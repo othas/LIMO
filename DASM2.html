@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Data-Analyse en Statistische Modellen 2</title>
+  <meta name="description" content="Course notes of DASM2" />
+  <meta name="generator" content="bookdown 0.20 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Data-Analyse en Statistische Modellen 2" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="Course notes of DASM2" />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Data-Analyse en Statistische Modellen 2" />
+  
+  <meta name="twitter:description" content="Course notes of DASM2" />
+  
+
+<meta name="author" content="Olivier Thas" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+
+
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="1" data-path=""><a href="#Ch_Inleiding"><i class="fa fa-check"></i><b>1</b> Inleiding</a><ul>
+<li class="chapter" data-level="1.1" data-path=""><a href="#de-wetenschappelijke-methode"><i class="fa fa-check"></i><b>1.1</b> De Wetenschappelijke Methode</a></li>
+<li class="chapter" data-level="1.2" data-path=""><a href="#voorbeeld"><i class="fa fa-check"></i><b>1.2</b> Voorbeeld</a><ul>
+<li class="chapter" data-level="1.2.1" data-path=""><a href="#inleiding"><i class="fa fa-check"></i><b>1.2.1</b> Inleiding</a></li>
+<li class="chapter" data-level="1.2.2" data-path=""><a href="#de-wetenschappelijke-methods-als-een-cyclus"><i class="fa fa-check"></i><b>1.2.2</b> De Wetenschappelijke Methods als een Cyclus</a></li>
+<li class="chapter" data-level="1.2.3" data-path=""><a href="#onzekerheid"><i class="fa fa-check"></i><b>1.2.3</b> (On)zekerheid</a></li>
+</ul></li>
+<li class="chapter" data-level="1.3" data-path=""><a href="#conditionele-distributie"><i class="fa fa-check"></i><b>1.3</b> Conditionele distributie</a></li>
+<li class="chapter" data-level="1.4" data-path=""><a href="#conditionele-verwachtingswaarde"><i class="fa fa-check"></i><b>1.4</b> Conditionele verwachtingswaarde</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path=""><a href="#even-testen"><i class="fa fa-check"></i><b>2</b> Even testen</a><ul>
+<li class="chapter" data-level="2.1" data-path=""><a href="#dingen-die-enkel-in-html-werken"><i class="fa fa-check"></i><b>2.1</b> Dingen die enkel in html werken</a></li>
+<li class="chapter" data-level="2.2" data-path=""><a href="#werkt-dit-in-html-en-pdf"><i class="fa fa-check"></i><b>2.2</b> Werkt dit in html en pdf</a></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Data-Analyse en Statistische Modellen 2</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="header">
+<h1 class="title">Data-Analyse en Statistische Modellen 2</h1>
+<p class="author"><em>Olivier Thas</em></p>
+<p class="date"><em>2021-2021</em></p>
+</div>
+<!--- For HTML Only --->
+<p><span class="math inline">\(\newcommand{\prob}[1]{\text{P}\left\{#1\right\}}\)</span> <span class="math inline">\(\newcommand{\mb}[1]{\boldsymbol{#1}}\)</span> <span class="math inline">\(\newcommand{\E}[1]{\mbox{E}\left\{#1\right\}}\)</span> <span class="math inline">\(\newcommand{\Ef}[2]{\mbox{E}_{#1}\left\{#2\right\}}\)</span> <span class="math inline">\(\newcommand{\cov}[1]{\mbox{Cov}\left\{#1\right\}}\)</span> <span class="math inline">\(\newcommand{\cor}[1]{\mbox{Cor}\left\{#1\right\}}\)</span> <span class="math inline">\(\newcommand{\covf}[2]{\mbox{Cov}_{#1}\left\{#2\right\}}\)</span> <span class="math inline">\(\newcommand{\var}[1]{\mbox{Var}\left\{#1\right\}}\)</span> <span class="math inline">\(\newcommand{\varf}[2]{\mbox{Var}_{#1}\left\{#2\right\}}\)</span> <span class="math inline">\(\newcommand\ind{\bot\hspace*{-6pt}\bot}\)</span></p>
+
+
+<div id="Ch_Inleiding" class="section level1">
+<h1><span class="header-section-number">Hoofdstuk 1</span> Inleiding</h1>
+<p>Statistiek is de wetenschap van het verzamelen en interpreteren van data, meestal met een duidelijke onderzoeksvraag voor ogen. In deze inleiding situeren we Statistiek in de Wetenschappelijke Methode. We geven ook een voorbeeld om de rol van statistiek toe te lichten.</p>
+<div id="de-wetenschappelijke-methode" class="section level2">
+<h2><span class="header-section-number">1.1</span> De Wetenschappelijke Methode</h2>
+<p>Het doel van wetenschap is het begrijpen van de natuur (van het allerkleinste tot het allergrootste, van vroeger en nu tot in de toekomst). De <strong>Wetenschappelijke Methode</strong> is de methodiek die vandaag de dag algemeen aanvaard wordt om onze wetenschappelijke kennis van de natuur op te bouwen. Twee belangrijke pijlers van de Wetenschappelijke Methode zijn: theorie en observatie. Een wetenschappelijke theorie voorspelt hoe een natuurlijk proces zich gedraagt en observaties kunnen gebruikt worden om de theorie te bevestigen of te ontkrachten. Om meer precies te zijn: een wetenschappelijke theorie kan nooit bewezen worden door observatie, maar kan wel ontkracht worden door observatie. Dit is het <strong>falcificatieprincipe</strong> van de wetenschapsfilosoof Karl Popper (1902-1994).</p>
+<p>Alvorens verder te gaan, moeten we even stilstaan bij Wiskunde als wetenschapsdiscipline omdat dit een uitzondering vormt. Wiskunde is een deductieve wetenschap. Men start met axioma's en redeneringsregels en hieruit worden stellingen gededuceerd. Via deze zuivere deductieve weg worden wiskundige theorieen opgebouwd. Observaties zijn niet nodig. In deze zin is Wiskunde geen natuurwetenschap.</p>
+<p>Alle andere wetenschapsdomeinen hebben een empirisch karakter omdat observaties nodig zijn om de kennis uit te breiden. Theorieen kunnen gepostuleerd worden zonder observatie (hoewel dit zelden gebeurt), maar opdat de grote wetenschapsgemeenschap ze voor waar aanneemt, moet de nieuwe theorie eerst aan observatie getoetst worden.</p>
+<p>Figuur <a href="#fig:StatMeth">1.1</a> geeft een schematische weergave van de Wetenschappelijke Methode.</p>
+<ul>
+<li><p>De <em>natuur</em> staat bovenaan de driehoek. Dit stelt het universum, de wereld, de werkelijkheid of de ``waarheid'' voor, waarover de mens kennis wil vergaren.</p></li>
+<li><p>Een <em>model</em> (of een <em>theorie</em>) stelt een abstractie van een aspect van de natuur voor. Een model laat toe om <em>predicties</em> te maken over het gedrag van een aspect van de natuur. Met ``model'' wordt niet noodzakelijk een mathematisch model bedoeld. Het kan ook een qualitatieve beschrijving zijn van een aspect van de natuur (bv. behandeling van plantjes met een insecticide leidt tot een vermindering van het aantal schadelijke insecten op de plantjes en tot een verhoogde opbrengst van de oogst).</p></li>
+<li><p>Via een <em>wetenschappelijk experiment</em> worden <em>data</em> uit de <em>natuur</em> gehaald. Data vormen een manifestatie van het werkelijke gedrag van de natuur.</p></li>
+<li><p><em>Statistische Besluitvorming</em> (Engels: <em>statistical inference</em>) vormt de brug tussen het model van de natuur en de data uit de natuur. Statistische Besluitvorming laat toe op een formele wijze het model te toetsen aan de data en te besluiten in welke mate de wetenschappelijke gemeenschap de theorie en het model voor waar mag aannemen.</p></li>
+<li><p>Statistiek wordt ingeroepen omdat de Wetenschappelijke Methode niet zonder doel gebruikt wordt. Wetenschappers hebben gedeeltelijke kennis van de natuur via een aantal modellen/theorieen, maar deze kennis doet nieuwe vragen ontstaan. Dit leidt tot een nieuwe <em>onderzoeksvraag</em>, welke vervolgens verfijnd wordt in een nauwkeurig geformuleerde <em>hypothese</em>. Een hypothese is zodanig geformuleerd dat ze door data kan verworpen worden indien de hypothese niet waar zou zijn. De formulering van de hypothese bepaalt mede hoe het <em>experiment</em> moet opgezet worden om de meest informative data (evidentie) te kunnen bekomen om vervolgens via de <em>statistische besluitvoering</em> tot een <em>conclusie</em> (i.e. antwoord op de <em>onderzoeksvraag</em>) te komen.</p></li>
+</ul>
+<p>Statistiek als wetenschapsdiscipline treedt niet enkel op in stap 4 via de statistische besluitvorming, maar het speelt ook in rol in stap 3 bij het ontwerpen van het experiment en bij het exploreren en visualiseren van de data.</p>
+<p>We komen nog even terug of het falcificatieprincipe. Doorheen deze cursus zal het duidelijk worden dat statistiek methoden aanlevert die toelaten om te meten in welke mate data consistent zijn met een gepostuleerd model. Indien de data consistent zijn met het model zullen we niet noodzakelijk onmiddellijk besluiten dat de theorie en het model correct zijn. De wijze waarop de data tot stand gekomen zijn via de opzet van experiment speelt hierbij ook een belangrijke rol. Het experiment moet eigenlijk zo opgezet worden dat het het model uitdaagt en pas als alle moeite gedaan is om te pogen data te bekomen die inconsistent zijn met het model, dan pas kunnen de theorie en het model als waar beschouwd worden met een grote waarschijnlijkheid. Wanneer echter de data inconsistent zijn met het gepostuleerde model, dan kan direct besloten worden dat het model niet juist is. De Wetenschappelijke Methode heeft echter een cyclisch karakter: bij het vaststellen van een foutief model zal de wetenschapper het model aanpassen en doorloopt hij opnieuw alle stappen van de Wetenschappelijke Methode. Dit wordt later gedemonstreerd.</p>
+<div class="figure" style="text-align: center"><span id="fig:StatMeth"></span>
+<img src="figures/StatMethode4.pdf" alt="De Wetenschappelijke Methode en de rol van Statistische Besluitvorming."  />
+<p class="caption">
+Figure 1.1: De Wetenschappelijke Methode en de rol van Statistische Besluitvorming.
+</p>
+</div>
+<p>Een andere belangrijke rol van de Statistiek is om de <strong>reproduceerbaarheid</strong> van wetenschappelijk onderzoek te waarborgen, binnen zelf gekozen probabiliteitsgrenzen (onzekerheid / zekerheid). Dit zou duidelijk moeten worden doorheen deze cursus.</p>
+</div>
+<div id="voorbeeld" class="section level2">
+<h2><span class="header-section-number">1.2</span> Voorbeeld</h2>
+<div id="inleiding" class="section level3">
+<h3><span class="header-section-number">1.2.1</span> Inleiding</h3>
+<p>In droge streken worden gewassen dikwijls geirrigeerd met water. Wanneer echter het irrigatiewater vervuild is met bepaalde contaminanten kan dit de groei van de planten en de opbrengst verlagen. Het is daarom belangrijk om te weten welke contaminanten de groei belemmeren en in welke concentraties de contaminant eventueel geen belangrijk negatief effect heeft op de groei.</p>
+<p>In een onderzoeksinstelling van het CSIRO (Commenwealth Institute for Scientific and Industrial Research Organisation) in Griffith, Australi&quot;e werd het effect van glyfosfaat op de wortelgroei van saffloer (<em>Carthamus tinctorius</em>) onderzocht. Saffloer wordt wereldwijd geteeld voor rode kleurstof, distelolie (voor verven, margerine en sladressing) en als een goedkope versie van saffraan. Glyfosfaat (<span class="math inline">\(C_3H_8NO_5P\)</span>) wordt gebruikt als herbicide en alsdusdanig kan het in irrigatiewater voorkomen. Tot zo ver wat reeds geweten is.</p>
+De <strong>onderzoeksvraag</strong> van de onderzoekers luidt: is er een lineair effect van de concentratie van glyfosfaat op lengte van de wortels van saffloer. Zo ja, kwantificeer dit verband. Dus op basis van de kennis van de onderzoekers over ``de natuur'' (glyfosfaat is een herbicide en kan dus ook de groei van saffloer aantasten) bedenken de onderzoekers een theorie (de concentratie van glyfosfaat in het irrigatiewater heeft een negatief effect op de wortelgroei) dat hen tot een model brengt:
+<span class="math display" id="eq:lijn">\[\begin{equation}
+  y = a + b x ,
+  \tag{1.1}
+\end{equation}\]</span>
+<p>met <span class="math inline">\(y\)</span> de lengte van de wortel, <span class="math inline">\(x\)</span> de concentratie van glyfosfaat en <span class="math inline">\(a\)</span> en <span class="math inline">\(b\)</span> de parameters van het model en met <span class="math inline">\(b&lt;0\)</span> om een negatief effect uit te drukken. De waarden van de parameters zijn niet gekend, maar data uit een experiment zullen hiervoor dienst doen. De data zullen tevens gebruikt worden om de geldigheid van het model na te gaan.</p>
+<p>We bespreken vervolgens enkele mogelijke experimenten en de resultaten die eruit komen.</p>
+<div id="experiment-1" class="section level4">
+<h4><span class="header-section-number">1.2.1.1</span> Experiment 1</h4>
+<p>De onderzoekers besluiten om twee planten van een bepaalde saffloer varieteit te gebruiken. Op veld 1 wordt een plant geplant en met gedestilleerd water geirrigeerd. Op veld 2 wordt de andere plant geplant en geirrigeerd met gedestilleerd water met <span class="math inline">\(1.5\)</span> ppm glyfosfaat toegevoegd. Na afloop worden de plantjes geoogst en wordt voor iedere plant de totale wortellengte met een meetlat gemeten. De uitkomsten van dit experiment worden weergegeven in Figuur <a href="#fig:wortel1">1.2</a> (links).</p>
+De parameters van vergelijking <a href="#eq:lijn">(1.1)</a> kunnen nu bekomen worden door het oplossen van het stelsel
+<span class="math display">\[\begin{eqnarray*}
+ 8.3 &amp;=&amp; a+b\times 0 \\
+ 1.1 &amp;=&amp; a+b\times 1.5.
+\end{eqnarray*}\]</span>
+<p>Dit geeft <span class="math inline">\(a=8.3\)</span> en <span class="math inline">\(b=-4.8\)</span>. De onderzoekers besluiten dat de glyfosfaat concentratie een negatief effect heeft op de wortellengte. Indien de glyfosfaat concentratie stijgt met 1 ppm dan vermindert de wortellengte met <span class="math inline">\(4.8\)</span> cm.</p>
+<p>Vertrouwen we het bekomen model? Hangt het model niet te sterk af van bijvoorbeeld de keuze van de twee plantjes?</p>
+
+<div class="figure" style="text-align: center"><span id="fig:wortel1"></span>
+<img src="DASM2_files/figure-html/wortel1-1.png" alt="Spreidingsdiagram van de wortellengte (\(y\)) ten opzichte van de concentratie van glyfosfaat (\(x\)) in het irrigatiewater. Links: data van Experiment 1. De lijn gaat perfect doorheen de twee observaties: \(y=8.3-4.8x\). Rechts: data van Experiment 2. De lijn stelt de geschatte regressierechte voor: \(\hat{y}=7.6 -3.9x\)." width="672" />
+<p class="caption">
+Figure 1.2: Spreidingsdiagram van de wortellengte (<span class="math inline">\(y\)</span>) ten opzichte van de concentratie van glyfosfaat (<span class="math inline">\(x\)</span>) in het irrigatiewater. Links: data van Experiment 1. De lijn gaat perfect doorheen de twee observaties: <span class="math inline">\(y=8.3-4.8x\)</span>. Rechts: data van Experiment 2. De lijn stelt de geschatte regressierechte voor: <span class="math inline">\(\hat{y}=7.6 -3.9x\)</span>.
+</p>
+</div>
+</div>
+<div id="experiment-2" class="section level4">
+<h4><span class="header-section-number">1.2.1.2</span> Experiment 2</h4>
+<p>De onderzoekers besluiten ditmaal om 6 planten van een bepaalde saffloer varieteit te gebruiken. Op veld 1 worden drie planten geplant en met gedestilleerd water geirrigeerd. Op veld 2 worden de drie andere planten geplant en geirrigeerd met gedestilleerd water met <span class="math inline">\(1.5\)</span> ppm glyfosfaat toegevoegd. Na afloop worden de plantjes geoogst en wordt voor iedere plant de totale wortellengte met een meetlat gemeten. De uitkomsten van dit experiment worden weergegeven in Figuur <a href="#fig:wortel1">1.2</a> (rechts).</p>
+<p>We zien nu dat de drie <strong>herhalingen</strong> bij eenzelfde concentratie verschillende wortellengtes geven. Enkele mogelijke verklaringen:</p>
+<ul>
+<li><p>Niettegenstaande alle planten tot eenzelfde varieteit behoren, zijn ze genetisch toch verschillend (bv. mutaties van generatie op generatie, epigenentica, ). Genetische en epigenetische verschillen kunnen variatie in tolerantie voor glyfosfaat verklaren. Dit zorgt voor <strong>biologische variabiliteit</strong>.</p></li>
+<li><p>Drie planten staan wel op eenzelfde veld, maar de physico-chemische eigenschappen zijn niet homogeen in een veld. De physico-chemische eigenschappen van de bodem kunnen de plantengroei ook beinvloeden en zorgen ook voor variabiliteit in de uitkomsten (wortellengte). De physico-chemische eigenschappen vormen een voorbeeld van <strong>omgevingsfactoren</strong> die niet volledig controleerbaar zijn in een experiment.</p></li>
+<li><p>De meetmethode kan ook voor extra variatie zorgen. In dit voorbeeld wordt de totale wortellengte gemeten door de afzonderlijke worteltakken af te snijden en ieder stukje zo strak mogelijk tegen een meetlat te leggen. De meetlat kan meten tot op 1 mm nauwkeurig. De lengtes van de afzonderlijke worteltakken worden tenslotte opgeteld en dit resultaat vormt de uitkomst van een experiment voor 1 plant. Uiteraard veroorzaakt dit <strong>meetfouten</strong>. We gaan ervan uit dat de meetfouten niet systematisch een te kleine of een te grote uitkomst geven.</p></li>
+</ul>
+<p>De rechte die getoond wordt in Figuur <a href="#fig:wortel1">1.2</a> (rechts) is een <strong>regressierechte</strong>. Een regressierechte kan ook wiskundig beschreven worden als <a href="#eq:lijn">(1.1)</a>, maar de berekening van de parameters is minder eenvoudig als in Experiment 1. We refereren naar een regressiemodel met numerieke waarden voor <span class="math inline">\(a\)</span> en <span class="math inline">\(b\)</span> bepaald aan de hand van de data, als een <strong>geschat regressiemodel</strong>. De parameters <span class="math inline">\(a\)</span> en <span class="math inline">\(b\)</span> kunnen geschat worden aan de hand van de data via de methode van de kleinste kwadraten. De interpretatie van <span class="math inline">\(y\)</span> in <a href="#eq:lijn">(1.1)</a> is dan niet meer de lengte van de wortel van 1 plant.</p>
+<p>Het geschatte regressiemodel is <span class="math display">\[
+  \hat{y}=7.6 -3.9 x
+\]</span> en <span class="math inline">\(\hat{y}\)</span> heeft hier de interpretatie van de gemiddelde lengte van de wortels van de planten bewaterd met glyfosfaat concentratie <span class="math inline">\(x\)</span>. Later in deze cursus worden regressiemodellen in detail besproken.</p>
+</div>
+<div id="experiment-3" class="section level4">
+<h4><span class="header-section-number">1.2.1.3</span> Experiment 3</h4>
+<p>De onderzoekers hebben velden ter beschikking op twee locaties. Locatie 1 is ligt op een heuveltop en krijgt veel zonlicht overdag (veld 1 ligt op deze locatie). Locatie 2 ligt iets lager langs de heuvelhelling waardoor de zon 's avond's vroeger achter de heuveltop verdwijnt (veld 2 ligt op deze locatie). Om na te gaan of dit een effect op de wortellengte kan hebben, wordt een controle-experiment uitgevoerd.</p>
+<p>Zes planten van een bepaalde saffloer varieteit worden gebruikt. Drie worden op veld 1 geplant en de drie anderen op veld 2. De twee velden worden enkel geirrigeerd met gedestilleerd water. De resultaten worden getoond in Figuur <a href="#fig:wortel2">1.3</a> (links).</p>
+<p>De data suggereert een verschil tussen de twee locaties met betrekking tot de groei van de planten. Nu we dit weten, moeten we ons vragen stellen bij de interpretatie van de resultaten uit Experiment 2. Het effect van glyfosfaat dat we gezien hebben in Experiment 2 zou geheel of gedeeltelijk toegeschreven kunnen worden aan de proefopzet: de betere groei werd bekomen op veld 1 en in het controle-experiment is het ook veld 1 dat de betere groei vertoont. Het effect van de concentratie van glyfosfaat en het effect van de locatie zijn niet uit elkaar te houden wegens een slechte proefopzet.</p>
+</div>
+<div id="experiment-4" class="section level4">
+<h4><span class="header-section-number">1.2.1.4</span> Experiment 4</h4>
+<p>De onderzoekers besluiten ditmaal om 12 planten van een bepaalde saffloer varieteit te gebruiken. Op locatie 1 (heuveltop) worden twee velden in gebruik genomen. Op ieder van deze veldjes worden drie plantjes geplant. Het ene veld wordt bewaterd met gedestilleerd water; het andere veldje krijgt water met <span class="math inline">\(1.5\)</span> ppm glyfosfaat. Ook op locatie 2 worden twee veldjes met drie planten in gebruik genomen en behandeld zoals op locatie 1. Na afloop worden de plantjes geoogst en wordt voor iedere plant de totale wortellengte met een meetlat gemeten. De uitkomsten van dit experiment worden weergegeven in Figuur <a href="#fig:wortel2">1.3</a> (rechts).</p>
+<p>De geschatte regressierechte is nu: <span class="math inline">\(\hat{y}=6.5-2.7x\)</span>. Dus met een toename in glyfosfaat concentratie met 1 ppm verwachten we een daling van de gemiddelde wortellengte van <span class="math inline">\(2.7\)</span> cm. Dit effect van het herbicide is al veel minder sterk dan wat geschat werd in Experiment 1 (daling van <span class="math inline">\(4.8\)</span> cm per eenheid ppm toename).</p>
+<p>De opzet van Experiment 4 is al veel beter dan dit van Experiment 1, maar er zit toch nog een zwak punt in het opzet van de studie. We hebben aangenomen dat het verband tussen glyfosfaat en wortellengte lineair is, maar met de observaties bekomen uit de experimenten kunnen we deze veronderstelling niet nagaan! Met slechts twee verschillende concentraties opgenomen in de studie, kunnen we nooit detecteren dat het werkelijke verband niet-lineair zou zijn.</p>
+
+<div class="figure" style="text-align: center"><span id="fig:wortel2"></span>
+<img src="DASM2_files/figure-html/wortel2-1.png" alt="Links: Spreidingsdiagram van de wortellengte (\(y\)) voor de plantjes op velden 1 en 2 (data van Experiment 3). Rechts: Spreidingsdiagram van de wortellengte (\(y\)) ten opzichte van de concentratie van glyfosfaat (\(x\)) in het irrigatiewater (data van Experiment 4). De holle vierkantjes stellen de uitkomsten op locatie 1 voor en de volle cirkeltjes de uitkomsten op locatie 2. De lijn stelt de geschatte regressierechte voor: \(\hat{y}=6.5 -2.7x\)." width="672" />
+<p class="caption">
+Figure 1.3: Links: Spreidingsdiagram van de wortellengte (<span class="math inline">\(y\)</span>) voor de plantjes op velden 1 en 2 (data van Experiment 3). Rechts: Spreidingsdiagram van de wortellengte (<span class="math inline">\(y\)</span>) ten opzichte van de concentratie van glyfosfaat (<span class="math inline">\(x\)</span>) in het irrigatiewater (data van Experiment 4). De holle vierkantjes stellen de uitkomsten op locatie 1 voor en de volle cirkeltjes de uitkomsten op locatie 2. De lijn stelt de geschatte regressierechte voor: <span class="math inline">\(\hat{y}=6.5 -2.7x\)</span>.
+</p>
+</div>
+</div>
+<div id="experiment-5" class="section level4">
+<h4><span class="header-section-number">1.2.1.5</span> Experiment 5</h4>
+<p>Dit experiment is hetzelfde als Experiment 4, maar nu nemen we nog twee extra veldjes in gebruik om het effect van glyfosfaat bij een intermediaire concentratie van <span class="math inline">\(0.5\)</span> ppm na te gaan. Dit zal ons informatie kunnen verschaffen over de veronderstelling van lineariteit. E'en extra veldje ligt op locatie 1 en het andere op locatie 2. De uitkomsten van dit experiment worden weergegeven in Figuur <a href="#fig:wortel3">1.4</a> (links).</p>
+<p>De figuur toont nu dat de uitkomsten voor de intermediaire glyfosfaat concentratie niet goed gecentreerd liggen rond de geschatte regressielijn (zwarte lijn op de figuur). Dit is een indicatie dat de data niet consistent zijn met het model en dat we dus moeten besluiten dat het gepostuleerde lineaire model van de onderzoekers de werkelijkheid (natuur) niet goed beschrijft. De blauwe stippellijn op de figuur is de geschatte regressielijn op basis van Experiment 4. De afwijking van uitkomsten bij <span class="math inline">\(0.5\)</span> ppm is nu nog duidelijker.</p>
+<p>Het is waarschijnlijk jammer voor de onderzoekers dat hun model moet verworpen worden wegens inconsistent met de observaties, maar gelukkig kan de data uit Experiment 5 toch nog gebruikt worden om een beter model te suggereren. Figuur <a href="#fig:wortel3">1.4</a> (rechts) toont opnieuw de data uit Experiment 5, maar nu met de concentratie op log-schaal (log-transformatie van de concentratie). De figuur suggereert dat er wel een lineair verband bestaat tussen de log-getransformeerde concentratie en de gemiddelde wortellengte!</p>
+
+<div class="figure" style="text-align: center"><span id="fig:wortel3"></span>
+<img src="DASM2_files/figure-html/wortel3-1.png" alt="Spreidingsdiagram van de wortellengte (\(y\)) ten opzichte van de concentratie van glyfosfaat (\(x\)) in het irrigatiewater. De holle vierkantjes stellen de uitkomsten op locatie 1 voor en de volle cirkeltjes de uitkomsten op locatie 2. Links: de resultaten van Experiment 5. De zwarte lijn stelt de geschatte regressierechte voor: \(\hat{y}=6.0 -2.5x\) en de blauwe stippellijn toont de geschatte regressierechte uit Experiment 4. Rechts: de resultaten van Experiment 5, maar na log-transformatie van de concentratie. De lijn stelt de geschatte regressierechte voor: \(\hat{y}=6.2 -4.4\log(x+1)\) en de blauwe stippellijn toont de geschatte regressierechte uit Experiment 4 (ook na log-transformatie van de concentratie)." width="672" />
+<p class="caption">
+Figure 1.4: Spreidingsdiagram van de wortellengte (<span class="math inline">\(y\)</span>) ten opzichte van de concentratie van glyfosfaat (<span class="math inline">\(x\)</span>) in het irrigatiewater. De holle vierkantjes stellen de uitkomsten op locatie 1 voor en de volle cirkeltjes de uitkomsten op locatie 2. Links: de resultaten van Experiment 5. De zwarte lijn stelt de geschatte regressierechte voor: <span class="math inline">\(\hat{y}=6.0 -2.5x\)</span> en de blauwe stippellijn toont de geschatte regressierechte uit Experiment 4. Rechts: de resultaten van Experiment 5, maar na log-transformatie van de concentratie. De lijn stelt de geschatte regressierechte voor: <span class="math inline">\(\hat{y}=6.2 -4.4\log(x+1)\)</span> en de blauwe stippellijn toont de geschatte regressierechte uit Experiment 4 (ook na log-transformatie van de concentratie).
+</p>
+</div>
+</div>
+</div>
+<div id="de-wetenschappelijke-methods-als-een-cyclus" class="section level3">
+<h3><span class="header-section-number">1.2.2</span> De Wetenschappelijke Methods als een Cyclus</h3>
+<p>Experimenten 1 tot en met 5 illustreren hoe wetenschap vaak verloopt: na de formulering van de onderzoeksvraag (en het model) worden experimenten opgezet. Gaandeweg leert men uit de experimenten waardoor nieuwe/betere experimenten opgezet worden en de onderzoeksvraag eventueel aangepast wordt. De wetenschappelijke methode kan eigenlijk ook als een cyclus beschreven worden: na de data-analyse wordt een besluit geformuleerd en hierdoor worden nieuwe onderzoeksvragen geformuleeerd en kan er weer over een experiment nagedacht worden </p>
+</div>
+<div id="onzekerheid" class="section level3">
+<h3><span class="header-section-number">1.2.3</span> (On)zekerheid</h3>
+<p>Bij de bespreking van de experimenten hebben we steeds naar figuren gekeken met daarop afgebeeld de observaties en de geschatte regressierechte. In Experiment 5 hebben we deze figuur gebruikt om tot een finaal besluit te komen, maar hoe zeker kunnen we zijn door enkel naar de data te kijken? Dit probleem wordt geillustreerd in Figuur <a href="#fig:wortel4">1.5</a>. We zien hier de resultaten van 6 experimenten; iedere dataset is een toevallige subset van de data van Experiment 5. Dus ieder van de 6 datasets is klein, maar zou wel het resultaat van een echt experiment kunnen zijn. In welke mate vertrouw je het resultaat van ieder van de 6 experimentjes? Demonstreren ze alle even duidelijk en overtuigend dezelfde conclusie? Tabel <a href="#tab:Ex5Subsets">1.1</a> toont de resultaten van de statistische analyses. Je kan zien dat de geschatte regressierechten verschillen van subset tot subset. Welke is de correcte? En hoe rapporteren we over dergelijke variabiliteit op de schattingen wanneer we in een reele setting slechts 1 dataset observeren en dus ook slechts 1 geschatte regressierechte? En is de variabiliteit op de geschatte regressierechte voldoende klein om met voldoende zekerheid een conclusie te kunnen formuleren? Om op deze vragen te antwoorden, zijn statistische methoden nodig. Statistische methoden laten toe om de evidentie in de data af te wegen ten opzichte van een gepostuleerd model. De conclusie die eruit komt zal worden geformuleerd met een appreciatie over de (on)zekerheid over het besluit. Statistiek vormt dus de sluitsteen van de Wetenschappelijke Methode.</p>
+
+<div class="figure" style="text-align: center"><span id="fig:wortel4"></span>
+<img src="DASM2_files/figure-html/wortel4-1.png" alt="Spreidingsdiagrammen van de wortellengte (\(y\)) ten opzichte van de log-concentratie van glyfosfaat (\(\log(x)\)) in het irrigatiewater. Iedere figuur toont het resultaat van een toevallige subset van de data van Experiment 5. De lijnen stellen de geschatte regressierechten voor." width="672" />
+<p class="caption">
+Figure 1.5: Spreidingsdiagrammen van de wortellengte (<span class="math inline">\(y\)</span>) ten opzichte van de log-concentratie van glyfosfaat (<span class="math inline">\(\log(x)\)</span>) in het irrigatiewater. Iedere figuur toont het resultaat van een toevallige subset van de data van Experiment 5. De lijnen stellen de geschatte regressierechten voor.
+</p>
+</div>
+<table>
+<caption><span id="tab:Ex5Subsets">Table 1.1: </span>Resultaten van de analyses van de data van de 6 toevallige subsets van Experiment 5. De tabel toont de schattingen van de parameters <span class="math inline">\(a\)</span> en <span class="math inline">\(b\)</span> in het ``model'' <span class="math inline">\(y=a+b\log(x+1)\)</span> en de <span class="math inline">\(p\)</span>-waarden voor het testen van <span class="math inline">\(b=0\)</span> ten op zichte van <span class="math inline">\(b\neq 0\)</span>.</caption>
+<thead>
+<tr class="header">
+<th align="center">subset</th>
+<th align="center">a</th>
+<th align="center">b</th>
+<th align="center">p</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">1</td>
+<td align="center">7.720</td>
+<td align="center">-6.854</td>
+<td align="center">0.178</td>
+</tr>
+<tr class="even">
+<td align="center">2</td>
+<td align="center">5.659</td>
+<td align="center">-3.766</td>
+<td align="center">0.136</td>
+</tr>
+<tr class="odd">
+<td align="center">3</td>
+<td align="center">6.041</td>
+<td align="center">-5.010</td>
+<td align="center">0.185</td>
+</tr>
+<tr class="even">
+<td align="center">4</td>
+<td align="center">6.546</td>
+<td align="center">-4.568</td>
+<td align="center">0.248</td>
+</tr>
+<tr class="odd">
+<td align="center">5</td>
+<td align="center">6.842</td>
+<td align="center">-4.635</td>
+<td align="center">0.119</td>
+</tr>
+<tr class="even">
+<td align="center">6</td>
+<td align="center">7.142</td>
+<td align="center">-6.904</td>
+<td align="center">0.111</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+<div id="conditionele-distributie" class="section level2">
+<h2><span class="header-section-number">1.3</span> Conditionele distributie</h2>
+<p>In de cursus DASM 1 werd de <strong>voorwaardelijke kans</strong>, of de <strong>conditionele kans</strong> als volgt gedefinieerd. Voor twee gebeurtenissen A en B, wordt de conditionele kans van gebeurtenis A, gegeven gebeurtenis B, gegeven door <span class="math display">\[
+  \prob{A \mid B} = \frac{\prob{A \cap B}}{\prob{B}}.
+\]</span></p>
+<p>Stel dat <span class="math inline">\(X\)</span> en <span class="math inline">\(Y\)</span> twee discrete toevalsveranderlijken zijn met kansfuncties <span class="math inline">\(P_X(x)=\prob{X=x}\)</span> en <span class="math inline">\(P_Y(y)=\prob{Y=y}\)</span>. Dan geeft de toepassing van de definitie van de conditionele kans, <span class="math display">\[
+  \prob{X=x \mid Y=y} =\frac{\prob{X=x \text{ and }Y=y}}{\prob{Y=y}} = \frac{P_{XY}(x,y)}{P_Y(y)},
+\]</span> met <span class="math inline">\(P_{XY}(x,y)\)</span> de gezamenlijke kansfunctie van <span class="math inline">\(X\)</span> en <span class="math inline">\(Y\)</span>.</p>
+<p>Voor continue toevalsveranderlijken, stel <span class="math inline">\(X\)</span> en <span class="math inline">\(Y\)</span>, wordt de dichtheidsfunctie van de conditionele distributie van <span class="math inline">\(Y\)</span> gegeven <span class="math inline">\(X\)</span> <em>gedefinieerd</em> als <span class="math display">\[
+  f_{Y\mid X}(y\mid x) = \frac{f_{XY}(x,y)}{f_X(x)}.
+\]</span> In de volgende paragraaf laten we aanvoelen dat deze uitdrukking ook overeenkomt met de defintie van de voorwaardelijke kans.</p>
+<p>We starten met een univariate continue toevalsveranderlijke <span class="math inline">\(X\)</span>. Voor een <span class="math inline">\(\delta&gt;0\)</span> weten we dat <span class="math display">\[
+  \prob{x \leq X \leq x+\delta} = F_X\left(x+\delta\right) - F_X\left(x\right).
+\]</span> Beschouw nu de volgende limiet <span class="math display">\[
+   \lim_{\delta\rightarrow 0} \frac{F_X\left(x+\delta\right) - F_X\left(x\right)}{\delta} ,
+\]</span> wat per definitie gelijk is aan de afgeleide van <span class="math inline">\(F_X\)</span> in <span class="math inline">\(x\)</span>, <span class="math display">\[
+  \frac{dF_X(x)}{dx}=f_X(x).
+\]</span> Voor een kleine <span class="math inline">\(\delta\)</span> mogen we dus approximatief schrijven <span class="math display">\[
+   f_X(x)\delta \approx \prob{x\leq X \leq x+\delta}.
+\]</span> Voor een bivariate stochastische vector <span class="math inline">\((X,Y)\)</span> kunnen we op analoge wijze bekomen dat <span class="math display">\[
+  f_{XY}(x,y) \delta_X \delta_Y \approx \prob{x \leq X\leq x+\delta_X \text{ en } y \leq Y \leq y+\delta_Y}
+\]</span> voor kleine <span class="math inline">\(\delta_X&gt;0\)</span> en <span class="math inline">\(\delta_Y&gt;0\)</span>. De definitie van de dichtheidsfunctie van de conditionele distributie van <span class="math inline">\(X\)</span> gegeven <span class="math inline">\(Y\)</span>, kan dus bij benadering geschreven worden als <span class="math display">\[
+   f_{Y\mid X}(y\mid x) = \frac{f_{XY}(x,y)}{f_X(x)} 
+   \approx \frac{\prob{x \leq X \leq x+\delta_X \text{ en } y \leq Y \leq y+\delta_Y}/(\delta_X\delta_Y)}{\prob{x \leq X\leq x+\delta}/\delta}.
+\]</span> Of, met <span class="math inline">\(\delta=\delta_X=\delta_Y\)</span>, <span class="math display">\[
+   f_{Y\mid X}(y\mid x)\delta = \frac{f_{XY}(x,y)}{f_X(x)} \delta
+   \approx \frac{\prob{x \leq X\leq x+\delta \text{ en } y \leq Y \leq y+\delta}}{\prob{x \leq X\leq x+\delta}}.
+\]</span> De laatste uitdrukking is per definitie de conditionele kans <span class="math display">\[
+  \prob{y\leq Y \leq y+\delta \mid x \leq X \leq x+\delta}.
+\]</span></p>
+</div>
+<div id="conditionele-verwachtingswaarde" class="section level2">
+<h2><span class="header-section-number">1.4</span> Conditionele verwachtingswaarde</h2>
+<p>Nu de conditionele distributie van <span class="math inline">\(Y\)</span> gegeven <span class="math inline">\(X\)</span> gekend is, kan de verwachtingswaarde van <span class="math inline">\(Y\)</span> gegeven <span class="math inline">\(X=x\)</span> eenvoudig gegeven worden: <span class="math display">\[
+  \E{Y \mid X=x} = \int_{-\infty}^{+\infty} u f_{Y\mid X}(u\mid x) du.
+\]</span> We schrijven some <span class="math inline">\(\E{Y\mid x}\)</span> als verkorte vorm van <span class="math inline">\(\E{Y \mid X=x}\)</span>.</p>
+
+</div>
+</div>
+<div id="even-testen" class="section level1">
+<h1><span class="header-section-number">Hoofdstuk 2</span> Even testen</h1>
+<p>blablabla</p>
+<blockquote>
+<h2 id="agenda"><span class="header-section-number">2</span> Agenda</h2>
+<p>In this tutorial we will deal with:</p>
+<ol style="list-style-type: decimal">
+<li>TOC {:toc}</li>
+</ol>
+</blockquote>
+<div id="dingen-die-enkel-in-html-werken" class="section level2">
+<h2><span class="header-section-number">2.1</span> Dingen die enkel in html werken</h2>
+<p>Het volgende is een inklapbare paragraaf.</p>
+<p><details> <summary markdown="span">This is the summary text, click me to expand</summary></p>
+<p>Dit is weer eens een test. </details></p>
+<div class="alert alert-primary" role="alert">
+<p>A simple primary alert—check it out!</p>
+</div>
+<div class="alert alert-secondary" role="alert">
+<p>A simple secondary alert—check it out!</p>
+</div>
+<div class="alert alert-success" role="alert">
+<p>A simple success alert—check it out!</p>
+</div>
+<div class="alert alert-danger" role="alert">
+<p>A simple danger alert—check it out!</p>
+</div>
+<div class="alert alert-warning" role="alert">
+<p>A simple warning alert—check it out!</p>
+</div>
+<div class="alert alert-info" role="alert">
+<p>A simple info alert—check it out!</p>
+</div>
+<div class="alert alert-light" role="alert">
+<p>A simple light alert—check it out!</p>
+</div>
+<div class="alert alert-dark" role="alert">
+<p>A simple dark alert—check it out!</p>
+</div>
+</div>
+<div id="werkt-dit-in-html-en-pdf" class="section level2">
+<h2><span class="header-section-number">2.2</span> Werkt dit in html en pdf</h2>
+<!--- For HTML Only --->
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># install.packages(&quot;remotes&quot;)</span>
+remotes<span class="op">::</span><span class="kw">install_github</span>(<span class="st">&quot;rlesur/klippy&quot;</span>)</code></pre></div>
+<pre><code>## Skipping install of &#39;klippy&#39; from a github remote, the SHA1 (378c247f) has not changed since last install.
+##   Use `force = TRUE` to force installation</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">r&lt;-<span class="dv">10</span><span class="op">+</span><span class="kw">rnorm</span>(<span class="dv">20</span>)</code></pre></div>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["DASM2.pdf"],
+"toc": {
+"collapse": "subsection"
+},
+"toolbar": {
+"position": "static"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
