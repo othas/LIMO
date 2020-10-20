@@ -108,7 +108,6 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="1.2" data-path=""><a href="#two-versions-of-this-course-oc-and-dl"><i class="fa fa-check"></i><b>1.2</b> Two versions of this course: OC and DL</a></li>
 <li class="chapter" data-level="1.3" data-path=""><a href="#communication"><i class="fa fa-check"></i><b>1.3</b> Communication</a></li>
 <li class="chapter" data-level="1.4" data-path=""><a href="#software"><i class="fa fa-check"></i><b>1.4</b> Software</a></li>
-<li class="chapter" data-level="1.5" data-path=""><a href="#work-in-progress"><i class="fa fa-check"></i><b>1.5</b> Work in progress</a></li>
 </ul></li>
 <li class="chapter" data-level="2" data-path=""><a href="#Ch_SimpleLinearRegression"><i class="fa fa-check"></i><b>2</b> Simple Linear Regression Analysis</a><ul>
 <li class="chapter" data-level="" data-path=""><a href="#example-galtons-height-data"><i class="fa fa-check"></i>Example (Galton's height data)</a></li>
@@ -279,9 +278,6 @@ a<span class="op">+</span>b</code></pre></div>
 <div id="software" class="section level2">
 <h2><span class="header-section-number">1.4</span> Software</h2>
 <p>In the course notes all data analyses are demonstrated with the R software, but on Blackboard also documentation on the SAS software will be provided. You will also have to learn how to perform regression analysis and ANOVA with the SAS software.</p>
-</div>
-<div id="work-in-progress" class="section level2">
-<h2><span class="header-section-number">1.5</span> Work in progress</h2>
 
 </div>
 </div>
@@ -289,7 +285,7 @@ a<span class="op">+</span>b</code></pre></div>
 <h1><span class="header-section-number">Hoofdstuk 2</span> Simple Linear Regression Analysis</h1>
 <div id="example-galtons-height-data" class="section level2 unnumbered">
 <h2>Example (Galton's height data)</h2>
-<p>As a first example, we consider the original dataset from Francis Galton, who invented {} by looking at this dataset. We obtained the data from <a href="https://dataverse.harvard.edu/file.xhtml?persistentId=doi:10.7910/DVN/T0HSJ1/LKC7PJ&amp;version=1.1" class="uri">https://dataverse.harvard.edu/file.xhtml?persistentId=doi:10.7910/DVN/T0HSJ1/LKC7PJ&amp;version=1.1</a> Here is the reference to the orginal paper of Francis Galton from 1886.</p>
+<p>As a first example, we consider the original dataset from Francis Galton, who invented <em>regression</em> by looking at this dataset. We obtained the data from <a href="https://dataverse.harvard.edu/file.xhtml?persistentId=doi:10.7910/DVN/T0HSJ1/LKC7PJ&amp;version=1.1" class="uri">https://dataverse.harvard.edu/file.xhtml?persistentId=doi:10.7910/DVN/T0HSJ1/LKC7PJ&amp;version=1.1</a> Here is the reference to the orginal paper of Francis Galton from 1886.</p>
 <p>Galton, F. (1886). Regression Towards Mediocrity in Hereditary Stature. Journal of the Anthropological Institute, 15, 246-263</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">Galton&lt;-<span class="kw">read.csv</span>(<span class="st">&quot;Data/Galton.tab&quot;</span>,<span class="dt">sep=</span><span class="st">&quot;</span><span class="ch">\t</span><span class="st">&quot;</span>)
 <span class="kw">head</span>(Galton)</code></pre></div>
@@ -527,10 +523,12 @@ a<span class="op">+</span>b</code></pre></div>
 <li><p><span class="math inline">\(x_i\)</span>: the value of the regressor of observation <span class="math inline">\(i=1,\ldots, n\)</span></p></li>
 <li><p><span class="math inline">\(Y_i\)</span>: the outcome of observation <span class="math inline">\(i=1,\ldots, n\)</span>.</p></li>
 </ul>
-<p>Since every <span class="math inline">\(x_i\)</span> can identify another population, we say that <span class="math inline">\(Y_i\)</span> is a random outcome from the population with (cumulative) distribution function (CDF) <span class="math inline">\(F_i(y)=F(y;x_i,\mb\beta)\)</span>, i.e. the distribution is determined by <span class="math inline">\(x_i\)</span> and possibly by a parameter vector <span class="math inline">\(\mb\beta\)</span>. We also assume that all <span class="math inline">\(n\)</span> outcomes are mutually independent. Note that we do not say that the <span class="math inline">\(n\)</span> outcomes are i.i.d. (<em>identically and independently distributed</em>), because not all <span class="math inline">\(F_i\)</span> coincide.</p>
+<p>Since every <span class="math inline">\(x_i\)</span> can identify another population, we say that <span class="math inline">\(Y_i\)</span> is a random outcome from the population with (cumulative) distribution function (CDF) <span class="math display">\[
+  F_i(y)=F(y;x_i,\mb\beta),
+\]</span> i.e. the distribution is determined by <span class="math inline">\(x_i\)</span> and possibly by a parameter vector <span class="math inline">\(\mb\beta\)</span>. We also assume that all <span class="math inline">\(n\)</span> outcomes are mutually independent. Note that we do not say that the <span class="math inline">\(n\)</span> outcomes are i.i.d. (<em>identically and independently distributed</em>), because not all <span class="math inline">\(F_i\)</span> coincide.</p>
 <p>Regression analysis is a method that allows to study the effect of a regressor on the <strong>mean outcome</strong>. We therefore also introduce a notation for the mean of the distribution <span class="math inline">\(F_i\)</span>, <span class="math display">\[
   \mu_i = \E{Y_i} = \Ef{F_i}{Y_i} = \int_{-\infty}^{+\infty} y dF(y;x_i,\mb\beta) = \E{Y_i \mid x_i}.
-\]</span> This notation stresses that <span class="math inline">\(\mu_i\)</span> is the mean of <span class="math inline">\(Y_i\)</span> and that this mean depends on the value of the regressor <span class="math inline">\(x_i\)</span> because the distribution of <span class="math inline">\(Y_i\)</span> denpends on <span class="math inline">\(x_i\)</span>. Therefore, <span class="math inline">\(\mu_i=\E{Y_i \mid x_i}\)</span> is the <strong>conditional mean</strong> of the outcome, given <span class="math inline">\(x_i\)</span>. To stress that the conditional mean is a function of the regressor and possibly of a parameter <span class="math inline">\(\mb\beta\)</span> we write <span class="math display">\[
+\]</span> This notation stresses that <span class="math inline">\(\mu_i\)</span> is the mean of <span class="math inline">\(Y_i\)</span> and that this mean depends on the value of the regressor <span class="math inline">\(x_i\)</span> because the distribution of <span class="math inline">\(Y_i\)</span> depends on <span class="math inline">\(x_i\)</span>. Therefore, <span class="math inline">\(\mu_i=\E{Y_i \mid x_i}\)</span> is the <strong>conditional mean</strong> of the outcome, given <span class="math inline">\(x_i\)</span>. To stress that the conditional mean is a function of the regressor and possibly of a parameter <span class="math inline">\(\mb\beta\)</span> we write <span class="math display">\[
   m(x;\mb\beta) = \E{Y \mid x}.
 \]</span></p>
 <p>In the two previous paragraphs we actually gave a generic description of a <strong>statistical model</strong>. We repeat here the description, with in slightly more general fashion.</p>
@@ -550,25 +548,28 @@ a<span class="op">+</span>b</code></pre></div>
 <li><p>Suppose that the function <span class="math inline">\(m\)</span> is known, up to the parameter vector <span class="math inline">\(\mb\beta\)</span>, and that the CDFs <span class="math inline">\(F_i\)</span> are also known, up to the parameter vector <span class="math inline">\(\mb\nu\)</span>. In this case, the <span class="math inline">\(n\)</span> CDFs <span class="math inline">\(F_i\)</span> are often equal to one another, i.e. <span class="math inline">\(F_i=F\)</span>. Of course, as for the semiparametric model, the CDF <span class="math inline">\(F\)</span> must be compatible with the restriction <span class="math inline">\(\E{Y_i\mid x_i}=m(x_i;\mb\beta)\)</span>. This model is known as a <strong>parametric model</strong>. It basically specifies the full conditional distribution up to finite dimensional parameter vectors <span class="math inline">\(\mb\beta\)</span> and <span class="math inline">\(\mb\nu\)</span>.</p></li>
 </ul>
 <p>With respect to the parametric models: if the interest is in the model <span class="math inline">\(\E{Y_i\mid x_i}=m(x_i;\mb\beta)\)</span>, i.e. the focus is on parameter <span class="math inline">\(\mb\beta\)</span>, then we call the parameter <span class="math inline">\(\mb\nu\)</span> a <strong>nuisance parameter</strong>.</p>
-<p>In later sections we will sometimes refer to semiparametric and parametric models, and then their meaning may become very clear.</p>
-<p>The general regression model is illustrated in Figure <a href="#fig:RegModel">2.1</a> (left). The focus of a regression analysis is the estimation of the function <span class="math inline">\(m(x;\mb\beta)\)</span>. If the function <span class="math inline">\(m\)</span> is known, then this reduces to the estimation of the parameter <span class="math inline">\(\mb\beta\)</span> using the sample observations. Based on the estimates, regression analysis also aims to formulate conclusions on the relation between the regressor and the conditional mean of the outcome. Sometimes the estimated regression model may also be used for precting an outcome for a given value of the regressor. These topics will all be discussed later in this course.</p>
+<p>In later sections we will sometimes refer to semiparametric and parametric models, and then their meaning may become clear.</p>
+<p>The general regression model is illustrated in Figure <a href="#fig:RegModel">2.1</a> (left). The focus of a regression analysis is the estimation of the function <span class="math inline">\(m(x;\mb\beta)\)</span>. If the function <span class="math inline">\(m\)</span> is known, then this reduces to the estimation of the parameter <span class="math inline">\(\mb\beta\)</span> using the sample observations. Based on the estimates, regression analysis also aims to formulate conclusions on the relation between the regressor and the conditional mean of the outcome. Sometimes the estimated regression model may also be used for predicting an outcome for a given value of the regressor. These topics will all be discussed later in this course.</p>
 <div class="figure" style="text-align: center"><span id="fig:RegModel"></span>
 <img src="DASM2_files/figure-html/RegModel-1.png" alt="Illustration of the regression model. The black line represents the function $m$. The red points are observed outcomes, sampled from the conditional distribution of $Y$ given $x=160$. The red line shows the shape of the density function of this conditional distribution. The blue points are observed outcomes, sampled from the conditional distribution of $Y$ given $x=200$. The blue line shows the shape of the density function of this conditional distribution. Left: $m$ is a non-linear function and the conditional distributions have different shapes. Middle: $m$ is a non-linear function and the conditional distribution functions have equal shapes. Right: $m$ is a linear function and the conditional distribution functions have equal shapes (normal distributions)." width="672" />
 <p class="caption">
 Figure 2.1: Illustration of the regression model. The black line represents the function <span class="math inline">\(m\)</span>. The red points are observed outcomes, sampled from the conditional distribution of <span class="math inline">\(Y\)</span> given <span class="math inline">\(x=160\)</span>. The red line shows the shape of the density function of this conditional distribution. The blue points are observed outcomes, sampled from the conditional distribution of <span class="math inline">\(Y\)</span> given <span class="math inline">\(x=200\)</span>. The blue line shows the shape of the density function of this conditional distribution. Left: <span class="math inline">\(m\)</span> is a non-linear function and the conditional distributions have different shapes. Middle: <span class="math inline">\(m\)</span> is a non-linear function and the conditional distribution functions have equal shapes. Right: <span class="math inline">\(m\)</span> is a linear function and the conditional distribution functions have equal shapes (normal distributions).
 </p>
 </div>
-We now simplify the model by assuming that the conditional distribution only depends on the regressor via its conditional mean. In other words: for every value of the regressor, the shape of the conditional outcome distribution is the same, and only the location (mean) may be depend on the regressor. This is illustrated in Figure <a href="#fig:RegModel">2.1</a> (middle). This extra assumption allows us to write the statistical model as
+We now simplify the model by assuming that the conditional distribution only depends on the regressor via its conditional mean. In other words: for every value of the regressor, the shape of the conditional outcome distribution is the same, and only the location (mean) may depend on the regressor. This is illustrated in Figure <a href="#fig:RegModel">2.1</a> (middle). This extra assumption allows us to write the statistical model as
 <span class="math display" id="eq:Mod1">\[\begin{equation}
   Y_i = m(x_i;\mb\beta) + \eps_i
   \tag{2.1}
 \end{equation}\]</span>
-<p>with <span class="math inline">\(\eps_i \iid F_\eps(\cdot;\mb\nu)\)</span>, <span class="math inline">\(F_\eps(\cdot;\mb\nu)\)</span> the CDF of <span class="math inline">\(\eps_i\)</span>, <span class="math inline">\(\mb\nu\)</span> a parameter vector and <span class="math inline">\(\E{\eps_i}=\E{\eps_i\mid x_i}=0\)</span>. For the latter assumption, we find a useful property: <span class="math display">\[
+<p>with <span class="math inline">\(\eps_i \iid F_\eps(\cdot;\mb\nu)\)</span>, with <span class="math inline">\(F_\eps(\cdot;\mb\nu)\)</span> the CDF of <span class="math inline">\(\eps_i\)</span>, <span class="math inline">\(\mb\nu\)</span> a parameter vector and <span class="math display">\[ 
+  \E{\eps_i}=\E{\eps_i\mid x_i}=0.
+\]</span> For the latter assumption, we find a useful property: <span class="math display">\[
   \E{Y\mid x}=m(x;\mb\beta)
-\]</span> i.e. it allows to interpret <span class="math inline">\(m(x;\mb\beta)\)</span> as the conditional mean. The stochastic variable <span class="math inline">\(\eps_i\)</span> is often referred to as the <strong>error term</strong>. The model thus suggests that the outcome can be decomposed into two components: a <strong>systematic component</strong>, <span class="math inline">\(m(x_i;\mb\beta)\)</span>, and a <strong>stochastic component</strong> (or random component, or error term) <span class="math inline">\(\eps_i\)</span>. The latter gives the deviation between the outcome <span class="math inline">\(Y_i\)</span> and the systematic component <span class="math inline">\(m(x_i;\mb\beta)\)</span>. It is important, however, to note that this decomposition often does not agree with how the outcomes are generated or realised: the variability of the outcomes <span class="math inline">\(Y_i\)</span> about the conditional mean <span class="math inline">\(m(x_i;\mb\beta)\)</span> is often inherently present in the population. In this sense, <span class="math inline">\(\eps_i\)</span> may not be looked at as an <em>error</em> on the measurement. In other cases, however, part of the variability in <span class="math inline">\(Y_i\)</span> may be due to imprecise measurements and then <span class="math inline">\(\eps_i\)</span> can (at least partly) be considered as a random error term.</p>
+\]</span> i.e. it allows to interpret <span class="math inline">\(m(x;\mb\beta)\)</span> as the conditional mean. The stochastic variable <span class="math inline">\(\eps_i\)</span> is often referred to as the <strong>error term</strong>. The model thus suggests that the outcome can be decomposed into two components: a <strong>systematic component</strong>, <span class="math inline">\(m(x_i;\mb\beta)\)</span>, and a <strong>stochastic component</strong> (or random component, or error term) <span class="math inline">\(\eps_i\)</span>. The latter gives the deviation between the outcome <span class="math inline">\(Y_i\)</span> and the systematic component <span class="math inline">\(m(x_i;\mb\beta)\)</span>.</p>
+<p>It is important, however, to note that this decomposition often does not agree with how the outcomes are generated or realised: the variability of the outcomes <span class="math inline">\(Y_i\)</span> about the conditional mean <span class="math inline">\(m(x_i;\mb\beta)\)</span> is often inherently present in the population (e.g. biological variability). In this sense, <span class="math inline">\(\eps_i\)</span> may not be looked at as an <em>error</em> on the measurement. In other cases, however, part of the variability in <span class="math inline">\(Y_i\)</span> may be due to imprecise measurements and then <span class="math inline">\(\eps_i\)</span> can (at least partly) be considered as a random error term.</p>
 <p>Note that the assumption <span class="math inline">\(\eps_i \iid F_\eps(\cdot;\mb{\nu})\)</span> implies that all error terms have the same distribution and hence, for a fixed <span class="math inline">\(\sigma^2\geq 0\)</span>, <span class="math display">\[
   \var{\eps_i} = \var{\eps_i \mid x_i} = \sigma^2
-\]</span> for all <span class="math inline">\(i=1,2,\ldots, n\)</span>. This restriction on the variance is referred to as the assumption of <strong>homoskedasticiteit</strong>. The variance <span class="math inline">\(\sigma^2\)</span> is called the ** residual variance**.</p>
+\]</span> for all <span class="math inline">\(i=1,2,\ldots, n\)</span>. This restriction on the variance is referred to as the assumption of <strong>homoskedasticiteit</strong> or <strong>constant variance</strong>. The variance <span class="math inline">\(\sigma^2\)</span> is called the <strong>residual variance</strong>.</p>
 <p>In this course we only discuss <strong>linear regression analysis</strong>, for which the function <span class="math inline">\(m(x;\mb\beta)\)</span> is restricted to linear functions of <span class="math inline">\(\mb\beta\)</span>: <span class="math display">\[
   m(x;\mb\beta) = \beta_0 + \beta_1x,
 \]</span> with <span class="math inline">\(\mb{\beta}^t=(\beta_0, \beta_1)\)</span>.</p>
@@ -582,12 +583,13 @@ This equation represents a linear line which is referred to as the <strong>regre
   \E{Y\mid x+1} - \E{Y\mid x} = \left(\beta_0+\beta_1(x+1)\right)-\left(\beta_0+\beta_1 x\right) = \beta_1 .
 \]</span> The parameter <span class="math inline">\(\beta_1\)</span> is thus the average increase in the outcome when the regressor increases with one unit. This parameter is also the <strong>slope</strong> of the regression line. The parameter is often referred to as the <strong>regression coefficient</strong>.</p>
 <p>The interpretation of the parameter <span class="math inline">\(\beta_0\)</span> follows from the identity <span class="math display">\[
-  \E{Y\mid x=0} = \beta_0+\beta_1 0 = \beta_0 .
+  \E{Y\mid x=0} = \beta_0+\beta_1 \times 0 = \beta_0 .
 \]</span> The parameter <span class="math inline">\(\beta_0\)</span> is thus the average outcome when the regressor takes value zero. It is the <strong>intercept</strong> of the regression line.</p>
-<p>Sometimes the situation <span class="math inline">\(x=0\)</span> does not have a physical meaning or it falls outside of the <strong>scope</strong> of the model (i.e. the range of <span class="math inline">\(x\)</span>-values that forms the focus of the data analysis). For this reason, the regression model is sometimes written as <span class="math display">\[
+<p>Sometimes the situation <span class="math inline">\(x=0\)</span> does not have a physical meaning or it falls outside of the <strong>scope</strong> of the model (i.e. the range of <span class="math inline">\(x\)</span>-values that forms the focus of the data analysis). For this reason, the regression model is sometimes formulated as <span class="math display">\[
   Y_i = \beta_0 + \beta_1(x_i-\bar{x}) + \eps_i
-\]</span> with <span class="math inline">\(\bar{x}\)</span> the sample mean of the regressor observations in the dataset, <span class="math inline">\(\eps_i \iid F_\eps(\cdot;\mb\nu)\)</span> and <span class="math inline">\(\E{\eps_i}=\E{\eps_i\mid x_i}=0\)</span>. The interpretation of <span class="math inline">\(\beta_0\)</span> now becomes <span class="math inline">\(\beta_0=\E{Y\mid x=\bar{x}}\)</span>. Since the sample mean <span class="math inline">\(\bar{x}\)</span> is often withing the scope of the model, the parameter <span class="math inline">\(\beta_0\)</span> now has a real meaning. The interpretation of <span class="math inline">\(\beta_1\)</span> remains unchanged. In the Galton example, the scope is approximately <span class="math inline">\([150 \text{cm},200 \text{cm}]\)</span>.</p>
-<p>In this chapter we discuss methods for the estimation of the parameters in the linear regression model <a href="#eq:Mod3">(2.2)</a>. We will find the sampling distribution of the parameter estimators. This will follow the basis for hypothesis tests and for confidence intervals.</p>
+\]</span> with <span class="math inline">\(\bar{x}\)</span> the sample mean of the regressor observations in the dataset, <span class="math inline">\(\eps_i \iid F_\eps(\cdot;\mb\nu)\)</span> and <span class="math inline">\(\E{\eps_i}=\E{\eps_i\mid x_i}=0\)</span>. The interpretation of <span class="math inline">\(\beta_0\)</span> now becomes <span class="math inline">\(\beta_0=\E{Y\mid x=\bar{x}}\)</span>. Since the sample mean <span class="math inline">\(\bar{x}\)</span> is often withing the scope of the model, the parameter <span class="math inline">\(\beta_0\)</span> now has a real meaning. The interpretation of <span class="math inline">\(\beta_1\)</span> remains unchanged.</p>
+<p>In the Galton example, the scope is approximately <span class="math inline">\([150 \text{cm},200 \text{cm}]\)</span>.</p>
+<p>In this chapter we discuss methods for the estimation of the parameters in the linear regression model <a href="#eq:Mod3">(2.2)</a>. We will find the sampling distribution of the parameter estimators. This will form the basis for hypothesis tests and for confidence intervals.</p>
 </div>
 <div id="S:RegSimStudy" class="section level2">
 <h2><span class="header-section-number">2.1</span> Interpretation via simulations</h2>
@@ -596,7 +598,10 @@ This equation represents a linear line which is referred to as the <strong>regre
 <p>We start with model <a href="#eq:Mod3">(2.2)</a>: <span class="math display">\[
   Y_i = \beta_0 + \beta_1x_i + \eps_i
 \]</span> with <span class="math inline">\(\eps_i \iid F_\eps(\cdot;\mb\nu)\)</span> and <span class="math inline">\(\E{\eps_i}=\E{\eps_i\mid x_i}=0\)</span>. We set <span class="math inline">\(F_\eps\)</span> to the normal distribution with mean zero and variance <span class="math inline">\(\sigma^2\)</span>.</p>
-<p>We start with the simulation of a sample of 5 outcomes (son's heights) at <span class="math inline">\(\mb{x}^t=(165, 170, 175, 180, 185)\)</span> (father's heights). Before we can start the simulations, we need to set the parameters to specific values. We choose: <span class="math inline">\(\beta_0=90\)</span>, <span class="math inline">\(\beta_1=0.5\)</span> en <span class="math inline">\(\sigma=25\)</span>. Thus, we simulate as if we known the truth (i.e. the population). In this context, we refer to this model as the <strong>data generating model</strong>.</p>
+<p>We start with the simulation of a sample of 5 outcomes (son's heights) at <span class="math inline">\(\mb{x}^t=(165, 170, 175, 180, 185)\)</span> (father's heights).</p>
+<p>Before we can start the simulations, we need to set the parameters to specific values. We choose: <span class="math display">\[
+  \beta_0=90 \;\;\; \beta_1=0.5 \;\;\; \sigma=25.
+\]</span> Thus, we simulate as if we known the truth (i.e. the population). In this context, we refer to this model as the <strong>data generating model</strong>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">set.seed</span>(<span class="dv">724245</span>)
 x&lt;-<span class="kw">c</span>(<span class="dv">165</span>,<span class="dv">170</span>,<span class="dv">175</span>,<span class="dv">180</span>,<span class="dv">185</span>) <span class="co"># five father&#39;s heights</span>
 x</code></pre></div>
@@ -611,12 +616,12 @@ y   </code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(x,y,<span class="dt">cex.axis=</span><span class="fl">1.5</span>,<span class="dt">cex.lab=</span><span class="fl">1.5</span>)
 <span class="kw">abline</span>(<span class="kw">c</span>(<span class="dv">90</span>,<span class="fl">0.5</span>),<span class="dt">col=</span><span class="dv">2</span>)</code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:RegSim1"></span>
-<img src="DASM2_files/figure-html/RegSim1-1.png" alt="Scatter plot of 1 simulated sample from the regression model. The red line is the linear regression model with the true parameter values." width="672" />
+<img src="DASM2_files/figure-html/RegSim1-1.png" alt="Scatter plot of 1 simulated sample from the (data generating) regression model. The red line is the linear regression model with the true parameter values." width="672" />
 <p class="caption">
-Figure 2.2: Scatter plot of 1 simulated sample from the regression model. The red line is the linear regression model with the true parameter values.
+Figure 2.2: Scatter plot of 1 simulated sample from the (data generating) regression model. The red line is the linear regression model with the true parameter values.
 </p>
 </div>
-<p>Next we repeat this procedure (experiment) multiple times. Each time other outcomes will be generated. The following R code generated <span class="math inline">\(N=100\)</span> repeated experiments, each with <span class="math inline">\(n=5\)</span> outcomes as described earlier. The resulst are visualised in Figure <a href="#fig:RegSim2">2.3</a>.</p>
+<p>Next we repeat this procedure (experiment) multiple times. Each time other outcomes will be generated. The following R code generates <span class="math inline">\(N=100\)</span> repeated experiments, each with <span class="math inline">\(n=5\)</span> outcomes as described earlier. The resulst are visualised in Figure <a href="#fig:RegSim2">2.3</a>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">set.seed</span>(<span class="dv">254111</span>)
 N&lt;-N100 <span class="co"># number of repeated experiments</span>
 x&lt;-<span class="kw">c</span>(<span class="dv">165</span>,<span class="dv">170</span>,<span class="dv">175</span>,<span class="dv">180</span>,<span class="dv">185</span>) <span class="co"># five father&#39;s heights</span>
@@ -632,9 +637,9 @@ Data&lt;-<span class="kw">data.frame</span>(<span class="dt">experiment=</span><
     Data&lt;-<span class="kw">rbind</span>(Data,<span class="kw">cbind</span>(experiment,x,y))
 }</code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:RegSim2"></span>
-<img src="DASM2_files/figure-html/RegSim2-1.png" alt="Scatter plot of $N=100$ simulated samples (experiment) from a regression model. Each color corresponds to a repeated experiment. The red line is the linear regression line with the true parameter values." width="672" />
+<img src="DASM2_files/figure-html/RegSim2-1.png" alt="Scatter plot of $N=100$ simulated samples (experiments) from a regression model. Each color corresponds to a repeated experiment. The red line is the linear regression line with the true parameter values." width="672" />
 <p class="caption">
-Figure 2.3: Scatter plot of <span class="math inline">\(N=100\)</span> simulated samples (experiment) from a regression model. Each color corresponds to a repeated experiment. The red line is the linear regression line with the true parameter values.
+Figure 2.3: Scatter plot of <span class="math inline">\(N=100\)</span> simulated samples (experiments) from a regression model. Each color corresponds to a repeated experiment. The red line is the linear regression line with the true parameter values.
 </p>
 </div>
 <p>Now we look at the histograms of the repeated samples; each histogram corresponds to another value of <span class="math inline">\(x\)</span>. See Figure <a href="#fig:RegSim3">2.4</a>.</p>
@@ -653,7 +658,7 @@ Figure 2.4: Histogram of the <span class="math inline">\(N=100\)</span> repeated
 </p>
 </div>
 <p>Every histogram in Figure <a href="#fig:RegSim3">2.4</a> approximately shows a normal distribution. This is expected, because we have sampled from a normal distribution for each value of <span class="math inline">\(x\)</span>. In particular, for a given value of <span class="math inline">\(x\)</span>, we have sampled the outcomes <span class="math inline">\(Y\)</span> from the distribution <span class="math inline">\(N(90+0.5x,25)\)</span>.</p>
-<p>Figure <a href="#fig:RegSim3">2.4</a> also shows the sample means of the <span class="math inline">\(N=100\)</span> repeated outcomes for each given <span class="math inline">\(x\)</span>. If <span class="math inline">\(N\)</span> is very large, then these sample means are approximately equal to the corresponding expected values <span class="math inline">\(\E{Y\mid x}=\beta_0+\beta_1x\)</span>. Also these expected values (with the given parameter values) are depicted in the graph; these are the points on the true regression line. Both lines are very close to one another. If <span class="math inline">\(N\)</span> were much larger then 100, we would expect that the lines with be even closer to one another. The next R code gives the numerical values.</p>
+<p>Figure <a href="#fig:RegSim3">2.4</a> also shows the sample means of the N=100 repeated outcomes for each given <span class="math inline">\(x\)</span>. If <span class="math inline">\(N\)</span> is very large, then these sample means are approximately equal to the corresponding expected values <span class="math inline">\(\E{Y\mid x}=\beta_0+\beta_1x\)</span>. Also these expected values (with the given parameter values) are depicted in the graph; these are the points on the true regression line. Both lines are very close to one another. If <span class="math inline">\(N\)</span> were much larger then 100, we would expect that the lines would be even closer to one another. The next R code gives the numerical values.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">Results&lt;-<span class="kw">data.frame</span>(<span class="dt">x=</span><span class="ot">NA</span>,<span class="dt">EmpMean=</span><span class="ot">NA</span>,<span class="dt">ExpectedValue=</span><span class="ot">NA</span>,
                     <span class="dt">EmpVariance=</span><span class="ot">NA</span>,<span class="dt">Variance=</span><span class="ot">NA</span>)
 <span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">5</span>) {
@@ -675,13 +680,13 @@ Results</code></pre></div>
 <p>Consider again model <a href="#eq:Mod3">(2.2)</a>, <span class="math display">\[
   Y_i = \beta_0 + \beta_1x_i + \eps_i
 \]</span> with <span class="math inline">\(\eps_i \iid F_\eps(\cdot;\mb\nu)\)</span> and <span class="math inline">\(\E{\eps_i}=\E{\eps_i\mid x_i}=0\)</span>.</p>
-<p>The <strong>least squares</strong> estimation method can be applied without knowledge of the exact shape of the distribution of the error term. In this sense, the model is an example of semiparametric statistical model: the conditional mean is parameterised (<span class="math inline">\(\beta_0\)</span> and <span class="math inline">\(\beta_1\)</span>) and poses a restriction on the conditional distributions, but the other moments of the conditional outcome distribution (or error term distribution) remain unspecified.</p>
+<p>The <strong>least squares</strong> estimation method can be applied without knowledge of the exact shape of the distribution of the error term. In this sense, the model is an example of <strong>semiparametric statistical model</strong>: the conditional mean is parameterised (<span class="math inline">\(\beta_0\)</span> and <span class="math inline">\(\beta_1\)</span>) and posesses a restriction on the conditional distributions, but the other moments of the conditional outcome distribution (or error term distribution) remain unspecified.</p>
 <p>In this section we aim at estimating the regression parameters <span class="math inline">\(\beta_0\)</span> and <span class="math inline">\(\beta_1\)</span>, which will be denoted by <span class="math inline">\(\hat\beta_0\)</span> and <span class="math inline">\(\hat\beta_1\)</span>. The estimated regression line should come <em>as close as possible</em> to the observed outcomes in the sample. We will need a measure for the distance between the estimated regression line and the observed sample data. For given estimates <span class="math inline">\(\hat\beta_0\)</span> and <span class="math inline">\(\hat\beta_1\)</span>, the estimated regression line is given by <span class="math display">\[
   \hat{m}(x)=m(x;\hat{\mb\beta})= \hat\beta_0+\hat\beta_1 x.
-\]</span> This line is sometimes also referred to as the <strong>fitted</strong> regression line. For given <span class="math inline">\(x\)</span>, this gives an estimate of the conditional mean of the outcome <span class="math inline">\(Y\)</span>. For the <span class="math inline">\(n\)</span> sample observations, the points om the estimated regression line are denoted by <span class="math display">\[
+\]</span> This line is sometimes referred to as the <strong>fitted</strong> regression line. For given <span class="math inline">\(x\)</span>, this gives an estimate of the conditional mean of the outcome <span class="math inline">\(Y\)</span>. For the <span class="math inline">\(n\)</span> sample observations, the points on the estimated regression line are denoted by <span class="math display">\[
   \hat{Y}_i = \hat{m}(x_i)=m(x_i;\hat{\mb\beta})=\hat\beta_0+\hat\beta_1 x_i \;\;\; i=1,\ldots, n.
-\]</span> The <span class="math inline">\(\hat{Y}_i\)</span>s are often called the <strong>predictions</strong> of the outcomes, but in many cases this is a misleading terminology because the points on the estimated regressionline should in the first place not be considered as predictions, but rather as estimates of the conditional mean. On the other hand, if no extra information is available, then <span class="math inline">\(\hat{m}(x)\)</span> is a good prediction for an outcome at regression value <span class="math inline">\(x\)</span> (see further). In this course we will stick to the conventional terminology (predictions), but in the first place we consider them as estimates of the conditional means.</p>
-<p>Good parameter estimates <span class="math inline">\(\hat\beta_0\)</span> and <span class="math inline">\(\hat\beta_1\)</span> should make the predictions <span class="math inline">\(\hat{Y}_i\)</span> come as close as possible to the observed outcomes <span class="math inline">\(Y_i\)</span>. This can be quantifiedf by the <strong>least squares criterion</strong></p>
+\]</span> The <span class="math inline">\(\hat{Y}_i\)</span>s are often called the <strong>predictions</strong> of the outcomes, but in many cases this is a misleading terminology because the points on the estimated regression line should in the first place not be considered as predictions, but rather as estimates of the conditional mean. On the other hand, if no extra information is available, then <span class="math inline">\(\hat{m}(x)\)</span> is a good prediction for an outcome at regression value <span class="math inline">\(x\)</span> (see further). In this course we will stick to the conventional terminology (predictions), but in the first place we consider them as estimates of the conditional means.</p>
+<p>Good parameter estimates <span class="math inline">\(\hat\beta_0\)</span> and <span class="math inline">\(\hat\beta_1\)</span> should make the predictions <span class="math inline">\(\hat{Y}_i\)</span> come as close as possible to the observed outcomes <span class="math inline">\(Y_i\)</span>. This can be quantified by the <strong>least squares criterion</strong></p>
 <span class="math display" id="eq:SSEReg1">\[\begin{equation}
   \SSE(\hat{\mb\beta}) = \sum_{i=1}^n \left(Y_i - \hat{Y}_i\right)^2 = \sum_{i=1}^n \left(Y_i - m(x_i;\hat{\mb\beta})\right)^2.
   \tag{2.3}
@@ -694,16 +699,19 @@ Results</code></pre></div>
 \]</span>
 </div>
 
-<p>We use the abbreviation LSE for the <strong>least squares estimator</strong>. Figure <a href="#fig:RegLSE">2.5</a> shows three datasets with fitted regression lines and with the indication of <span class="math inline">\(Y_i - \hat{Y}_i\)</span>. The deviation <span class="math inline">\(Y_i - \hat{Y}_i\)</span> is called the <strong>residual</strong>, which is often written as <span class="math display">\[
-  e_i = Y_i - \hat{Y}_i \text{ or } e_i(\hat{\mb{\beta}}) =Y_i -m(x_i;\hat{\mb{\beta}}).
-\]</span> With this notation we write <span class="math inline">\(\SSE=\sum_{i=1}^n e_i^2\)</span>, or <span class="math inline">\(\SSE(\hat{\mb{\beta}})=\sum_{i=1}^n e_i^2(\hat{\mb{\beta}})\)</span>.</p>
+<p>We use the abbreviation LSE for the <strong>least squares estimator</strong>.</p>
+<p>Figure <a href="#fig:RegLSE">2.5</a> shows three datasets with fitted regression lines and with the indication of <span class="math inline">\(Y_i - \hat{Y}_i\)</span>. The deviation <span class="math inline">\(Y_i - \hat{Y}_i\)</span> is called the <strong>residual</strong>, which is often written as <span class="math display">\[
+  e_i = Y_i - \hat{Y}_i \;\text{ or }\; e_i(\hat{\mb{\beta}}) =Y_i -m(x_i;\hat{\mb{\beta}}).
+\]</span> With this notation we write <span class="math display">\[
+  \SSE=\sum_{i=1}^n e_i^2 \;\text{ or }\; \SSE(\hat{\mb{\beta}})=\sum_{i=1}^n e_i^2(\hat{\mb{\beta}}).
+\]</span></p>
 <div class="figure" style="text-align: center"><span id="fig:RegLSE"></span>
-<img src="DASM2_files/figure-html/RegLSE-1.png" alt="Illustration of the estimation of the regession line. The black line shows the function $m$; this function is in practice not known and need to be estimated based on five sample observations (red points). The estimated regression line is depicted as the red dashed line. The vertical lines connect the observed outcomes $y_i$ with the predictions. The lengths of these vertical lines form the basis for SSE. Each of the three graphs start with another (randomly selected) sample. Left: estimtes of $\beta_0$ and $\beta_1$ are $51.9$ and $0.71$ with SSE$=52.75$. Middle: $133.3$ and $0.26$ with SSE$=35.94$. Right: $122.3$ and $0.31$ with SSE$=3.18$." width="672" />
+<img src="DASM2_files/figure-html/RegLSE-1.png" alt="Illustration of the estimation of the regession line. The black line shows the function $m$; this function is in practice not known and need to be estimated based on five sample observations (red points). The estimated regression line is depicted as the red dashed line. The vertical lines connect the observed outcomes $y_i$ with the predictions. The lengths of these vertical lines form the basis for SSE. Each of the three graphs start with another (randomly selected) sample. Left: estimates of $\beta_0$ and $\beta_1$ are $51.9$ and $0.71$ with SSE$=52.75$. Middle: $133.3$ and $0.26$ with SSE$=35.94$. Right: $122.3$ and $0.31$ with SSE$=3.18$." width="672" />
 <p class="caption">
-Figure 2.5: Illustration of the estimation of the regession line. The black line shows the function <span class="math inline">\(m\)</span>; this function is in practice not known and need to be estimated based on five sample observations (red points). The estimated regression line is depicted as the red dashed line. The vertical lines connect the observed outcomes <span class="math inline">\(y_i\)</span> with the predictions. The lengths of these vertical lines form the basis for SSE. Each of the three graphs start with another (randomly selected) sample. Left: estimtes of <span class="math inline">\(\beta_0\)</span> and <span class="math inline">\(\beta_1\)</span> are <span class="math inline">\(51.9\)</span> and <span class="math inline">\(0.71\)</span> with SSE<span class="math inline">\(=52.75\)</span>. Middle: <span class="math inline">\(133.3\)</span> and <span class="math inline">\(0.26\)</span> with SSE<span class="math inline">\(=35.94\)</span>. Right: <span class="math inline">\(122.3\)</span> and <span class="math inline">\(0.31\)</span> with SSE<span class="math inline">\(=3.18\)</span>.
+Figure 2.5: Illustration of the estimation of the regession line. The black line shows the function <span class="math inline">\(m\)</span>; this function is in practice not known and need to be estimated based on five sample observations (red points). The estimated regression line is depicted as the red dashed line. The vertical lines connect the observed outcomes <span class="math inline">\(y_i\)</span> with the predictions. The lengths of these vertical lines form the basis for SSE. Each of the three graphs start with another (randomly selected) sample. Left: estimates of <span class="math inline">\(\beta_0\)</span> and <span class="math inline">\(\beta_1\)</span> are <span class="math inline">\(51.9\)</span> and <span class="math inline">\(0.71\)</span> with SSE<span class="math inline">\(=52.75\)</span>. Middle: <span class="math inline">\(133.3\)</span> and <span class="math inline">\(0.26\)</span> with SSE<span class="math inline">\(=35.94\)</span>. Right: <span class="math inline">\(122.3\)</span> and <span class="math inline">\(0.31\)</span> with SSE<span class="math inline">\(=3.18\)</span>.
 </p>
 </div>
-<p>Before we continue, we introduce the matrix notation for the model. We introduce the following notation:</p>
+<p>Before we continue, we introduce the <strong>matrix notation</strong> for the model. We introduce the following notation:</p>
 <ul>
 <li><p>parameter vector <span class="math inline">\(\mb\beta^t=(\beta_0, \beta_1)\)</span> and estimate <span class="math inline">\(\hat{\mb\beta}^t=(\hat\beta_0, \hat\beta_1)\)</span></p></li>
 <li><p>outcome vector <span class="math inline">\(\mb{Y}^t=(Y_1,\ldots, Y_n)\)</span></p></li>
@@ -776,7 +784,7 @@ First we write
   \hat\beta_1
     &amp;=&amp; \frac{\sum_{i=1}^n (Y_i-\bar{Y})(x_i-\bar{x})}{\sum_{i=1}^n (x_i-\bar{x})^2}.
  \end{eqnarray*}\]</span>
-<p>This solution could also be found directly by computing the partial derivatives of SSE w.r.t. the two parameters, setting these derivatives to zero and solving the system of equations for the two parameters (later we will see that our solution via vector differentiation is more general and also applied to multiple linear regression).</p>
+<p>This solution could also be found directly by computing the partial derivatives of SSE w.r.t. the two parameters, setting these derivatives to zero and solving the system of equations for the two parameters (later we will see that our solution via vector differentiation is more general and also applies to multiple linear regression).</p>
 <span class="math display">\[\begin{eqnarray*}
   \frac{\partial}{\partial \beta_0} \SSE(\mb\beta)
     &amp;=&amp; 0\\
@@ -792,7 +800,7 @@ First we write
     &amp;=&amp; -2\sum_{i=1}^n x_i(Y_i - \beta_0-\beta_1 x_i)=0.
     \tag{2.5}
  \end{eqnarray}\]</span>
-<p>Equations <a href="#eq:LSEEE0">(2.4)</a> and <a href="#eq:LSEEE1">(2.5)</a> are called the <strong>estimating equations</strong>. In the context of LSE they are also known as the <strong>normal equations</strong>.</p>
+<p>Equations <a href="#eq:LSEEE0">(2.4)</a> and <a href="#eq:LSEEE1">(2.5)</a> are called the <strong>estimating equations</strong>. In the context of LSE for linear regression models they are also known as the <strong>normal equations</strong>.</p>
 </div>
 <div id="example-galtons-height-data-1" class="section level2 unnumbered">
 <h2>Example (Galton's height data)</h2>
@@ -811,11 +819,14 @@ m</code></pre></div>
 \]</span></p>
 <p>Figure <a href="#fig:GaltonFittedReg">2.6</a> shows the scatter plot and the fitted regression line. Sometimes the fitted regression line is represented as <span class="math display">\[
   \hat{y}_i = 89.8 + 0.51 x_i .
-\]</span> Interpretation: if the height of the fathers increases with 1cm, then the average height of their sons is estimated to increase with <span class="math inline">\(0.5\)</span>cm. The intercept, however, has no direct physical interpretation because there are no fathers of height 0cm. This issue can be resolved by first centering the regressor. This is illustrated next.</p>
+\]</span> Interpretation: if the height of the fathers increases with 1cm, then the average height of their sons is estimated to increase with <span class="math inline">\(0.5\)</span>cm.</p>
+<p>The intercept, however, has no direct physical interpretation because there are no fathers of height 0cm. This issue can be resolved by first centering the regressor. This is illustrated next.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">Galton.sons&lt;-Galton.sons <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">mutate</span>(<span class="dt">father.cm.centered=</span>father.cm<span class="op">-</span><span class="kw">mean</span>(father.cm))
 <span class="kw">mean</span>(Galton.sons<span class="op">$</span>father.cm)</code></pre></div>
 <pre><code>## [1] 175.4905</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">mean</span>(Galton.sons<span class="op">$</span>father.cm.centered)</code></pre></div>
+<pre><code>## [1] 6.242341e-15</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">m2&lt;-<span class="kw">lm</span>(son.cm<span class="op">~</span>father.cm.centered,<span class="dt">data=</span>Galton.sons)
 m2</code></pre></div>
 <pre><code>## 
@@ -825,19 +836,19 @@ m2</code></pre></div>
 ## Coefficients:
 ##        (Intercept)  father.cm.centered  
 ##           178.9070              0.5077</code></pre>
-<p>First note that the estimate of the slope remains unchanged after centering the regressor. The intercept is now estimanted by <span class="math inline">\(\hat\beta_0=178.9\)</span>. Hence, when the centered regressor equals 0, i.e. when fathers have average height (<span class="math inline">\(175.5\)</span>cm), their sons have an estimated average height of <span class="math inline">\(178.9\)</span>cm.</p>
+<p>First note that the estimate of the slope remains unchanged after centering the regressor. The intercept is now estimanted by <span class="math inline">\(\hat\beta_0=178.9\)</span>. Hence, when the centered regressor equals 0, i.e. when fathers have average height (175.5cm), their sons have an estimated average height of <span class="math inline">\(178.9\)</span>cm.</p>
 <div class="figure" style="text-align: center"><span id="fig:GaltonFittedReg"></span>
 <img src="DASM2_files/figure-html/GaltonFittedReg-1.png" alt="Scatter plot of the Galton data and the fitted regression line (black). The red line is the diagonal line." width="672" />
 <p class="caption">
 Figure 2.6: Scatter plot of the Galton data and the fitted regression line (black). The red line is the diagonal line.
 </p>
 </div>
-<p>An historical note: Figure <a href="#fig:GaltonFittedReg">2.6</a> shows the fitted regression line, but also the diagonal line. If the fitted regression line would coincide with the diagonal, then this would indicate that the average height of sons equals the height of their fathers. However, this is obviously not the case for Galton's dataset. From the graph we see that the smaller fathers have sons that are on average taller than them. On the other hand, the taller fathers have sons that are on average smaller than them. In 1886 Galton also observed this phenomenon, which he called <em>regression towards mediocrity</em>. In his 1886 paper he develop the basis of modern regression analysis (without the statistical inference); the term <em>regression</em> comes from his paper on the analysis of heights of parents and children. Nowadays, <em>regression towards mediocrity</em> is known as <em>regression to the mean</em>.</p>
+<p><strong>An historical note</strong>: Figure <a href="#fig:GaltonFittedReg">2.6</a> shows the fitted regression line, but also the diagonal line. If the fitted regression line would coincide with the diagonal, then this would indicate that the average height of sons equals the height of their fathers. However, this is obviously not the case for Galton's dataset. From the graph we see that the smaller fathers have sons that are on average taller than them. On the other hand, the taller fathers have sons that are on average smaller than them. In 1886 Galton also observed this phenomenon, which he called <em>regression towards mediocrity</em>. In his 1886 paper he develop the basis of modern regression analysis (without the statistical inference); the term <em>regression</em> comes from his paper on the analysis of heights of parents and children. Nowadays, <em>regression towards mediocrity</em> is known as <em>regression to the mean</em>.</p>
 <p>Finally, note that the estimates computed for this example, do not give any appreciation of the (im)precision with which they were estimated. To what extent can we thrust these estimates? To answer that question, we need the sampling distribution of the estimators. This will be discussed later in this course.</p>
 </div>
 <div id="exercise-blood-pressure" class="section level2 unnumbered">
 <h2>Exercise: blood pressure</h2>
-<p>In a small dose-finding study of a blood pressure reducing drug, 40 high blood pressure patients (systolic blood pressure at least 150mmHg) were randomised over 4 concentrations of the active compound (<em>arginine</em>) in the drug: 0, 2, 5 and 10mg per day. The outcome is the systolic blood pressure reduction after 2 months, measured in mmHg. The data can be read as shown in the next chunck of R code.</p>
+<p>In a small dose-finding study of a blood pressure reducing drug, 40 high blood pressure patients (systolic blood pressure at least 150 mmHg) were randomised over 4 concentrations of the active compound (<em>arginine</em>) in the drug: 0, 2, 5 and 10 mg per day. The outcome is the systolic blood pressure reduction after 2 months, measured in mmHg. The data can be read as shown in the next chunck of R code.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">load</span>(<span class="st">&quot;Data/BloodPressure.RData&quot;</span>)</code></pre></div>
 <p>Fit a linear regression to the data and interpret the regression coefficient.</p>
 <p><details> <summary markdown="span">Try to make this exercise yourself. If you are ready you can expand this page and look at a solution</summary></p>
@@ -912,7 +923,7 @@ We also give the explicit form of <span class="math inline">\(\var{\hat{\mb\beta
    -\bar{x}                                      &amp; 1 \end{pmatrix}.
    \tag{2.6}
 \end{equation}\]</span>
-<p>To give you a good understanding of these two properties, we extend the simulation study of Section <a href="#S:RegSimStudy">2.1</a>. For every repeated experiment, we compute the LSE of the two <span class="math inline">\(\beta\)</span>-parameters. We repeat the experiment <span class="math inline">\(N=100\)</span> times and then we compute the mean and the variance of the <span class="math inline">\(N=100\)</span> parameter estimates. Recall that we set the (true) parameter values to <span class="math inline">\(\beta_0=90\)</span>, <span class="math inline">\(\beta_1=0.5\)</span> and <span class="math inline">\(\sigma=5\)</span>.</p>
+<p>To give you a good understanding of these two properties, we extend the simulation study of Section <a href="#S:RegSimStudy">2.1</a>. For every repeated experiment, we compute the LSE of the two <span class="math inline">\(\beta\)</span>-parameters. We repeat the experiment <span class="math inline">\(N=\)</span> 100 times and then we compute the mean and the variance of the <span class="math inline">\(N=\)</span> 100 parameter estimates. Recall that we set the (true) parameter values to <span class="math inline">\(\beta_0=90\)</span>, <span class="math inline">\(\beta_1=0.5\)</span> and <span class="math inline">\(\sigma=5\)</span>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">set.seed</span>(<span class="dv">75286</span>)
 N&lt;-N100 <span class="co"># number of repeated experiments</span>
 x&lt;-<span class="kw">c</span>(<span class="dv">165</span>,<span class="dv">170</span>,<span class="dv">175</span>,<span class="dv">180</span>,<span class="dv">185</span>) <span class="co"># five father&#39;s heights</span>
@@ -930,7 +941,7 @@ betaHat&lt;-<span class="kw">data.frame</span>(<span class="dt">beta0Hat=</span>
 <pre><code>##          beta0Hat    beta1Hat
 ## beta0Hat 2209.750 -12.6339951
 ## beta1Hat  -12.634   0.0723973</code></pre>
-<p>The averages of the <span class="math inline">\(N=100\)</span> estimates of <span class="math inline">\(\beta_0\)</span> and <span class="math inline">\(\beta_1\)</span> are indeed close to the true values. If <span class="math inline">\(N\)</span> were larger, we expect the estimates to be even closer to the true values.</p>
+<p>The averages of the <span class="math inline">\(N=\)</span> 100 estimates of <span class="math inline">\(\beta_0\)</span> and <span class="math inline">\(\beta_1\)</span> are indeed close to the true values. If <span class="math inline">\(N\)</span> were larger, we expect the estimates to be even closer to the true values.</p>
 <p>Theorem <a href="#thm:LSEMeanVar">2.2</a> tells us that the variance of <span class="math inline">\(\hat{\mb\beta}\)</span> equals <span class="math inline">\((\mb{X}^t\mb{X})^{-1}\sigma^2\)</span>. The design matrix <span class="math inline">\(\mb{X}\)</span> for our simulation experiment is constructed in the following chunck of R code.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">X&lt;-<span class="kw">matrix</span>(<span class="dt">nrow=</span><span class="dv">5</span>,<span class="dt">ncol=</span><span class="dv">2</span>)
 X[,<span class="dv">1</span>]=<span class="dv">1</span>
@@ -947,7 +958,7 @@ X</code></pre></div>
 <pre><code>##        [,1]  [,2]
 ## [1,] 3067.5 -17.5
 ## [2,]  -17.5   0.1</code></pre>
-<p>The results of our simulation study give only a rough approximation to this true covariance matrix. A better approximation is obtained with a larger number of repeated experiments (<span class="math inline">\(N\)</span>). We illustrate this with <span class="math inline">\(N=10000\)</span>.</p>
+<p>The results of our simulation study give only a rough approximation to this true covariance matrix. A better approximation is obtained with a larger number of repeated experiments (<span class="math inline">\(N\)</span>). We illustrate this with <span class="math inline">\(N=\)</span> 10^{4}.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">set.seed</span>(<span class="dv">6247467</span>)
 N&lt;-N10000 <span class="co"># number of repeated experiments</span>
 x&lt;-<span class="kw">c</span>(<span class="dv">165</span>,<span class="dv">170</span>,<span class="dv">175</span>,<span class="dv">180</span>,<span class="dv">185</span>) <span class="co"># five father&#39;s heights</span>
@@ -965,8 +976,8 @@ betaHat5&lt;-<span class="kw">data.frame</span>(<span class="dt">beta0Hat=</span
 Var5&lt;-<span class="kw">solve</span>(<span class="kw">t</span>(X)<span class="op">%*%</span>X)<span class="op">*</span><span class="dv">25</span>
 EmpVar5</code></pre></div>
 <pre><code>##            beta0Hat    beta1Hat
-## beta0Hat 4976.92567 -28.3814291
-## beta1Hat  -28.38143   0.1620121</code></pre>
+## beta0Hat 3080.48493 -17.5710114
+## beta1Hat  -17.57101   0.1003883</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">Var5</code></pre></div>
 <pre><code>##        [,1]  [,2]
 ## [1,] 3067.5 -17.5
@@ -984,8 +995,8 @@ betaHat50&lt;-<span class="kw">data.frame</span>(<span class="dt">beta0Hat=</spa
 }
 
 <span class="kw">colMeans</span>(betaHat50)</code></pre></div>
-<pre><code>##   beta0Hat   beta1Hat 
-## 93.9305350  0.4776537</code></pre>
+<pre><code>##  beta0Hat  beta1Hat 
+## 90.178681  0.498924</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">X&lt;-<span class="kw">matrix</span>(<span class="dt">nrow=</span><span class="dv">50</span>,<span class="dt">ncol=</span><span class="dv">2</span>)
 X[,<span class="dv">1</span>]=<span class="dv">1</span>
 X[,<span class="dv">2</span>]=x
@@ -993,9 +1004,9 @@ X[,<span class="dv">2</span>]=x
 EmpVar50&lt;-<span class="kw">var</span>(betaHat50)
 Var50&lt;-<span class="kw">solve</span>(<span class="kw">t</span>(X)<span class="op">%*%</span>X)<span class="op">*</span><span class="dv">25</span>
 EmpVar50</code></pre></div>
-<pre><code>##            beta0Hat     beta1Hat
-## beta0Hat 242.550681 -1.401843197
-## beta1Hat  -1.401843  0.008119254</code></pre>
+<pre><code>##            beta0Hat    beta1Hat
+## beta0Hat 311.718416 -1.77841831
+## beta1Hat  -1.778418  0.01016245</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">Var50</code></pre></div>
 <pre><code>##        [,1]  [,2]
 ## [1,] 306.75 -1.75
@@ -1008,10 +1019,10 @@ EmpVar50</code></pre></div>
 Figure 2.7: histograms of <span class="math inline">\(N=10000\)</span> repeated estimates of <span class="math inline">\(\beta_1\)</span> for <span class="math inline">\(n=5\)</span> and <span class="math inline">\(n=50\)</span>. These form approximations for the sampling distributions of the estimators.
 </p>
 </div>
-<p>The figure shows the histograms of the <span class="math inline">\(N=10000\)</span> estimates of <span class="math inline">\(\beta_1\)</span> for sample sizes of <span class="math inline">\(n=5\)</span> and <span class="math inline">\(n=50\)</span>. This illustrates once more that the estimator <span class="math inline">\(\hat{\mb\beta}_1\)</span> is a stochastic (or random) variable. This is easy to understand: <span class="math inline">\(\hat\beta_1= \frac{\sum_{i=1}^n (Y_i-\bar{Y})(x_i-\bar{x})}{\sum_{i=1}^n (x_i-\bar{x})^2}\)</span> is a (linear) function of <span class="math inline">\(Y_1,\ldots, Y_1\)</span>, which are randomly samples outcomes. Hence, <span class="math inline">\(\hat\beta_1\)</span> is also a random variable and it can this be described by a distribution. This distribution is referred to as the <strong>sampling distribution</strong>. It will be discussed in some more detail later in this course. In this section we only looked at the mean and the variance of the estimator.</p>
+<p>The figure shows the histograms of the <span class="math inline">\(N=\)</span> 10^{4} estimates of <span class="math inline">\(\beta_1\)</span> for sample sizes of <span class="math inline">\(n=5\)</span> and <span class="math inline">\(n=50\)</span>. This illustrates once more that the estimator <span class="math inline">\(\hat{\mb\beta}_1\)</span> is a stochastic (or random) variable. This is easy to understand: <span class="math inline">\(\hat\beta_1= \frac{\sum_{i=1}^n (Y_i-\bar{Y})(x_i-\bar{x})}{\sum_{i=1}^n (x_i-\bar{x})^2}\)</span> is a (linear) function of <span class="math inline">\(Y_1,\ldots, Y_1\)</span>, which are randomly sampled outcomes. Hence, <span class="math inline">\(\hat\beta_1\)</span> is also a random variable and it can this be described by a distribution. This distribution is referred to as the <strong>sampling distribution</strong>. It will be discussed in some more detail later in this course. In this section we only looked at the mean and the variance of the estimator.</p>
 <p>Figure <a href="#fig:SimReg3">2.7</a> demonstrates that the variance of the sampling distribution of <span class="math inline">\(\hat\beta_1\)</span> descreases with increasing sample size <span class="math inline">\(n\)</span>. The variance, which is defined as <span class="math display">\[
   \var{\hat\beta_1} = \E{(\hat\beta_1-\E{\hat\beta_1})^2},
-\]</span> quantifies how the estimates, over the repeated experiments, vary avout hte true parameter value <span class="math inline">\(\beta_1\)</span> (note that <span class="math inline">\(\beta_1=\E{\hat\beta_1}\)</span>; unbiased estimator). Thus, the snaller the variance, the more frequent (over repeated experiments) the estimate <span class="math inline">\(\hat\beta_1\)</span> is close to the true value <span class="math inline">\(\beta_1\)</span>. In other words (cfr. definition of variance): for a large sample size <span class="math inline">\(n\)</span> we expect the estimates <span class="math inline">\(\hat\beta_1\)</span> an overage closer to the true value <span class="math inline">\(\beta_1\)</span> than for a small sample size <span class="math inline">\(n\)</span>.</p>
+\]</span> quantifies how the estimates, over the repeated experiments, vary about the true parameter value <span class="math inline">\(\beta_1\)</span> (note that <span class="math inline">\(\beta_1=\E{\hat\beta_1}\)</span>; unbiased estimator). Thus, the smaller the variance, the more frequent (over repeated experiments) the estimate <span class="math inline">\(\hat\beta_1\)</span> is close to the true value <span class="math inline">\(\beta_1\)</span>. In other words (cfr. definition of variance): for a large sample size <span class="math inline">\(n\)</span> we expect the estimates <span class="math inline">\(\hat\beta_1\)</span> an average closer to the true value <span class="math inline">\(\beta_1\)</span> than for a small sample size <span class="math inline">\(n\)</span>.</p>
 <p>If the goal of the study is to estimate the parameter with a great <strong>precision</strong>, then the variance of the estimator must be small. We therefore say that the variance of an estimator is to be considered as a measure of the <strong>imprecision</strong> of the estimator.</p>
 </div>
 </div>
@@ -1033,15 +1044,15 @@ betaHat50&lt;-<span class="kw">data.frame</span>(<span class="dt">beta0Hat=</spa
 
 <span class="kw">colMeans</span>(betaHat50)</code></pre></div>
 <pre><code>##   beta0Hat   beta1Hat 
-## 89.5560826  0.5026506</code></pre>
+## 89.8835261  0.5006106</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">var</span>(betaHat50)</code></pre></div>
 <pre><code>##             beta0Hat     beta1Hat
-## beta0Hat 168.6467643 -0.957354922
-## beta1Hat  -0.9573549  0.005452577</code></pre>
+## beta0Hat 152.1525837 -0.865844097
+## beta1Hat  -0.8658441  0.004943341</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">hist</span>(betaHat50<span class="op">$</span>beta1Hat,<span class="dt">main=</span><span class="st">&quot;n=50&quot;</span>,<span class="dt">xlab=</span><span class="st">&quot;beta1-hat&quot;</span>,<span class="dt">xlim=</span><span class="kw">c</span>(<span class="op">-</span><span class="dv">1</span>,<span class="dv">2</span>))
 <span class="kw">abline</span>(<span class="dt">v=</span><span class="fl">0.5</span>,<span class="dt">col=</span><span class="dv">2</span>)</code></pre></div>
 <p><img src="DASM2_files/figure-html/unnamed-chunk-26-1.png" width="672" /></p>
-<p>The simulation study demonstrates once more that the LSE of the estimators are unbiased. When looking at the empirical variances of <span class="math inline">\(\hat\beta_0\)</span> and <span class="math inline">\(\hat\beta_1\)</span> we see that they are now equal to 168.6467643 and 0.0054526, respecitvely. These are smaller than the variances we obtained from the previous simulation study in which we considered 5 equally spaced values of the regressor. The minimum and maximum values of the regressor are still 165 and 185 and the total sample size is also still equal to <span class="math inline">\(n=50\)</span>. The differences in the variances can be explained by expression <a href="#eq:SigmaBetaLSE">(2.6)</a> for <span class="math inline">\(\var{\hat{\mb\beta}}\)</span>.</p>
+<p>The simulation study demonstrates once more that the LSE of the estimators are unbiased. When looking at the empirical variances of <span class="math inline">\(\hat\beta_0\)</span> and <span class="math inline">\(\hat\beta_1\)</span> we see that they are now equal to 152.1525837 and 0.0049433, respecitvely. These are smaller than the variances we obtained from the previous simulation study in which we considered 5 equally spaced values of the regressor. The minimum and maximum values of the regressor are still 165 and 185 and the total sample size is also still equal to <span class="math inline">\(n=50\)</span>. The differences in the variances can be explained by expression <a href="#eq:SigmaBetaLSE">(2.6)</a> for <span class="math inline">\(\var{\hat{\mb\beta}}\)</span>.</p>
 <p>Let us first look at <span class="math inline">\(\var{\hat\beta_1}\)</span>, which is given by <span class="math display">\[
   \frac{\sigma^2}{\sum_{i=1}^n (x_i-\bar{x})^2}.
 \]</span> Recall that <span class="math inline">\(n=50\)</span> and <span class="math inline">\(\sigma^2=25\)</span> are the same here as in the previous simulation study. Also <span class="math inline">\(\bar{x}=175\)</span> is the same as before (less relevant). It is easy to confirm that the denominator <span class="math inline">\(\sum_{i=1}^n (x_i-\bar{x})^2\)</span> is larger here (5000) than for the previous simulation study (2500). For <span class="math inline">\(\var{\hat\beta_0}\)</span> you may also check that the variance for the setting in this exercise is smaller than for the previous setting.</p>
@@ -1051,7 +1062,8 @@ betaHat50&lt;-<span class="kw">data.frame</span>(<span class="dt">beta0Hat=</spa
 <h3><span class="header-section-number">2.3.2</span> Best Linear Unbiased Estimator (BLUE)</h3>
 <p>In the two previous sections we have investigated the variance of the LSE. We have stressed that the variance is a measure for the imprecission of an estimator. So we like to have an estimator that has a small imprecission or variance. In this section we shall demonstrate that within a certain class of estimators, and for regression model <a href="#eq:Mod3">(2.2)</a>, the LSE has the smallest variance and hence from this perspective it is the best estimator.</p>
 <p>Let's describe the class of estimators of <span class="math inline">\(\mb\beta\)</span> that can be written as <span class="math inline">\(\mb{AY}\)</span>, with <span class="math inline">\(\mb{A}\)</span> a <span class="math inline">\(p\times n\)</span> matrix that may depend on <span class="math inline">\(\mb{X}\)</span>, but that may not depend on stochastic variables (such as e.g. <span class="math inline">\(\mb{Y}\)</span>). We write <span class="math inline">\(\hat{\mb\beta}^*=\mb{AY}\)</span>. The class of <strong>linear unbiased estimators</strong> is then given by estimators of the form <span class="math inline">\(\hat{\mb\beta}^*=\mb{AY}\)</span>, for which it holds that <span class="math inline">\(\E{\hat{\mb\beta}^*}=\mb\beta\)</span> (i.e. the estimator is unbiased for <span class="math inline">\(\mb\beta\)</span>).</p>
-<p>The LSE <span class="math inline">\(\hat{\mb{\beta}}\)</span> is an example of a linear unbiased estimator of <span class="math inline">\(\mb\beta\)</span>. It has the form <span class="math inline">\(\mb{AY}\)</span> with <span class="math inline">\(\mb{A}=(\mb{X}^t\mb{X})^{-1}\mb{X}^t\)</span>. We focus on estimators of <span class="math inline">\(\beta_1\)</span> that can also be written as <span class="math display">\[
+<p>The LSE <span class="math inline">\(\hat{\mb{\beta}}\)</span> is an example of a linear unbiased estimator of <span class="math inline">\(\mb\beta\)</span>. It has the form <span class="math inline">\(\mb{AY}\)</span> with <span class="math inline">\(\mb{A}=(\mb{X}^t\mb{X})^{-1}\mb{X}^t\)</span>.</p>
+<p>As an example, consider the LSE of <span class="math inline">\(\beta_1\)</span>, which can be written as <span class="math display">\[
   \hat\beta_1= \frac{\sum_{i=1}^n (Y_i-\bar{Y})(x_i-\bar{x})}{\sum_{i=1}^n (x_i-\bar{x})^2}.
 \]</span> Also here you see that the estimator is a linear combination of the <span class="math inline">\(n\)</span> outcomes <span class="math inline">\(Y_i\)</span>. We consider now an alternative linear estimator: <span class="math display">\[
   \hat\beta_1^*= \frac{\sum_{i=1}^n w_i(Y_i-\bar{Y})(x_i-\bar{x})}{\sum_{i=1}^n (x_i-\bar{x})^2},
@@ -1076,7 +1088,7 @@ betaHat50&lt;-<span class="kw">data.frame</span>(<span class="dt">beta0Hat=</spa
 \]</span> The covariance in this expression becomes <span class="math display">\[
   \cov{\mb{c}^t\hat{\mb\beta},\mb{c}^t\mb{DY}} = \mb{c}^t(\mb{X}^t\mb{X})^{-1}\mb{X}^t\var{\mb{Y}}\mb{D}^t = \mb{c}^t(\mb{X}^t\mb{X})^{-1}\mb{X}^t\mb{D}^t\sigma^2.
 \]</span></p>
-<p>Since <span class="math inline">\(\hat{\mb\beta}^*\)</span> is an unbiased estimator, i.e. <span class="math inline">\(\E{\hat{\mb\beta}^*}=\mb\beta\)</span>, we find</p>
+<p>Since <span class="math inline">\(\hat{\mb\beta}^*\)</span> is an unbiased estimator, i.e. <span class="math inline">\(\E{\hat{\mb\beta}^*}=\mb\beta\)</span>, we find for all <span class="math inline">\(\mb\beta\)</span></p>
 <span class="math display">\[\begin{eqnarray*}
   \E{\mb{DY}}
   &amp;=&amp; \mb{0} \\
@@ -1127,23 +1139,23 @@ MSENew&lt;-<span class="kw">c</span>()
 
 <span class="kw">colMeans</span>(betaHatLSE)</code></pre></div>
 <pre><code>##   beta0Hat   beta1Hat 
-## 91.5014574  0.4918422</code></pre>
+## 90.5853872  0.4966336</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">colMeans</span>(betaHatNew)</code></pre></div>
 <pre><code>##   beta0Hat   beta1Hat 
-## 56.7114184  0.6903183</code></pre>
+## 56.1436710  0.6931226</code></pre>
 <p>For these averages of the estimates over the Monte Carlo runs, we conclude that the LSEs are unbiased (as we already knew), but the new estimator is biased!</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">diag</span>(<span class="kw">var</span>(betaHatLSE))</code></pre></div>
 <pre><code>##     beta0Hat     beta1Hat 
-## 4976.9256732    0.1620121</code></pre>
+## 3080.4849279    0.1003883</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">diag</span>(<span class="kw">var</span>(betaHatNew))</code></pre></div>
 <pre><code>##     beta0Hat     beta1Hat 
-## 1.911668e+03 6.229921e-02</code></pre>
+## 1.183233e+03 3.865236e-02</code></pre>
 <p>The new, but biased estimator, seems to give smaller variances than the LSE. \ Didn't we learn that the LSE has the smallest bias (BLUE property)? No, the BLUE property says that the LSE has the smallest variance among all <strong>unbiased</strong> estimators. Thus our new estimator, which is biased, does not belong to the class of unbiased estimators and hence it can theoretically have a smaller variance.</p>
 <p>Let's now look at the Mean Squared errors.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">mean</span>(MSELSE)</code></pre></div>
-<pre><code>## [1] 2464.786</code></pre>
+<pre><code>## [1] 1540.31</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">mean</span>(MSENew)</code></pre></div>
-<pre><code>## [1] 1500.389</code></pre>
+<pre><code>## [1] 1164.721</code></pre>
 <p>The MSE of the LSE is larger than the MSE of the new estimator. This means that on average, over many repeated experiments, the new estimator is closer to the true value of the parameter! This is also a very desirable property!</p>
 <p>The new estimator that was introduces here, is known as the <strong>ridge estimator</strong>. It will turn out to be a useful estimator in high dimensional prediction problems. </details></p>
 <div id="sampling-distribution-of-the-lse" class="section level3">
@@ -1254,20 +1266,20 @@ EmpVar</code></pre></div>
 betaHat50&lt;-<span class="kw">simRegressionExp</span>(<span class="dt">N=</span>N1000,<span class="dt">nRep=</span><span class="dv">10</span>)
 <span class="kw">colMeans</span>(betaHat50)</code></pre></div>
 <pre><code>##   beta0Hat   beta1Hat 
-## 89.7645848  0.5013068</code></pre>
+## 90.0568710  0.4997006</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">var</span>(betaHat50)</code></pre></div>
 <pre><code>##             beta0Hat      beta1Hat
-## beta0Hat 12.05951571 -0.0694219745
-## beta1Hat -0.06942197  0.0004002611</code></pre>
+## beta0Hat 11.71799942 -0.0668749613
+## beta1Hat -0.06687496  0.0003822612</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># for n=200</span>
 betaHat200&lt;-<span class="kw">simRegressionExp</span>(<span class="dt">N=</span>N1000,<span class="dt">nRep=</span><span class="dv">40</span>)
 <span class="kw">colMeans</span>(betaHat200)</code></pre></div>
 <pre><code>##   beta0Hat   beta1Hat 
-## 90.1399390  0.4992143</code></pre>
+## 89.9934692  0.5000403</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">var</span>(betaHat200)</code></pre></div>
-<pre><code>##             beta0Hat      beta1Hat
-## beta0Hat  2.20171580 -1.253485e-02
-## beta1Hat -0.01253485  7.153342e-05</code></pre>
+<pre><code>##             beta0Hat     beta1Hat
+## beta0Hat  3.08244132 -0.017619947
+## beta1Hat -0.01761995  0.000100889</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">3</span>))
 <span class="kw">qqnorm</span>(betaHat5<span class="op">$</span>beta1Hat,<span class="dt">main=</span><span class="st">&quot;n=5&quot;</span>)
 <span class="kw">qqline</span>(betaHat5<span class="op">$</span>beta1Hat)
@@ -1488,7 +1500,7 @@ plotBI&lt;-<span class="cf">function</span>(SimBI,<span class="dt">nPlot=</span>
 
 SimBI5&lt;-<span class="kw">simRegressionBI</span>(<span class="dt">N=</span>N1000,<span class="dt">nRep=</span><span class="dv">1</span>)
 <span class="kw">mean</span>(SimBI5<span class="op">$</span>cover) <span class="co"># empirical coverage</span></code></pre></div>
-<pre><code>## [1] 0.95</code></pre>
+<pre><code>## [1] 0.966</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plotBI</span>(SimBI5,<span class="dt">nPlot=</span><span class="dv">30</span>)</code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:SimBI5"></span>
 <img src="DASM2_files/figure-html/SimBI5-1.png" alt="95\% confidence intervals from repeated sampling ($n=5$). The points represent the point estimates $\hat\beta_1$. Only the results of the first 30 repeated experiments are shown. The vertical line indicates the true parameter value: $\beta_1=0.5$." width="672" />
@@ -1496,7 +1508,7 @@ SimBI5&lt;-<span class="kw">simRegressionBI</span>(<span class="dt">N=</span>N10
 Figure 2.11: 95% confidence intervals from repeated sampling (<span class="math inline">\(n=5\)</span>). The points represent the point estimates <span class="math inline">\(\hat\beta_1\)</span>. Only the results of the first 30 repeated experiments are shown. The vertical line indicates the true parameter value: <span class="math inline">\(\beta_1=0.5\)</span>.
 </p>
 </div>
-<p>From the output we read the <strong>empirical coverage</strong> of the <span class="math inline">\(95\%\)</span> confidence interval: 0.95. This is based on 100 repeated experiments. For a large number of repeated experiments, the empirical coverage is a good approximation of the true coverage probability. In our simulation study, the empirical coverage is (approximately) equal to the <strong>nominal</strong> <span class="math inline">\(95\%\)</span> confidence level, which (empirically) demonstrates that the theory is correct (the CI has its correct probabilistic interpretation). The results are visualised in Figure <a href="#fig:SimBI5">2.11</a>: the first 30 CIs are shown. Of these 30 intervals, 29 cover the true parameter value <span class="math inline">\(\beta_1=0.5\)</span>. That gives thus an empirical coverage of <span class="math inline">\(29/30=96.7\%\)</span>. Note that the R output shows the empirical coverage of all 100 repeated experiments.</p>
+<p>From the output we read the <strong>empirical coverage</strong> of the <span class="math inline">\(95\%\)</span> confidence interval: 0.966. This is based on 1000 repeated experiments. For a large number of repeated experiments, the empirical coverage is a good approximation of the true coverage probability. In our simulation study, the empirical coverage is (approximately) equal to the <strong>nominal</strong> <span class="math inline">\(95\%\)</span> confidence level, which (empirically) demonstrates that the theory is correct (the CI has its correct probabilistic interpretation). The results are visualised in Figure <a href="#fig:SimBI5">2.11</a>: the first 30 CIs are shown. Of these 30 intervals, 29 cover the true parameter value <span class="math inline">\(\beta_1=0.5\)</span>. That gives thus an empirical coverage of <span class="math inline">\(29/30=96.7\%\)</span>. Note that the R output shows the empirical coverage of all 1000 repeated experiments.</p>
 <p>Figure <a href="#fig:SimBI5b">2.12</a> shows the results of the first 100 repeated experiments.</p>
 <div class="figure" style="text-align: center"><span id="fig:SimBI5b"></span>
 <img src="DASM2_files/figure-html/SimBI5b-1.png" alt="95\% confidence intervals from repeated sampling ($n=5$). The points represent the point estimates $\hat\beta_1$. Only the results of the first 100 repeated experiments are shown. The vertical line indicates the true parameter value: $\beta_1=0.5$." width="672" />
@@ -1521,11 +1533,11 @@ Figure 2.13: 95% confidence intervals from repeated sampling (<span class="math 
 </p>
 </div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">1</span>))</code></pre></div>
-<p>We repeat the simulation study for larger sample sizes. The results are shown in Figure <a href="#fig:SimBIAll">2.13</a> (only for the first 30 repeated experiments). The empirical coverages based on 100 repeated experiments are:</p>
+<p>We repeat the simulation study for larger sample sizes. The results are shown in Figure <a href="#fig:SimBIAll">2.13</a> (only for the first 30 repeated experiments). The empirical coverages based on 1000 repeated experiments are:</p>
 <ul>
-<li><p><span class="math inline">\(n=5\)</span>: 0.95</p></li>
-<li><p><span class="math inline">\(n=10\)</span>: 0.97</p></li>
-<li><p><span class="math inline">\(n=50\)</span>: 0.93</p></li>
+<li><p><span class="math inline">\(n=5\)</span>: 0.966</p></li>
+<li><p><span class="math inline">\(n=10\)</span>: 0.962</p></li>
+<li><p><span class="math inline">\(n=50\)</span>: 0.948</p></li>
 </ul>
 <p>For all sample sizes <span class="math inline">\(n\)</span> the empirical covarages are very close to the nominal confidence level of <span class="math inline">\(95\%\)</span>.</p>
 <p>Figure <a href="#fig:SimBIAll">2.13</a> demonstrates that the lengths of the confidence intervals become smaller as the sample size increases. This follows directly from the theory: the length of a <span class="math inline">\(95\%\)</span> is <span class="math inline">\(2t_{n-2;1-0.05/2} \hat\sigma_{\beta_1}\)</span> and this decreases because <span class="math inline">\(\hat\sigma_{\beta_1}\)</span> decreases in expectation with increasing sample size (<span class="math inline">\(\sigma_{beta_1} \propto \frac{1}{\sqrt{n}}\)</span>). Thus, the lenght of the intervals decreases as <span class="math inline">\(n\)</span> increases, and still the coverage remains <span class="math inline">\(95\%\)</span>. This phenomenon is related to the variability of the estimates: with increasing sample size <span class="math inline">\(n\)</span>, the variability of the estimates decreases and thus the CI can be smaller while still giving a coverage of <span class="math inline">\(95\%\)</span>.</p>
