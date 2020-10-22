@@ -600,7 +600,7 @@ This equation represents a linear line which is referred to as the <strong>regre
 \]</span> with <span class="math inline">\(\eps_i \iid F_\eps(\cdot;\mb\nu)\)</span> and <span class="math inline">\(\E{\eps_i}=\E{\eps_i\mid x_i}=0\)</span>. We set <span class="math inline">\(F_\eps\)</span> to the normal distribution with mean zero and variance <span class="math inline">\(\sigma^2\)</span>.</p>
 <p>We start with the simulation of a sample of 5 outcomes (son's heights) at <span class="math inline">\(\mb{x}^t=(165, 170, 175, 180, 185)\)</span> (father's heights).</p>
 <p>Before we can start the simulations, we need to set the parameters to specific values. We choose: <span class="math display">\[
-  \beta_0=90 \;\;\; \beta_1=0.5 \;\;\; \sigma=25.
+  \beta_0=90 \;\;\; \beta_1=0.5 \;\;\; \sigma=5.
 \]</span> Thus, we simulate as if we known the truth (i.e. the population). In this context, we refer to this model as the <strong>data generating model</strong>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">set.seed</span>(<span class="dv">724245</span>)
 x&lt;-<span class="kw">c</span>(<span class="dv">165</span>,<span class="dv">170</span>,<span class="dv">175</span>,<span class="dv">180</span>,<span class="dv">185</span>) <span class="co"># five father&#39;s heights</span>
@@ -1161,7 +1161,7 @@ MSENew&lt;-<span class="kw">c</span>()
 <div id="sampling-distribution-of-the-lse" class="section level3">
 <h3><span class="header-section-number">2.3.3</span> Sampling distribution of the LSE</h3>
 
-<p>Since <span class="math inline">\(\hat{\mb\beta}\)</span> is a function of the outcome vector <span class="math inline">\(\mb{Y}\)</span> and since the outcome vector is a random variable, the estimtor <span class="math inline">\(\hat{\mb\beta}\)</span> is also a random variable. Its distribution (<strong>sampling distribution</strong>) is determined by the distribution of <span class="math inline">\(\mb{Y}\)</span>. In model <a href="#eq:Mod3">(2.2)</a> we see that <span class="math inline">\(\mb{Y} = \mb{X}\mb\beta + \mb{\eps}\)</span>, but the distribution of <span class="math inline">\(\mb{\eps}\)</span> is not fully specified (only the mean is restricted to zero). This prohibits finding the sampling distribution of <span class="math inline">\(\hat{\mb\beta}\)</span> moeilijk, unless asymptotically (see further).</p>
+<p>Since <span class="math inline">\(\hat{\mb\beta}\)</span> is a function of the outcome vector <span class="math inline">\(\mb{Y}\)</span> and since the outcome vector is a random variable, the estimtor <span class="math inline">\(\hat{\mb\beta}\)</span> is also a random variable. Its distribution (<strong>sampling distribution</strong>) is determined by the distribution of <span class="math inline">\(\mb{Y}\)</span>. In model <a href="#eq:Mod3">(2.2)</a> we see that <span class="math inline">\(\mb{Y} = \mb{X}\mb\beta + \mb{\eps}\)</span>, but the distribution of <span class="math inline">\(\mb{\eps}\)</span> is not fully specified (only the mean is restricted to zero). This prohibits finding the sampling distribution of <span class="math inline">\(\hat{\mb\beta}\)</span>, unless asymptotically (see further).</p>
 We shall introduce an extra distribution assumption in the statistical model, and this will allow for finding the sampling distribution. Model <a href="#eq:Mod3">(2.2)</a> is extended to (in matrix notation)
 <span class="math display" id="eq:Mod4">\[\begin{equation}
   \mb{Y} = \mb{X}\mb\beta + \mb{\eps}
@@ -1245,23 +1245,23 @@ simRegressionExp&lt;-<span class="cf">function</span>(<span class="dt">N=</span>
   
 <span class="co"># for n=5</span>
 betaHat5&lt;-<span class="kw">simRegressionExp</span>(<span class="dt">N=</span>N1000,<span class="dt">nRep=</span><span class="dv">1</span>)
-<span class="kw">colMeans</span>(betaHat)</code></pre></div>
+<span class="kw">colMeans</span>(betaHat5)</code></pre></div>
 <pre><code>##   beta0Hat   beta1Hat 
-## 88.8751318  0.5051252</code></pre>
+## 89.6311933  0.5020559</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">X&lt;-<span class="kw">matrix</span>(<span class="dt">nrow=</span><span class="dv">5</span>,<span class="dt">ncol=</span><span class="dv">2</span>)
 X[,<span class="dv">1</span>]&lt;-<span class="dv">1</span>
-X[,<span class="dv">2</span>]&lt;-<span class="kw">seq</span>(<span class="dv">150</span>,<span class="dv">250</span>,<span class="dv">25</span>)
+X[,<span class="dv">2</span>]&lt;-<span class="kw">c</span>(<span class="dv">165</span>,<span class="dv">170</span>,<span class="dv">175</span>,<span class="dv">180</span>,<span class="dv">185</span>)
 
-EmpVar&lt;-<span class="kw">var</span>(betaHat)
+EmpVar&lt;-<span class="kw">var</span>(betaHat5)
 Var&lt;-<span class="kw">solve</span>(<span class="kw">t</span>(X)<span class="op">%*%</span>X)<span class="op">*</span><span class="dv">1</span> 
 EmpVar</code></pre></div>
-<pre><code>##          beta0Hat    beta1Hat
-## beta0Hat 2209.750 -12.6339951
-## beta1Hat  -12.634   0.0723973</code></pre>
+<pre><code>##             beta0Hat     beta1Hat
+## beta0Hat 124.3967926 -0.712668233
+## beta1Hat  -0.7126682  0.004089645</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">Var</code></pre></div>
-<pre><code>##        [,1]     [,2]
-## [1,]  6.600 -0.03200
-## [2,] -0.032  0.00016</code></pre>
+<pre><code>##       [,1]   [,2]
+## [1,] 122.7 -0.700
+## [2,]  -0.7  0.004</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># for n=50</span>
 betaHat50&lt;-<span class="kw">simRegressionExp</span>(<span class="dt">N=</span>N1000,<span class="dt">nRep=</span><span class="dv">10</span>)
 <span class="kw">colMeans</span>(betaHat50)</code></pre></div>
