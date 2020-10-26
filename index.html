@@ -102,12 +102,14 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 <ul class="summary">
 <li class="chapter" data-level="1" data-path=""><a href="#Ch_Introduction"><i class="fa fa-check"></i><b>1</b> Introduction</a><ul>
-<li class="chapter" data-level="1.1" data-path=""><a href="#how-to-work-through-the-course-notes"><i class="fa fa-check"></i><b>1.1</b> How to work through the course notes</a><ul>
+<li class="chapter" data-level="1.1" data-path=""><a href="#version-and-changes"><i class="fa fa-check"></i><b>1.1</b> Version and Changes</a></li>
+<li class="chapter" data-level="1.2" data-path=""><a href="#introduction"><i class="fa fa-check"></i><b>1.2</b> Introduction</a></li>
+<li class="chapter" data-level="1.3" data-path=""><a href="#how-to-work-through-the-course-notes"><i class="fa fa-check"></i><b>1.3</b> How to work through the course notes</a><ul>
 <li class="chapter" data-level="" data-path=""><a href="#exercise"><i class="fa fa-check"></i>Exercise</a></li>
 </ul></li>
-<li class="chapter" data-level="1.2" data-path=""><a href="#two-versions-of-this-course-oc-and-dl"><i class="fa fa-check"></i><b>1.2</b> Two versions of this course: OC and DL</a></li>
-<li class="chapter" data-level="1.3" data-path=""><a href="#communication"><i class="fa fa-check"></i><b>1.3</b> Communication</a></li>
-<li class="chapter" data-level="1.4" data-path=""><a href="#software"><i class="fa fa-check"></i><b>1.4</b> Software</a></li>
+<li class="chapter" data-level="1.4" data-path=""><a href="#two-versions-of-this-course-oc-and-dl"><i class="fa fa-check"></i><b>1.4</b> Two versions of this course: OC and DL</a></li>
+<li class="chapter" data-level="1.5" data-path=""><a href="#communication"><i class="fa fa-check"></i><b>1.5</b> Communication</a></li>
+<li class="chapter" data-level="1.6" data-path=""><a href="#software"><i class="fa fa-check"></i><b>1.6</b> Software</a></li>
 </ul></li>
 <li class="chapter" data-level="2" data-path=""><a href="#Ch_SimpleLinearRegression"><i class="fa fa-check"></i><b>2</b> Simple Linear Regression Analysis</a><ul>
 <li class="chapter" data-level="" data-path=""><a href="#example-galtons-height-data"><i class="fa fa-check"></i>Example (Galton's height data)</a></li>
@@ -191,6 +193,20 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 <div id="Ch_Introduction" class="section level1">
 <h1><span class="header-section-number">Hoofdstuk 1</span> Introduction</h1>
+<div id="version-and-changes" class="section level2">
+<h2><span class="header-section-number">1.1</span> Version and Changes</h2>
+<p>Since this is a new course and the course notes are still under development, I will every now and then update the course notes. The updates may contain new materials and/or corrections to previous versions. In this section I will briefly list the changes as compared to previous versions.</p>
+<ul>
+<li><p><strong>Version</strong>: October 26</p></li>
+<li><p><strong>Changes</strong>:</p>
+<ul>
+<li><p>Section 2.3.2: correction to the R code of the simulation exercise (calculation of MSE)</p></li>
+<li><p>Section 2.3.3: simulation study with exponentially distributed error term (the wrong covariance matrices were shown)</p></li>
+</ul></li>
+</ul>
+</div>
+<div id="introduction" class="section level2">
+<h2><span class="header-section-number">1.2</span> Introduction</h2>
 <p>This course (<em>Linear Models</em>) is a classical treatment of linear models, which are among the most popular and simple models for statistical data analysis and prediction. The models describe the relationship between the mean of an outcome variable <span class="math inline">\(Y\)</span> and one or more regressors <span class="math inline">\(x\)</span> via a function that is linear in the parameters. The model thus focusses on the conditional expectation <span class="math inline">\(\E{Y \mid x}\)</span>. Here is a brief overview of the content of the course:</p>
 <ul>
 <li><p>simple linear regression model: here the models are limited to a single regressor. In this chapter most of the concepts and theory will be presented so that in later chapters we can rely on many of the theoretical results of this chapter. Throughout the whole chapter, the methods will be illustrated by means of example datasets, and the meaning of the model and the statistical inference procedures will be demonstrated with Monte Carlo simulation studies. In particular, the following topics will be discussed:</p>
@@ -232,8 +248,9 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul></li>
 <li><p>This course is concluded with a chapter on reporting: how to write a good statistical report. This can be seen as a stand alone chapter and can be read at any time.</p></li>
 </ul>
+</div>
 <div id="how-to-work-through-the-course-notes" class="section level2">
-<h2><span class="header-section-number">1.1</span> How to work through the course notes</h2>
+<h2><span class="header-section-number">1.3</span> How to work through the course notes</h2>
 <p>These course notes are written with R Bookdown in R Studio, and rendered to an html file that is made available on GitHub. If you wish, you can convert the html to a pdf file. The best way to do this, is via the <em>print</em> function of your browser. Before doing so, you can best first collapse the sidebar (that contains the table of content).</p>
 <p>This course is work in progress. It is a new course and <strong>the course notes are still work in progress</strong>. So every week there will be an update. If you access the course notes via the link to GitHub you will see the updates automatically.</p>
 <p>Many <strong>data analyses examples</strong> are worked out in detail in the course notes, including the R code. When you access the course notes via GitHub, you can easily copy the R code and paste it to your local R software. Here is an example of a chunck of R code:</p>
@@ -260,7 +277,7 @@ a<span class="op">+</span>b</code></pre></div>
 </div>
 </div>
 <div id="two-versions-of-this-course-oc-and-dl" class="section level2">
-<h2><span class="header-section-number">1.2</span> Two versions of this course: OC and DL</h2>
+<h2><span class="header-section-number">1.4</span> Two versions of this course: OC and DL</h2>
 <p>As for all courses in our Master of Statistics and Data Science program, each course has two versions: the <strong>on-campus (OC)</strong> and the <strong>distance learning (DL)</strong> versions.</p>
 <p>The course notes are the same for both groups of students. Each group, however, has another Blackboard course site at which you can find all files and information. I keep these two Blackboard sites separate because the contact modes and hours are different:</p>
 <ul>
@@ -270,13 +287,13 @@ a<span class="op">+</span>b</code></pre></div>
 <p>The project assignment is the same for the DL and OC students.</p>
 </div>
 <div id="communication" class="section level2">
-<h2><span class="header-section-number">1.3</span> Communication</h2>
+<h2><span class="header-section-number">1.5</span> Communication</h2>
 <p>On Blackboard there is a <strong>discussion forum</strong> that can be used for asking questions.</p>
 <p>Questions can also be asked during the <strong>Q&amp;A sessions</strong>, and the OC students can of course also ask questions in class (either physically when we are on-campus, or in the virtual class room when we are online).</p>
 <p>You are also welcome to send emails to the lecturer, but the discussion forum is preferred so that other students can also learn from the answers to the questions.</p>
 </div>
 <div id="software" class="section level2">
-<h2><span class="header-section-number">1.4</span> Software</h2>
+<h2><span class="header-section-number">1.6</span> Software</h2>
 <p>In the course notes all data analyses are demonstrated with the R software, but on Blackboard also documentation on the SAS software will be provided. You will also have to learn how to perform regression analysis and ANOVA with the SAS software.</p>
 
 </div>
@@ -1125,16 +1142,16 @@ x&lt;-<span class="kw">c</span>(<span class="dv">165</span>,<span class="dv">170
 X&lt;-<span class="kw">cbind</span>(<span class="dv">1</span>,x) <span class="co"># design matrix</span>
 betaHatLSE&lt;-<span class="kw">data.frame</span>(<span class="dt">beta0Hat=</span><span class="ot">NA</span>,<span class="dt">beta1Hat=</span><span class="ot">NA</span>)
 betaHatNew&lt;-<span class="kw">data.frame</span>(<span class="dt">beta0Hat=</span><span class="ot">NA</span>,<span class="dt">beta1Hat=</span><span class="ot">NA</span>)
-MSELSE&lt;-<span class="kw">c</span>()
-MSENew&lt;-<span class="kw">c</span>()
+MSELSE&lt;-<span class="kw">matrix</span>(<span class="dt">nrow =</span> N,<span class="dt">ncol=</span><span class="dv">2</span>)
+MSENew&lt;-<span class="kw">matrix</span>(<span class="dt">nrow =</span> N,<span class="dt">ncol=</span><span class="dv">2</span>)
 <span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>N) {
-    y&lt;-<span class="dv">90</span><span class="op">+</span><span class="fl">0.5</span><span class="op">*</span>x<span class="op">+</span><span class="kw">rnorm</span>(<span class="dv">5</span>,<span class="dt">sd=</span><span class="dv">5</span>) <span class="co"># random sample of 5 outcomes</span>
-    m&lt;-<span class="kw">lm</span>(y<span class="op">~</span>x)
-    betaHatLSE[i,]&lt;-<span class="kw">coef</span>(m)
-    MSELSE&lt;-<span class="kw">c</span>(MSELSE,<span class="kw">mean</span>((<span class="kw">coef</span>(m)<span class="op">-</span><span class="kw">c</span>(<span class="dv">90</span>,<span class="fl">0.5</span>))<span class="op">^</span><span class="dv">2</span>))
-    betaTilde&lt;-<span class="kw">solve</span>(<span class="kw">t</span>(X)<span class="op">%*%</span>X<span class="op">+</span><span class="fl">0.005</span><span class="op">*</span><span class="kw">diag</span>(<span class="dv">2</span>))<span class="op">%*%</span><span class="kw">t</span>(X)<span class="op">%*%</span>y
-    betaHatNew[i,]&lt;-betaTilde
-    MSENew&lt;-<span class="kw">c</span>(MSENew,<span class="kw">mean</span>((betaTilde<span class="op">-</span><span class="kw">c</span>(<span class="dv">90</span>,<span class="fl">0.5</span>))<span class="op">^</span><span class="dv">2</span>))
+  y&lt;-<span class="dv">90</span><span class="op">+</span><span class="fl">0.5</span><span class="op">*</span>x<span class="op">+</span><span class="kw">rnorm</span>(<span class="dv">5</span>,<span class="dt">sd=</span><span class="dv">5</span>) <span class="co"># random sample of 5 outcomes</span>
+  m&lt;-<span class="kw">lm</span>(y<span class="op">~</span>x)
+  betaHatLSE[i,]&lt;-<span class="kw">coef</span>(m)
+  MSELSE[i,]&lt;-(<span class="kw">coef</span>(m)<span class="op">-</span><span class="kw">c</span>(<span class="dv">90</span>,<span class="fl">0.5</span>))<span class="op">^</span><span class="dv">2</span>
+  betaTilde&lt;-<span class="kw">solve</span>(<span class="kw">t</span>(X)<span class="op">%*%</span>X<span class="op">+</span><span class="fl">0.005</span><span class="op">*</span><span class="kw">diag</span>(<span class="dv">2</span>))<span class="op">%*%</span><span class="kw">t</span>(X)<span class="op">%*%</span>y
+  betaHatNew[i,]&lt;-betaTilde
+  MSENew[i,]&lt;-(betaTilde<span class="op">-</span><span class="kw">c</span>(<span class="dv">90</span>,<span class="fl">0.5</span>))<span class="op">^</span><span class="dv">2</span>
 }
 
 <span class="kw">colMeans</span>(betaHatLSE)</code></pre></div>
@@ -1298,7 +1315,7 @@ Figure 2.10: Histograms of the <span class="math inline">\(N=1000\)</span> herha
 </div>
 <div id="maximum-likelihood-estimator-of-hatmbbeta" class="section level3">
 <h3><span class="header-section-number">2.3.4</span> Maximum likelihood estimator of <span class="math inline">\(\hat{\mb\beta}\)</span></h3>
-<p>The LSE does need distributional assumptions, such normality. The method of least squares is thus a parameter estimation method that can be applied to <strong>semiparametric statistical models</strong> such as Model <a href="#eq:Mod3">(2.2)</a>.</p>
+<p>The LSE does need distributional assumptions, such as normality. The method of least squares is thus a parameter estimation method that can be applied to <strong>semiparametric statistical models</strong> such as Model <a href="#eq:Mod3">(2.2)</a>.</p>
 <p>For fully parametric statistical model, such as Model <a href="#eq:Mod4">(2.7)</a>, the method of <strong>maximum likelihood</strong> becomes applicable for parameter estimation. With normally distributed error terms, as in Model <a href="#eq:Mod4">(2.7)</a>, it can be shows that the LSE is equivalent to the <strong>maximum likelihood estimator</strong> (MLE). This is demonstrated in this section.</p>
 <p>Model <a href="#eq:Mod4">(2.7)</a> is equivalent to <span class="math display">\[
   Y_i \mid x_i \sim N(\beta_0+\beta_1 x_i,\sigma^2).
