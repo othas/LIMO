@@ -135,6 +135,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="" data-path=""><a href="#exercise-blood-pressure-1"><i class="fa fa-check"></i>Exercise: Blood Pressure</a></li>
 <li class="chapter" data-level="2.7" data-path=""><a href="#S_RegTests"><i class="fa fa-check"></i><b>2.7</b> Hypothesis Tests</a></li>
 <li class="chapter" data-level="" data-path=""><a href="#example-galtons-height-data-3"><i class="fa fa-check"></i>Example (Galton's height data)</a></li>
+<li class="chapter" data-level="" data-path=""><a href="#exercise-converting-two-sided-p-values"><i class="fa fa-check"></i>Exercise: Converting two-sided p-values</a></li>
 <li class="chapter" data-level="" data-path=""><a href="#exercise-muscle-mass"><i class="fa fa-check"></i>Exercise: Muscle mass</a></li>
 <li class="chapter" data-level="2.8" data-path=""><a href="#S_AssessAssumptions"><i class="fa fa-check"></i><b>2.8</b> Assessment of the Model Assumptions</a></li>
 <li class="chapter" data-level="" data-path=""><a href="#example-galtons-height-data-4"><i class="fa fa-check"></i>Example (Galton's height data)</a><ul>
@@ -197,6 +198,15 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <h2><span class="header-section-number">1.1</span> Version and Changes</h2>
 <p>Since this is a new course and the course notes are still under development, I will every now and then update the course notes. The updates may contain new materials and/or corrections to previous versions. In this section I will briefly list the changes as compared to previous versions.</p>
 <ul>
+<li><p><strong>Version</strong>: October 27</p></li>
+<li><p><strong>Changes</strong>:</p>
+<ul>
+<li><p>Section 2.3.2, Theorem 2.3: small correction in the proof (there was a factor <span class="math inline">\(\mb{c}\)</span> missing)</p></li>
+<li><p>Section 2.6, simulation study: In the function simRegressionBI, the error terms were simulated from a centered exponential distribution. This is changed to a normal distribution. (Note that the results with the exponential distribution are approximately correct for large sample sizes).</p></li>
+<li><p>Section 2.7, Galton's height example: the one-sided alternative hypothesis is corrected to <span class="math inline">\(H_1:\beta_1\)</span>.</p></li>
+<li><p>Section 2.7: an extra exercise on the calculation of one-sided p-values is added.</p></li>
+<li><p>Section 2.7: the solution of exercise (muscle mass) is given in some more detail.</p></li>
+</ul></li>
 <li><p><strong>Version</strong>: October 26</p></li>
 <li><p><strong>Changes</strong>:</p>
 <ul>
@@ -854,6 +864,13 @@ m2</code></pre></div>
 ##        (Intercept)  father.cm.centered  
 ##           178.9070              0.5077</code></pre>
 <p>First note that the estimate of the slope remains unchanged after centering the regressor. The intercept is now estimanted by <span class="math inline">\(\hat\beta_0=178.9\)</span>. Hence, when the centered regressor equals 0, i.e. when fathers have average height (175.5cm), their sons have an estimated average height of <span class="math inline">\(178.9\)</span>cm.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(Galton.sons,
+       <span class="kw">aes</span>(<span class="dt">x=</span>father.cm, <span class="dt">y=</span>son.cm)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">color=</span><span class="st">&quot;blue&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;length of father (cm)&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylab</span>(<span class="st">&quot;length of son (cm)&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">theme</span>(<span class="dt">axis.title=</span><span class="kw">element_text</span>(<span class="dt">size=</span><span class="dv">15</span>), <span class="dt">axis.text =</span> <span class="kw">element_text</span>(<span class="dt">size=</span><span class="dv">15</span>)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_abline</span>(<span class="dt">intercept=</span>m<span class="op">$</span>coefficients[<span class="dv">1</span>],<span class="dt">slope=</span>m<span class="op">$</span>coefficients[<span class="dv">2</span>]) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_abline</span>(<span class="dt">intercept=</span><span class="dv">0</span>,<span class="dt">slope=</span><span class="dv">1</span>,<span class="dt">color=</span><span class="st">&quot;red&quot;</span>)</code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:GaltonFittedReg"></span>
 <img src="DASM2_files/figure-html/GaltonFittedReg-1.png" alt="Scatter plot of the Galton data and the fitted regression line (black). The red line is the diagonal line." width="672" />
 <p class="caption">
@@ -1103,7 +1120,7 @@ betaHat50&lt;-<span class="kw">data.frame</span>(<span class="dt">beta0Hat=</spa
 <p>Next we find an expression for the variance of <span class="math inline">\(\mb{c}^t\hat{\mb\beta}^*\)</span>: <span class="math display">\[
   \var{\mb{c}^t\hat{\mb\beta}^*} = \var{\mb{c}^t\hat{\mb\beta}} + \var{\mb{c}^t\mb{DY}} + 2\cov{\mb{c}^t\hat{\mb\beta},\mb{c}^t\mb{DY}}.
 \]</span> The covariance in this expression becomes <span class="math display">\[
-  \cov{\mb{c}^t\hat{\mb\beta},\mb{c}^t\mb{DY}} = \mb{c}^t(\mb{X}^t\mb{X})^{-1}\mb{X}^t\var{\mb{Y}}\mb{D}^t = \mb{c}^t(\mb{X}^t\mb{X})^{-1}\mb{X}^t\mb{D}^t\sigma^2.
+  \cov{\mb{c}^t\hat{\mb\beta},\mb{c}^t\mb{DY}} = \mb{c}^t(\mb{X}^t\mb{X})^{-1}\mb{X}^t\var{\mb{Y}}\mb{D}^t\mb{c} = \mb{c}^t(\mb{X}^t\mb{X})^{-1}\mb{X}^t\mb{D}^t\mb{c}\sigma^2.
 \]</span></p>
 <p>Since <span class="math inline">\(\hat{\mb\beta}^*\)</span> is an unbiased estimator, i.e. <span class="math inline">\(\E{\hat{\mb\beta}^*}=\mb\beta\)</span>, we find for all <span class="math inline">\(\mb\beta\)</span></p>
 <span class="math display">\[\begin{eqnarray*}
@@ -1469,7 +1486,7 @@ sigma2.MSE&lt;-<span class="kw">c</span>()
   \prob{-t_{n-2;1-\alpha/2} &lt; \frac{\hat\beta_1 - \beta_1}{\hat\sigma_{\beta_1}} &lt; t_{n-2;1-\alpha/2}} = 1-\alpha
 \]</span> implies that <span class="math display">\[
   \prob{\hat\beta_1-t_{n-2;1-\alpha/2} \hat\sigma_{\beta_1}&lt;  \beta_1 &lt; \hat\beta_1+t_{n-2;1-\alpha/2} \hat\sigma_{\beta_1}} = 1-\alpha.
-\]</span> From this equality, the <span class="math inline">\(1-\alpha\)</span> *confidence interval** (CI) of <span class="math inline">\(\beta_1\)</span> follows directly: <span class="math display">\[
+\]</span> From this equality, the <span class="math inline">\(1-\alpha\)</span> <strong>confidence interval</strong> (CI) of <span class="math inline">\(\beta_1\)</span> follows directly: <span class="math display">\[
  \left[\hat\beta_1-t_{n-2;1-\alpha/2} \hat\sigma_{\beta_1}, \hat\beta_1+t_{n-2;1-\alpha/2} \hat\sigma_{\beta_1}\right].
 \]</span> The construction of the confidence interval of <span class="math inline">\(\beta_0\)</span> is analogous.</p>
 <p>The interpretation of a confidence interval is now demonstrated by means of repeated sampling in a simulation study. We start with a small sample size of <span class="math inline">\(n=5\)</span>.</p>
@@ -1487,7 +1504,7 @@ simRegressionBI&lt;-<span class="cf">function</span>(<span class="dt">N=</span><
                       <span class="dt">cover=</span><span class="ot">NA</span>)
   
   <span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>N) {
-      y&lt;-<span class="dv">90</span><span class="op">+</span><span class="fl">0.5</span><span class="op">*</span>x<span class="op">+</span>(<span class="kw">rexp</span>(<span class="dv">5</span><span class="op">*</span>nRep)<span class="op">-</span><span class="dv">1</span>) <span class="co"># random sample of outcomes</span>
+      y&lt;-<span class="dv">90</span><span class="op">+</span><span class="fl">0.5</span><span class="op">*</span>x<span class="op">+</span><span class="kw">rnorm</span>(<span class="dv">5</span><span class="op">*</span>nRep,<span class="dt">sd=</span><span class="dv">5</span>) <span class="co"># random sample of outcomes</span>
       m&lt;-<span class="kw">lm</span>(y<span class="op">~</span>x)
       Results[i,<span class="dv">1</span>]&lt;-<span class="kw">coef</span>(m)[<span class="dv">2</span>]
       Results[i,<span class="dv">2</span><span class="op">:</span><span class="dv">3</span>]&lt;-<span class="kw">confint</span>(m)[<span class="dv">2</span>,] <span class="co"># default is a 95% CI</span>
@@ -1517,7 +1534,7 @@ plotBI&lt;-<span class="cf">function</span>(SimBI,<span class="dt">nPlot=</span>
 
 SimBI5&lt;-<span class="kw">simRegressionBI</span>(<span class="dt">N=</span>N1000,<span class="dt">nRep=</span><span class="dv">1</span>)
 <span class="kw">mean</span>(SimBI5<span class="op">$</span>cover) <span class="co"># empirical coverage</span></code></pre></div>
-<pre><code>## [1] 0.966</code></pre>
+<pre><code>## [1] 0.955</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plotBI</span>(SimBI5,<span class="dt">nPlot=</span><span class="dv">30</span>)</code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:SimBI5"></span>
 <img src="DASM2_files/figure-html/SimBI5-1.png" alt="95\% confidence intervals from repeated sampling ($n=5$). The points represent the point estimates $\hat\beta_1$. Only the results of the first 30 repeated experiments are shown. The vertical line indicates the true parameter value: $\beta_1=0.5$." width="672" />
@@ -1525,7 +1542,7 @@ SimBI5&lt;-<span class="kw">simRegressionBI</span>(<span class="dt">N=</span>N10
 Figure 2.11: 95% confidence intervals from repeated sampling (<span class="math inline">\(n=5\)</span>). The points represent the point estimates <span class="math inline">\(\hat\beta_1\)</span>. Only the results of the first 30 repeated experiments are shown. The vertical line indicates the true parameter value: <span class="math inline">\(\beta_1=0.5\)</span>.
 </p>
 </div>
-<p>From the output we read the <strong>empirical coverage</strong> of the <span class="math inline">\(95\%\)</span> confidence interval: 0.966. This is based on 1000 repeated experiments. For a large number of repeated experiments, the empirical coverage is a good approximation of the true coverage probability. In our simulation study, the empirical coverage is (approximately) equal to the <strong>nominal</strong> <span class="math inline">\(95\%\)</span> confidence level, which (empirically) demonstrates that the theory is correct (the CI has its correct probabilistic interpretation). The results are visualised in Figure <a href="#fig:SimBI5">2.11</a>: the first 30 CIs are shown. Of these 30 intervals, 29 cover the true parameter value <span class="math inline">\(\beta_1=0.5\)</span>. That gives thus an empirical coverage of <span class="math inline">\(29/30=96.7\%\)</span>. Note that the R output shows the empirical coverage of all 1000 repeated experiments.</p>
+<p>From the output we read the <strong>empirical coverage</strong> of the <span class="math inline">\(95\%\)</span> confidence interval: 0.955. This is based on 1000 repeated experiments. For a large number of repeated experiments, the empirical coverage is a good approximation of the true coverage probability. In our simulation study, the empirical coverage is (approximately) equal to the <strong>nominal</strong> <span class="math inline">\(95\%\)</span> confidence level, which (empirically) demonstrates that the theory is correct (the CI has its correct probabilistic interpretation). The results are visualised in Figure <a href="#fig:SimBI5">2.11</a>: the first 30 CIs are shown. Of these 30 intervals, 29 cover the true parameter value <span class="math inline">\(\beta_1=0.5\)</span>. That gives thus an empirical coverage of <span class="math inline">\(29/30=96.7\%\)</span>. Note that the R output shows the empirical coverage of all 1000 repeated experiments.</p>
 <p>Figure <a href="#fig:SimBI5b">2.12</a> shows the results of the first 100 repeated experiments.</p>
 <div class="figure" style="text-align: center"><span id="fig:SimBI5b"></span>
 <img src="DASM2_files/figure-html/SimBI5b-1.png" alt="95\% confidence intervals from repeated sampling ($n=5$). The points represent the point estimates $\hat\beta_1$. Only the results of the first 100 repeated experiments are shown. The vertical line indicates the true parameter value: $\beta_1=0.5$." width="672" />
@@ -1552,12 +1569,12 @@ Figure 2.13: 95% confidence intervals from repeated sampling (<span class="math 
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">1</span>))</code></pre></div>
 <p>We repeat the simulation study for larger sample sizes. The results are shown in Figure <a href="#fig:SimBIAll">2.13</a> (only for the first 30 repeated experiments). The empirical coverages based on 1000 repeated experiments are:</p>
 <ul>
-<li><p><span class="math inline">\(n=5\)</span>: 0.966</p></li>
-<li><p><span class="math inline">\(n=10\)</span>: 0.962</p></li>
+<li><p><span class="math inline">\(n=5\)</span>: 0.955</p></li>
+<li><p><span class="math inline">\(n=10\)</span>: 0.958</p></li>
 <li><p><span class="math inline">\(n=50\)</span>: 0.948</p></li>
 </ul>
 <p>For all sample sizes <span class="math inline">\(n\)</span> the empirical covarages are very close to the nominal confidence level of <span class="math inline">\(95\%\)</span>.</p>
-<p>Figure <a href="#fig:SimBIAll">2.13</a> demonstrates that the lengths of the confidence intervals become smaller as the sample size increases. This follows directly from the theory: the length of a <span class="math inline">\(95\%\)</span> is <span class="math inline">\(2t_{n-2;1-0.05/2} \hat\sigma_{\beta_1}\)</span> and this decreases because <span class="math inline">\(\hat\sigma_{\beta_1}\)</span> decreases in expectation with increasing sample size (<span class="math inline">\(\sigma_{beta_1} \propto \frac{1}{\sqrt{n}}\)</span>). Thus, the lenght of the intervals decreases as <span class="math inline">\(n\)</span> increases, and still the coverage remains <span class="math inline">\(95\%\)</span>. This phenomenon is related to the variability of the estimates: with increasing sample size <span class="math inline">\(n\)</span>, the variability of the estimates decreases and thus the CI can be smaller while still giving a coverage of <span class="math inline">\(95\%\)</span>.</p>
+<p>Figure <a href="#fig:SimBIAll">2.13</a> demonstrates that the lengths of the confidence intervals become smaller as the sample size increases. This follows directly from the theory: the length of a <span class="math inline">\(95\%\)</span> is <span class="math inline">\(2t_{n-2;1-0.05/2} \hat\sigma_{\beta_1}\)</span> and this decreases because <span class="math inline">\(\hat\sigma_{\beta_1}\)</span> decreases in expectation with increasing sample size (<span class="math inline">\(\sigma_{\beta_1} \propto \frac{1}{\sqrt{n}}\)</span>). Thus, on average the lenght of the intervals decreases as <span class="math inline">\(n\)</span> increases, and still the coverage remains <span class="math inline">\(95\%\)</span>. This phenomenon is related to the variability of the estimates: with increasing sample size <span class="math inline">\(n\)</span>, the variability of the estimates decreases and thus the CI can be smaller while still giving a coverage of <span class="math inline">\(95\%\)</span>.</p>
 </div>
 <div id="example-galtons-height-data-2" class="section level2 unnumbered">
 <h2>Example (Galton's height data)</h2>
@@ -1597,16 +1614,16 @@ Figure 2.13: 95% confidence intervals from repeated sampling (<span class="math 
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># upper bound of 95% CI</span>
 <span class="fl">0.50766</span><span class="op">+</span><span class="kw">qt</span>(<span class="fl">0.975</span>,<span class="dt">df=</span><span class="dv">171</span>)<span class="op">*</span><span class="fl">0.0668</span></code></pre></div>
 <pre><code>## [1] 0.6395188</code></pre>
-<p>Het <span class="math inline">\(95\%\)</span> betrouwbaarheidsinterval van <span class="math inline">\(\beta_1\)</span> is dus <span class="math display">\[
+<p>The <span class="math inline">\(95\%\)</span> confidence interval of <span class="math inline">\(\beta_1\)</span> thus becomes <span class="math display">\[
    [0.376 , 0.640] .
- \]</span> Hence, with a probability of 95% we expect that the regression coefficient <span class="math inline">\(\beta_1\)</span> is somewhere between <span class="math inline">\(0.376\)</span> and <span class="math inline">\(0.640\)</span>. Thus, if the father's height increases with 1cm, we expect with a probability of 95% that the average son's height increases with <span class="math inline">\(0.376\)</span>cm to <span class="math inline">\(0.640\)</span>cm. Equivalently, we could say that if the father's height increases with 5cm, we expect with a probability of 95% that the average son's height increases with <span class="math inline">\(5\times 0.376=1.88\)</span>cm to <span class="math inline">\(5 \times 0.640=3.2\)</span>cm.</p>
+ \]</span> Hence, with a probability of 95% we expect that the regression coefficient <span class="math inline">\(\beta_1\)</span> is somewhere between <span class="math inline">\(0.376\)</span> and <span class="math inline">\(0.640\)</span>. Thus, if the father's height increases with 1cm, we expect with a probability of 95% that the average son's height increases with <span class="math inline">\(0.376\)</span> cm to <span class="math inline">\(0.640\)</span> cm. Equivalently, we could say that if the father's height increases with 5cm, we expect with a probability of 95% that the average son's height increases with <span class="math inline">\(5\times 0.376=1.88\)</span> cm to <span class="math inline">\(5 \times 0.640=3.2\)</span> cm.</p>
 <p>Note that all values within the CI are positive. The data are thus consistent with a positive effect of father's height on the expected son's height.</p>
 <p>The next R code can also be used for the computation of the CI.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">confint</span>(m)</code></pre></div>
 <pre><code>##                  2.5 %      97.5 %
 ## (Intercept) 66.6519190 112.9844701
 ## father.cm    0.3757362   0.6395761</code></pre>
-<p>Finally we note that the correct probabilistic interpretation of the CI depends on the distributional assumption that part of the statistical model. In particular: correct specification of the the conditional mean <span class="math inline">\(m(x)\)</span> as a linear function of <span class="math inline">\(x\)</span>; normality of the error term; homoskedasticity; mutual independence of the outcomes. Later we will introduce methods that can be used for assessing these assumptions.</p>
+<p>Finally we note that the correct probabilistic interpretation of the CI depends on the distributional assumption that is part of the statistical model. In particular: correct specification of the the conditional mean <span class="math inline">\(m(x)\)</span> as a linear function of <span class="math inline">\(x\)</span>; normality of the error term; homoskedasticity; mutual independence of the outcomes. Later we will introduce methods that can be used for assessing these assumptions.</p>
 </div>
 <div id="exercise-blood-pressure-1" class="section level2 unnumbered">
 <h2>Exercise: Blood Pressure</h2>
@@ -1628,11 +1645,11 @@ m&lt;-<span class="kw">lm</span>(bp.reduction<span class="op">~</span>dose,<span
 </div>
 <div id="S_RegTests" class="section level2">
 <h2><span class="header-section-number">2.7</span> Hypothesis Tests</h2>
-<p>A frequent reason for performing a regression analysis, is to give an answer to the research questions whether or not the average outcome is linearly associated with a regressor. In the Galton's data example, Galton wanted to know whether or not the average height of son's linearly depend on their father's height. In terms of regression model <a href="#eq:Mod4">(2.7)</a> this research question translates into the null hypothesis <span class="math display">\[
+<p>A frequent reason for performing a regression analysis, is to give an answer to the research question whether or not the average outcome is linearly associated with a regressor. In the Galton's data example, Galton wanted to know whether or not the average height of son's linearly depends on their father's height. In terms of regression model <a href="#eq:Mod4">(2.7)</a> this research question translates into the null hypothesis <span class="math display">\[
   H_0: \beta_1 = 0.
 \]</span> The alternative hypothesis depends on the exact formulation of the research question, or on prior knowledge. In the Galton's data example there may be two sensible situations one could think of:</p>
 <ul>
-<li><p>Galton did not have a clue as to what the relation between father's and son's heights could be, because there is also the mother. In this setting, the alternative hypothesis becomes <span class="math inline">\(H_1: \beta_1\neq 0\)</span>. (<em>two-sided alternative</em>)</p></li>
+<li><p>Galton did not have a clue as to what the relation between father's and son's heights could be, because there is also the mother and environmental factors (<em>nature versus nurture</em>). In this setting, the alternative hypothesis becomes <span class="math inline">\(H_1: \beta_1\neq 0\)</span>. (<em>two-sided alternative</em>)</p></li>
 <li><p>Galton had prior knowledge (from literature, from discussions with other scientists, or from other independent datasets) that a negative relation (i.e. <span class="math inline">\(\beta_1&lt;0\)</span>) is not plausible. In this setting, the alternative hypothesis would be formulated as <span class="math inline">\(H_1: \beta_1&gt; 0\)</span>. (<em>one-sided alternative to the right</em>)</p></li>
 <li><p>For completeness, we also give this third option, which does probably make much sense for the Galton data example. Galton could not have been interested in detecting a negative association, in which case he would again have chosen for the alternative <span class="math inline">\(H_1: \beta_1&gt; 0\)</span>.</p></li>
 </ul>
@@ -1641,7 +1658,7 @@ m&lt;-<span class="kw">lm</span>(bp.reduction<span class="op">~</span>dose,<span
 \]</span> From this expression, it is evident that this statistic is sensitive for deviations from <span class="math inline">\(H_0\)</span> in the direction of the two-sided as well as the one-sided alternatives.</p>
 <p>If we assume that the normal regression model <a href="#eq:Mod4">(2.7)</a> holds, then from Equation <a href="#eq:tmp998765615">(2.10)</a> it follows that <span class="math display">\[
  T \HSim t_{n-2}.
-\]</span> (i.e. under the null hypothesis the test statistic <span class="math inline">\(T\)</span> has a <span class="math inline">\(t_{n-2}\)</span> <strong>null distribution</strong>) Based on this null distribution, <span class="math inline">\(p\)</span>-values and rejection regions can be computed. In particular:</p>
+\]</span> (i.e. under the null hypothesis the test statistic <span class="math inline">\(T\)</span> has a <span class="math inline">\(t_{n-2}\)</span> <strong>null distribution</strong>). Based on this null distribution, <span class="math inline">\(p\)</span>-values and rejection regions can be computed. In particular:</p>
 <ul>
 <li><p>The one-sided alternative hypothesis <span class="math inline">\(H_1:\beta_1&gt;0\)</span>.<br />
 We wish to reject <span class="math inline">\(H_0\)</span> in favor of <span class="math inline">\(H_1\)</span> for large values of <span class="math inline">\(T\)</span>. Hence, <span class="math display">\[
@@ -1658,7 +1675,7 @@ We wish to reject <span class="math inline">\(H_0\)</span> in favor of <span cla
  \]</span> and is thus given by <span class="math inline">\(]-\infty, -t_{n-2;1-\alpha}]\)</span>. Or, equivalently, the critical value is <span class="math inline">\(t_{n-2;\alpha}=-t_{n-2;1-\alpha}\)</span>.</p></li>
 <li><p>The two-sided alternative hypothesis <span class="math inline">\(H_1:\beta_1\neq 0\)</span>.<br />
 We wish to reject <span class="math inline">\(H_0\)</span> in favor of <span class="math inline">\(H_1\)</span> for large and small values of <span class="math inline">\(T\)</span> (i.e. large positive and negative values of <span class="math inline">\(T\)</span>). Hence, <span class="math display">\[
-   p = \probf{0}{|T|\geq |t|} = \probf{0}{T\leq -|t| \text{ of } T \geq |t|} = 2 \probf{0}{T\geq |t|}=2(1-F_T(|t|;n-2)).
+   p = \probf{0}{|T|\geq |t|} = \probf{0}{T\leq -|t| \text{ or } T \geq |t|} = 2 \probf{0}{T\geq |t|}=2(1-F_T(|t|;n-2)).
  \]</span> The rejection region for the test at the <span class="math inline">\(\alpha\)</span> significance level follows from <span class="math display">\[
    \alpha= \prob{\text{type I error}}=\probf{0}{\text{reject }H_0}=\probf{0}{|T|&gt;t_{n-2;1-\alpha/2}},
  \]</span> and it is thus give by <span class="math inline">\([-t_{n-2;1-\alpha/2},t_{n-2;1-\alpha/2}]\)</span>, or, equivalently, the critical value for the test based on <span class="math inline">\(|T|\)</span> is given by <span class="math inline">\(t_{n-2;1-\alpha/2}\)</span>.</p></li>
@@ -1687,7 +1704,7 @@ We wish to reject <span class="math inline">\(H_0\)</span> in favor of <span cla
 ## Residual standard error: 5.661 on 171 degrees of freedom
 ## Multiple R-squared:  0.2523, Adjusted R-squared:  0.2479 
 ## F-statistic:  57.7 on 1 and 171 DF,  p-value: 1.907e-12</code></pre>
-<p>We want to test the null hypothesis <span class="math inline">\(H_0: \beta_1=0\)</span> against the alternative hypothesis <span class="math inline">\(H_1: \beta_1\neq 0\)</span>. In the output we read on the line of : <span class="math inline">\(t=7.596\)</span> and <span class="math inline">\(p=1.91\times 10^{-12}\)</span>. We verify these results in the next chunck.</p>
+<p>We want to test the null hypothesis <span class="math inline">\(H_0: \beta_1=0\)</span> against the alternative hypothesis <span class="math inline">\(H_1: \beta_1\neq 0\)</span>. In the output we read on the line of <em>father.cm</em>: <span class="math inline">\(t=7.596\)</span> and <span class="math inline">\(p=1.91\times 10^{-12}\)</span>. We verify these results in the next chunck.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># observed test statistic</span>
 t.obs&lt;-<span class="fl">0.50766</span> <span class="op">/</span><span class="st"> </span><span class="fl">0.06683</span> 
 t.obs</code></pre></div>
@@ -1695,17 +1712,36 @@ t.obs</code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># two-sided p-value</span>
 <span class="dv">2</span><span class="op">*</span>(<span class="dv">1</span><span class="op">-</span><span class="kw">pt</span>(<span class="kw">abs</span>(t.obs),<span class="dt">df=</span><span class="dv">171</span>))</code></pre></div>
 <pre><code>## [1] 1.905587e-12</code></pre>
-<p>Hence, at the 5% level of significance we conclude that there is a positive effect of the father's height on the average height of their sons (<span class="math inline">\(p&lt;0.0001\)</span>). From previous analyses we know that the effect is estimated as <span class="math inline">\(\hat\beta_1=0.51\)</span> with a 95% confidence interval of <span class="math inline">\([0.376,0.640]\)</span>.</p>
-<p>Suppose that the researchers know that the effect of the father's height on the average son's height can never be negative. The the alternative hypothesis becomes <span class="math inline">\(H_1: \beta_1&lt;0\)</span>. The R output from the  function, however, always gives the <span class="math inline">\(p\)</span>-value for a two-sided alternative hypothesis. Upon using the symmetry of the <span class="math inline">\(t_{n-2}\)</span> null distribution we can easily convert the two-sided <span class="math inline">\(p\)</span>-value to a one-sided <span class="math inline">\(p\)</span>-value. In particular, the R output gives the two-sided <span class="math inline">\(p\)</span>-value, which is defined as <span class="math display">\[
+<p>Hence, at the 5% level of significance we conclude that there is a positive effect of the father's height on the average height of their sons (<span class="math inline">\(p&lt;0.0001\)</span>). From previous analyses we know that the effect is estimated as <span class="math inline">\(\hat\beta_1=0.51\)</span> with a 95% confidence interval of <span class="math inline">\(0.376\)</span> to <span class="math inline">\(0.640\)</span>.</p>
+<p>Suppose that the researchers know that the effect of the father's height on the average son's height can never be negative. Then the alternative hypothesis becomes <span class="math inline">\(H_1: \beta_1&gt;0\)</span>. The R output from the <em>lm</em> function, however, always gives the <span class="math inline">\(p\)</span>-value for a two-sided alternative hypothesis. Upon using the symmetry of the <span class="math inline">\(t_{n-2}\)</span> null distribution we can easily convert the two-sided <span class="math inline">\(p\)</span>-value to a one-sided <span class="math inline">\(p\)</span>-value. In particular, the R output gives the two-sided <span class="math inline">\(p\)</span>-value, which is defined as <span class="math display">\[
    2\probf{0}{T\geq |t|} .
  \]</span> For the one-sided test we need <span class="math display">\[
-   \probf{0}{T\leq t}.
-\]</span> If <span class="math inline">\(t&lt;0\)</span>, then <span class="math inline">\(t=-|t|\)</span> and thus <span class="math display">\[
-   p=\probf{0}{T\leq t} = \probf{0}{T\leq -|t|} = \probf{0}{-T\geq |t|} = \probf{0}{T\geq |t|} ,
-\]</span> in which the last step made use of the symmetry of the null distrubution of <span class="math inline">\(T\)</span> (i.e. the distribution of <span class="math inline">\(-T\)</span> equals the distribution of <span class="math inline">\(T\)</span> under <span class="math inline">\(H_0\)</span>). Consequently, the one-sided <span class="math inline">\(p\)</span>-value equals half of the two-sided <span class="math inline">\(p\)</span>-value if <span class="math inline">\(t\)</span> is negative. Thus,<br />
+   \probf{0}{T\geq t}.
+\]</span> If <span class="math inline">\(t&gt;0\)</span>, then <span class="math inline">\(t=+|t|\)</span> and thus <span class="math display">\[
+   p=\probf{0}{T\geq t} = \probf{0}{T\geq |t|} ,
+\]</span> Consequently, the one-sided <span class="math inline">\(p\)</span>-value equals half of the two-sided <span class="math inline">\(p\)</span>-value if <span class="math inline">\(t\)</span> is positive. Thus,<br />
 <span class="math display">\[
    p = \frac{1}{2}\times 1.9\times 10^{-12} = 9.5\times 10^{-13}.
 \]</span> For this data example we come to the same conclusion as before.</p>
+</div>
+<div id="exercise-converting-two-sided-p-values" class="section level2 unnumbered">
+<h2>Exercise: Converting two-sided p-values</h2>
+<p>As an exercise, derive the formula to find the <span class="math inline">\(p\)</span>-value for the one-sided testing problem with <span class="math inline">\(H_1: \beta_1&lt;0\)</span>, starting from the <span class="math inline">\(p\)</span>-value for the two-sided alternative, <span class="math inline">\(2\probf{0}{T\geq |t|}\)</span>. Derive the conversion for both a positive and a negative observed test statistic <span class="math inline">\(t\)</span>. Calculate this one-sided <span class="math inline">\(p\)</span>-value for the Galton's height data.</p>
+<p><details> <summary markdown="span">Try to make this exercise and expand the page to see the soluation.</summary> For the one-sided test we need <span class="math display">\[
+   \probf{0}{T\geq t}.
+\]</span></p>
+<p>If <span class="math inline">\(t&lt;0\)</span>, then <span class="math inline">\(t=-|t|\)</span> and thus <span class="math display">\[
+   p=\probf{0}{T\leq t} = \probf{0}{T\leq -|t|} = \probf{0}{-T\geq |t|} = \probf{0}{T\geq |t|} ,
+\]</span> in which the last step made use of the symmetry of the null distrubution of <span class="math inline">\(T\)</span> (i.e. the distribution of <span class="math inline">\(-T\)</span> equals the distribution of <span class="math inline">\(T\)</span> under <span class="math inline">\(H_0\)</span>). Consequently, the one-sided <span class="math inline">\(p\)</span>-value equals half of the two-sided <span class="math inline">\(p\)</span>-value if <span class="math inline">\(t\)</span> is negative. With <span class="math inline">\(p_2=2\probf{0}{T\geq |t|}\)</span>, this one-sided <span class="math inline">\(p\)</span>-value thus equals <span class="math inline">\(p_2/2\)</span>.</p>
+<p>If <span class="math inline">\(t&gt;0\)</span>, then <span class="math inline">\(t=|t|\)</span> and thus <span class="math display">\[
+   p=\probf{0}{T\leq t} = \probf{0}{T\leq |t|} = 1-\probf{0}{T\geq |t|} .
+\]</span> With <span class="math inline">\(p_2=2\probf{0}{T\geq |t|}\)</span>, the one-sided <span class="math inline">\(p\)</span>-value can thus be calculated as <span class="math display">\[
+  p = 1- \frac{p_2}{2}.
+\]</span></p>
+<p>In the Galton's height example, the observed <span class="math inline">\(t\)</span>-value equals <span class="math inline">\(7.596&gt;0\)</span>, and hence the <span class="math inline">\(p\)</span>-value that corresponds to <span class="math inline">\(H_1:\beta_1&lt;0\)</span> becomes <span class="math display">\[
+   p = 1-\frac{1}{2}\times 1.9\times 10^{-12} \approx 1.
+\]</span><br />
+</details></p>
 </div>
 <div id="exercise-muscle-mass" class="section level2 unnumbered">
 <h2>Exercise: Muscle mass</h2>
@@ -1831,13 +1867,12 @@ t.obs</code></pre></div>
 <span class="st">  </span><span class="kw">geom_abline</span>(<span class="dt">intercept=</span>m<span class="op">$</span>coefficients[<span class="dv">1</span>],<span class="dt">slope=</span>m<span class="op">$</span>coefficients[<span class="dv">2</span>]) </code></pre></div>
 <p><img src="DASM2_files/figure-html/unnamed-chunk-41-1.png" width="672" /></p>
 <p>From the output we can formulate the following conclusions.</p>
-<p>On average the muscle mass of women aged between 41 and 78 years is significantly negatively associated with the age (<span class="math inline">\(p&lt;0.001\)</span>) at the <span class="math inline">\(5\%\)</span> level of significance. We estimate that the mean muscle mass decreases with 1.19 (SE=0.09) units with an increase of age of 1 year. The <span class="math inline">\(95\%\)</span> confidence interval of this estimate is -1.37 to -1 units per increase of age with one unit.</p>
-<p>For women between the age of </details></p>
+<p>The <span class="math inline">\(p\)</span>-value that is reported in the R output refers to the two-sided alternative. Here we translate the research question into the one-sided alternative <span class="math inline">\(H_1: \beta_1&lt;0\)</span>. Since the observed test statistic <span class="math inline">\(t\)</span>=-1.1881997 is negative the <span class="math inline">\(p\)</span>-value becomes 1.924970810^{-18}/2<span class="math inline">\(&lt;0.0001\)</span>. Hence, on average the muscle mass of women aged between 41 and 78 years is significantly negatively associated with the age (<span class="math inline">\(p&lt;0.001\)</span>) at the <span class="math inline">\(5\%\)</span> level of significance. We estimate that the mean muscle mass decreases with 1.19 (SE=0.09) units with an increase of age of 1 year. The <span class="math inline">\(95\%\)</span> confidence interval of this estimate is -1.37 to -1 units of muscle mass per increase of age with one year. </details></p>
 </div>
 <div id="S_AssessAssumptions" class="section level2">
 <h2><span class="header-section-number">2.8</span> Assessment of the Model Assumptions</h2>
 
-<p>The normal simple linear regression model <a href="#eq:Mod4">(2.7)</a> is the most restrictive in the sense that it requires the largest numer of assumptions. In this section we discuss the importance of the model assumptions and how they can be verified based on the observed data. We will use Galton's height data to illustrate the methods.</p>
+<p>The normal simple linear regression model <a href="#eq:Mod4">(2.7)</a> is the most restrictive than the semiparametric linear regression model <a href="#eq:Mod3">(2.2)</a> in the sense that it requires the largest numer of assumptions. In this section we discuss the importance of the model assumptions and how they can be verified based on the observed data. We will use Galton's height data to illustrate the methods.</p>
 </div>
 <div id="example-galtons-height-data-4" class="section level2 unnumbered">
 <h2>Example (Galton's height data)</h2>
@@ -1867,17 +1902,17 @@ ave.e&lt;-<span class="kw">c</span>()
 Figure 2.14: Scatterplot of the residuals against the father's heights (Galton's height example). The red stars represent the sample means of the residuals for a given father's height.
 </p>
 </div>
-<p>Since the sample means of the residuals are only estimates of <span class="math inline">\(\E{Y-\beta_0-\beta_1 x\mid x}\)</span>, we cannot expect that these sample means are exactly equal to zero (i.e. the sample means also show a sampling distribution). The larger the number of replicates on which such a sample mean is computed, the smaller the sampling variability and the closer we expect the sample mean to zero.</p>
-<p>We hope that the average residuals do not show a systematic pattern as a function of the regressor; this would agree with the model assumption <span class="math inline">\(\E{\eps \mid x}=0\)</span>. Figure <a href="#fig:GaltonRes1">2.14</a> shows no such systematic pattern, and therefore we conclude that the linear relation between the regressor (father's height) and the mean response (son's height) is linear.</p>
-<p>If there are no replicates at the regressor values, then the sample plot can be constructed, but with no sample means of the residuals. Such graphs (with or without the average residuals) are known as <strong>residual plots</strong>.</p>
+<p>Since the sample means of the residuals are only estimates of <span class="math inline">\(\E{Y-\beta_0-\beta_1 x\mid x}\)</span>, we cannot expect that these sample means are exactly equal to zero (i.e. the sample means also show sampling variability). The larger the number of replicates on which such a sample mean is computed, the smaller the sampling variability and the closer we expect the sample mean to be close to zero.</p>
+<p>We hope that the average residuals do not show a systematic pattern as a function of the regressor. No systematic pattern would agree with the model assumption <span class="math inline">\(\E{\eps \mid x}=0\)</span>. Figure <a href="#fig:GaltonRes1">2.14</a> shows no such systematic pattern, and therefore we conclude that the linear relation between the regressor (father's height) and the mean response (son's height) is linear.</p>
+<p>If there are no replicates at the regressor values, then the plot can be constructed, but with no sample means of the residuals. Such graphs (with or without the average residuals) are known as <strong>residual plots</strong>.</p>
 </div>
 <div id="normality-of-the-error-term" class="section level3 unnumbered">
 <h3>Normality of the error term</h3>
 <p>The model implies that <span class="math display">\[ 
   \eps_i=Y_i-m(x_i;\mb\beta) \mid x_i \sim N(0,\sigma^2). 
 \]</span></p>
-<p>To some extent the residuals <span class="math inline">\(e_i=Y_i-m(x_i;\hat{\mb\beta})\)</span> can be considered as ``estimates'' of <span class="math inline">\(\ep_i\)</span>. Therefore we will use the residuals for assessing the normality assumption. We could use histograms, boxplots and normal QQ-plots for this purpose. Particularly the normal QQ-plots are informative, because they are specifically developped for this assessing normality.</p>
-<p>Figure <a href="#fig:GaltonQQResid">2.15</a> shows the normal QQ-plot of the residuals of the Galton example. Most of the points in the QQ-plot are close to the straight line, with only a few larger deviations in the right hand tail of the distribution. However, the number of outliers (2 or 3) is very small as compared to the sample size (173). The plot does also not reveal systematic deviations from the straight line.</p>
+<p>To some extent the residuals <span class="math inline">\(e_i=Y_i-m(x_i;\hat{\mb\beta})\)</span> can be considered as ``estimates'' of <span class="math inline">\(\eps_i\)</span>. Therefore we will use the residuals for assessing the normality assumption. We could use histograms, boxplots and normal QQ-plots for this purpose. Particularly the normal QQ-plots are informative, because they are specifically developped for this assessing normality.</p>
+<p>Figure <a href="#fig:GaltonQQResid">2.15</a> shows the normal QQ-plot of the residuals of the Galton example. Most of the points in the QQ-plot are close to the straight line with no systematic pattern, and with only a few larger deviations in the right hand tail of the distribution. However, the number of outliers (2 or 3) is very small as compared to the sample size (173). The plot does also not reveal systematic deviations from the straight line.</p>
 <p>Finally, note that the normality assumption is not very important for this example, because the rather large sample size of <span class="math inline">\(n=173\)</span> tells us that the parameter estimators will be approximately normally distributed thanks to the central limit theorem. So only a very strong deviation from normality would have been worrisome. Also recall that the <span class="math inline">\(p\)</span>-value for the two-sided test for <span class="math inline">\(H_0:\beta_1=0\)</span> was very small (<span class="math inline">\(p&lt;0.001\)</span>); thus even a small deviation from normality would not have caused doubt over the conclusion of the statistical test.</p>
 <p>The R code for the QQ-plot in Figure <a href="#fig:GaltonQQResid">2.15</a> is shown below.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">qqnorm</span>(m<span class="op">$</span>resid,<span class="dt">cex.lab=</span><span class="fl">1.5</span>,<span class="dt">cex.axis=</span><span class="fl">1.5</span>,
@@ -1896,9 +1931,9 @@ Figure 2.15: Normal QQ-plot of the residuals of the Galton example.
   \var{\eps_i}=\var{\eps_i\mid x_i} =\var{Y_i \mid x_i}=\sigma^2,
 \]</span> i.e. the variance of the outcomes (and of the error terms) is constant and does not depend on the values of the regressor.</p>
 <p>If there are replicated observations for each value of the regressor in the dataset, then the sample variance of the outcome can be calculated for unique observed value of the regressor. The sample variances can then be plotted against the regressor <span class="math inline">\(x\)</span>. If this graph shows no clear pattern that deviates from the assumption of a constant variance, then the graph suggests that the constant-variance assumption is satisfied.</p>
-<p>If there are no replicated observations for the unique regressor values, than one may plot <span class="math inline">\(e_i^2\)</span> versus <span class="math inline">\(x_i\)</span>. If we say that the residuals <span class="math inline">\(e_i\)</span> are (approximately) estimates for the error terms <span class="math inline">\(\eps_i\)</span>, and becuase <span class="math inline">\(\var{\eps_i} = \E{\eps_i^2}\)</span>, we expect that <span class="math inline">\(\E{e_i^2} \approx \E{\eps_i}\)</span> and hence the plot of <span class="math inline">\(e_i^2\)</span> versus <span class="math inline">\(x_i\)</span> should not indicate a systematic pattern under the assumption of constant-variance.</p>
-<p>If there are regressor values with and without replicates, than one could either choose to simply plot <span class="math inline">\(e_i^2\)</span> for all <span class="math inline">\(i=1,\ldots, n\)</span>, or for the replicated observations one may plot the average of the <span class="math inline">\(e_i^2\)</span> (note that this is different from the sample variances because of the factor <span class="math inline">\(1/(n-1)\)</span> in the calculation of the sample variance, and the factor <span class="math inline">\(1/n\)</span> in the calculation of the average). The reason for using <span class="math inline">\(1/n\)</span> in this case, is to make individual <span class="math inline">\(e_i^2\)</span> more comparable to the averages.</p>
-<p>Figure <a href="#fig:GaltonResidVar">2.16</a> shows the plot for the Galton example. No systematic pattern can be observed, except for some outliers, particularly in the plot in the left panel (variance). The plot in the right panel is less extreme because of the square-root transformation. Note that particularly in the graph in the left panel we expect strong skewness to the right, because the sampling distribution of the sample variance is related to a <span class="math inline">\(\chi^2\)</span> distribution.</p>
+<p>If there are no replicated observations for the unique regressor values, then one may plot <span class="math inline">\(e_i^2\)</span> versus <span class="math inline">\(x_i\)</span>. If we reason that the residuals <span class="math inline">\(e_i\)</span> are (approximately) estimates for the error terms <span class="math inline">\(\eps_i\)</span>, and because <span class="math inline">\(\var{\eps_i} = \E{(\eps_i-\E{\eps_i})^2} = \E{\eps_i^2}\)</span>, we expect that <span class="math inline">\(\E{e_i^2} \approx \E{\eps_i}\)</span> and hence the plot of <span class="math inline">\(e_i^2\)</span> versus <span class="math inline">\(x_i\)</span> should not indicate a systematic pattern under the assumption of constant-variance.</p>
+<p>If there are regressor values with and without replicates, then one could either choose to simply plot <span class="math inline">\(e_i^2\)</span> for all <span class="math inline">\(i=1,\ldots, n\)</span>, or for the replicated observations one may plot the average of the <span class="math inline">\(e_i^2\)</span> (note that this is different from the sample variances because of the factor <span class="math inline">\(1/(n-1)\)</span> in the calculation of the sample variance, and the factor <span class="math inline">\(1/n\)</span> in the calculation of the average). The reason for using <span class="math inline">\(1/n\)</span> in this case, is to make these averages more comparable to the individually plotted <span class="math inline">\(e_i^2\)</span>.</p>
+<p>Figure <a href="#fig:GaltonResidVar">2.16</a> shows the plot for the Galton example. No systematic pattern can be observed, except for some outliers, particularly in the plot in the left panel (variance). The plot in the right panel is less extreme because he square-root transformation is applied to the (average of the) <span class="math inline">\(e_i^2\)</span> (this is this plotted at the scale of the standard deviation and the scale of the outcomes). Note that particularly in the graph in the left panel we expect strong skewness to the right, because the sampling distribution of the sample variance is related to a <span class="math inline">\(\chi^2\)</span> distribution.</p>
 <p>We conclude that there is no indication for a violation of the constant-variance assumption.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))
 heights&lt;-<span class="kw">unique</span>(Galton.sons<span class="op">$</span>father.cm)
@@ -1926,7 +1961,7 @@ Figure 2.16: Sample variances (left) en standard deviations (right) against the 
 </div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># note that the reference line is at MSE (n-2)/n</span>
 <span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">1</span>))</code></pre></div>
-<p>The next two graphs in Figure <a href="#fig:GaltonResid2">2.17</a> show the squared residuals <span class="math inline">\(e_i^2\)</span> versus <span class="math inline">\(x_i\)</span> (thus no averaging, even at regressor values with replicated observatiobs) and the absolute values <span class="math inline">\(\vert e_i \vert\)</span> against <span class="math inline">\(x_i\)</span>. The latter graph is also supposed to give no systematic pattern if the assumption of constant-variance holds, and it is less sensitive to outliers are compared to the plot with the squared residuals.</p>
+<p>The next two graphs in Figure <a href="#fig:GaltonResid2">2.17</a> show the squared residuals <span class="math inline">\(e_i^2\)</span> versus <span class="math inline">\(x_i\)</span> (thus no averaging, even at regressor values with replicated observations) and the absolute values <span class="math inline">\(\vert e_i \vert\)</span> against <span class="math inline">\(x_i\)</span>. The latter graph is also supposed to give no systematic pattern if the assumption of constant-variance holds, and it is less sensitive to outliers as compared to the plot with the squared residuals. We also expect no skewness in the plot of the absolute values.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))
 e&lt;-m<span class="op">$</span>residuals
 <span class="kw">plot</span>(Galton.sons<span class="op">$</span>father.cm,e<span class="op">^</span><span class="dv">2</span>,<span class="dt">cex.lab=</span><span class="fl">1.5</span>,<span class="dt">cex.axis=</span><span class="fl">1.5</span>,
@@ -1955,7 +1990,7 @@ Figure 2.17: Scatter plots of <span class="math inline">\(e_i^2\)</span> against
 <p>First we fit the regression model.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">m&lt;-<span class="kw">lm</span>(muscle.mass<span class="op">~</span>age, <span class="dt">data=</span>muscles)</code></pre></div>
 <p><strong>Linearity of the regression model</strong></p>
-<p>We can assess the linearity by simple plotting the residuals versus the regressor (age). If there are multiple observations for an age, we can also compute and plot the average rediduals.</p>
+<p>We can assess the linearity by simple plotting the residuals versus the regressor (age). If there are multiple observations for an age, we can also compute and plot the average residuals.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">e&lt;-m<span class="op">$</span>residuals
 x.all&lt;-<span class="kw">unique</span>(muscles<span class="op">$</span>age)
 ave.e&lt;-<span class="kw">c</span>()
@@ -1976,7 +2011,7 @@ ave.e&lt;-<span class="kw">c</span>()
 <p><img src="DASM2_files/figure-html/unnamed-chunk-44-1.png" width="672" /></p>
 <p>The smooth line again does not suggest a deviation from linearity.</p>
 <p><strong>Normality of the error terms</strong></p>
-<p>We make a normal QQ-plot of the residuals, as well as a boxplot The normal QQ-plot shows small systematic deviations in the two tails of the distribution, but the shape of the distribution is still quite symmetric (see also the boxplot). Given the moderately large sample size of <span class="math inline">\(n=59\)</span>, we do consider this a problematic deviation from the normality assumption and we can still trust the results for confidence intervals and the hypothesis test (moreover, the <span class="math inline">\(p\)</span>-value is extremely small).</p>
+<p>We make a normal QQ-plot of the residuals, as well as a boxplot. The normal QQ-plot shows small systematic deviations in the two tails of the distribution, but the shape of the distribution is still quite symmetric (see also the boxplot). Given the moderately large sample size of <span class="math inline">\(n=59\)</span>, we do consider this a problematic deviation from the normality assumption and we can still trust the results for confidence intervals and the hypothesis test (moreover, the <span class="math inline">\(p\)</span>-value is extremely small).</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))
 <span class="kw">qqnorm</span>(m<span class="op">$</span>resid,<span class="dt">cex.lab=</span><span class="fl">1.5</span>,<span class="dt">cex.axis=</span><span class="fl">1.5</span>,
        <span class="dt">xlab=</span><span class="st">&quot;expected quantiles&quot;</span>,<span class="dt">ylab=</span><span class="st">&quot;residuals&quot;</span>,<span class="dt">main=</span><span class="st">&quot;&quot;</span>)
@@ -2005,20 +2040,20 @@ e&lt;-m<span class="op">$</span>residuals
 </div>
 <div id="binary-dummy-regressors" class="section level2">
 <h2><span class="header-section-number">2.9</span> Binary Dummy Regressors</h2>
-<p>In this section we will demonstrate how the <strong>two-sample problem</strong> is a special case of simple linear regression. In the two sample problem, we are interested in comparing two means. For example, consider the dose finding study, but we only look at the patients that received 0mg (control group) and 2mg per day. We want to know the mean difference in blood pressure reduction between these two doses. Thus we basically have two samples of patients: a sample of 10 patients receiving placebo and a sample of 10 patients receiving 2mg/day. We are not interested in assessing a linear effect of the dose. We now consider the 0mg/day and 2mg/day as two treatments (placebo and active treatment).</p>
-<p>More formally, we consider two groups, populations are treatments (whatever term you prefer), say treatment U and treatment V. The interest is in estimating <span class="math display">\[
+<p>In this section we will demonstrate how the <strong>two-sample problem</strong> is a special case of simple linear regression. In the two sample problem, we are interested in comparing two means. For example, consider the dose finding study, but we only look at the patients that received 0mg (control or placebo group) and 2mg per day. We want to know the mean difference in blood pressure reduction between these two doses. Thus we basically have two samples of patients: a sample of 10 patients receiving placebo and a sample of 10 patients receiving 2mg/day. We are not interested in assessing a linear effect of the dose. We now consider the 0mg/day and 2mg/day as two treatments (placebo and active treatment).</p>
+<p>More formally, we consider two groups, populations or treatments (whatever term you prefer), say treatment U and treatment V. The interest is in estimating <span class="math display">\[
   \mu_U = \E{Y \mid U} \;\; \text{ and } \;\; \mu_V=\E{Y \mid V}
 \]</span> and the treatment <em>effect size</em> <span class="math display">\[
  \delta = \mu_V-\mu_U.
 \]</span></p>
 <p>Of course we know the solution: <span class="math display">\[
-  \hat\mu_U = \bar{Y}_U \;\;\text{ and } \;\; \hat\mu_V=\bar{Y}_V \;\;\text{ and } \hat\delta = \hat\mu_V-\hat\mu_V,
+  \hat\mu_U = \bar{Y}_U \;\;\text{ and } \;\; \hat\mu_V=\bar{Y}_V \;\;\text{ and }\;\; \hat\delta = \hat\mu_V-\hat\mu_V,
 \]</span> in which we used the obvious notation of <span class="math inline">\(\bar{Y}_U\)</span> and <span class="math inline">\(\bar{Y}_V\)</span> representing the sample means of the outcomes in the <span class="math inline">\(U\)</span> and the <span class="math inline">\(V\)</span> sample, respectively. Confidence intervals can be easily obtained as well as hypothesis tests for testing <span class="math inline">\(H_0: \delta=0\)</span> against one-sided or two-sided alternatives (this is the well known two-sample <span class="math inline">\(t\)</span>-test).</p>
 <p>For the confidence intervals and two-sample hypothesis test, we often assume normality in the two treatment groups (unless the samples sizes are large), i.e. <span class="math display">\[
   Y_i \mid U \sim N(\mu_U, \sigma^2) \;\;\text{ and }\;\; Y_i \mid V \sim N(\mu_V, \sigma^2).
 \]</span></p>
-<p>This two-sample problem can also be formulated as a regression model, which will allow is to apply all theory that we have seen before.</p>
-Define a <strong>dummy regressor</strong> <span class="math inline">\(x_i\)</span> as
+<p>This two-sample problem can also be formulated as a regression model, which will allow us to apply all theory that we have seen before.</p>
+<p>Define a <strong>dummy regressor</strong> <span class="math inline">\(x_i\)</span> as</p>
 <span class="math display">\[\begin{eqnarray*}
   x_i 
     &amp;=&amp; 1 \text{ if observation i belongs to treatment V} \\
@@ -2104,7 +2139,7 @@ BloodPressure2<span class="op">$</span>x&lt;-<span class="kw">ifelse</span>(Bloo
 </div>
 <div id="exercise-smoking" class="section level2 unnumbered">
 <h2>Exercise: Smoking</h2>
-<p>We are presented with a sample of 654 youths, aged 3 to 19 years, in the area of East Boston during middle to late 1970's. Interest concerns the relationship between smoking and FEV (forced expiratory volume; it measures how much air a person can exhale during a forced breath; measured in liters). In the dataset, the smoke variable is already coded as a dummy variable: smoke=0 refers to non-smokers and smoke=1 refers to smokers.</p>
+<p>We are presented with a sample of 654 youths, aged 3 to 19 years, in the area of East Boston during middle to late 1970's. Interest concerns the relationship between smoking and FEV (forced expiratory volume; it measures how much air a person can exhale during a forced breath, measured in liters). In the dataset, the smoke variable is already coded as a dummy variable: smoke=0 refers to non-smokers and smoke=1 refers to smokers.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fev&lt;-<span class="kw">read.csv</span>(<span class="st">&quot;data/fevdata.txt&quot;</span>,<span class="dt">sep=</span><span class="st">&quot; &quot;</span>)
 <span class="kw">names</span>(fev)&lt;-<span class="kw">c</span>(<span class="st">&quot;age&quot;</span>,<span class="st">&quot;fev&quot;</span>,<span class="st">&quot;height&quot;</span>,<span class="st">&quot;sex&quot;</span>,<span class="st">&quot;smoke&quot;</span>)</code></pre></div>
 <p>Fit a linear regression model with the dummy <em>smoke</em> as regressor and interpret the model fit (estimated regression coefficient, <span class="math inline">\(95\%\)</span> confidence interval, and hypohtesis test for <span class="math inline">\(H_0:\beta_1=0\)</span> versus <span class="math inline">\(H_1: \beta_1\neq 0\)</span> at the <span class="math inline">\(5\%\)</span> level of significance).</p>
@@ -2136,7 +2171,7 @@ BloodPressure2<span class="op">$</span>x&lt;-<span class="kw">ifelse</span>(Bloo
 <pre><code>##                2.5 %   97.5 %
 ## (Intercept) 5.135845 5.930036
 ## smoke       5.809588 7.309810</code></pre>
-<p>We conclude that at the <span class="math inline">\(5\%\)</span> level of significance smoker have a significant larger FEV (<span class="math inline">\(p&lt;0.001\)</span>). We estimate that on average the FEV of smokers is 6.56 (SE=0.38) liters larger than among the non-smokers. The corresponding <span class="math inline">\(95\%\)</span> confidence interval ranges from <span class="math inline">\(5.81\)</span> to <span class="math inline">\(7.31\)</span>.</p>
+<p>We conclude at the <span class="math inline">\(5\%\)</span> level of significance that smokers have on average a significant larger FEV (<span class="math inline">\(p&lt;0.001\)</span>). We estimate that on average the FEV of smokers is 6.56 (SE=0.38) liters larger than among the non-smokers. The corresponding <span class="math inline">\(95\%\)</span> confidence interval ranges from <span class="math inline">\(5.81\)</span> to <span class="math inline">\(7.31\)</span> liters.</p>
 <p></details></p>
 </div>
 <div id="association-versus-causation" class="section level2">
@@ -2161,7 +2196,7 @@ BloodPressure2<span class="op">$</span>x&lt;-<span class="kw">ifelse</span>(Bloo
 </div>
 <div id="causal-inference-and-counterfactuals" class="section level3">
 <h3><span class="header-section-number">2.10.2</span> Causal inference and counterfactuals</h3>
-<p><strong>Causal inference</strong> is a discipline in statistics that aims to develop methods that can be used to assess causal relationships. Although it is only rather recent (last 20 years) that it has become a very active research area, concepts of causality were already proposed by Sir Ronald Fisher and Jerzy Neyman in the 1920s. The modern revival started in the early 1980 with the work of Donald Rubin.</p>
+<p><strong>Causal inference</strong> is a discipline in statistics that aims to develop methods that can be used to assess causal relationships. Although it is only rather recent (last 20 years) that it has become a very active research area, concepts of causality were already proposed by Sir Ronald Fisher and Jerzy Neyman in the 1920s. The modern revival started in the early 1980 with e.g. the work of Donald Rubin.</p>
 <p>In this section we explain some of the basic concepts of causal inference. As an example we will consider the blood pressure reduction study with only the 0mg/day (placebo) (<span class="math inline">\(X_i=0\)</span>) and the 2mg/day treatment groups (<span class="math inline">\(X_i=1\)</span>) (two-sample problem).</p>
 <p>We now define two <strong>counterfactual</strong> outcomes:</p>
 <ul>
@@ -2169,7 +2204,9 @@ BloodPressure2<span class="op">$</span>x&lt;-<span class="kw">ifelse</span>(Bloo
 <li><p><span class="math inline">\(Y_i(0)\)</span> is the outcome of subject <span class="math inline">\(i\)</span> if subject <span class="math inline">\(i\)</span> would receive treatment <span class="math inline">\(X_i=0\)</span>.</p></li>
 </ul>
 <p>In reality a subject can only receice a single treatment, either <span class="math inline">\(X_i=1\)</span> or <span class="math inline">\(X_i=0\)</span>, and hence both counterfactuals can never be observed simultaneously. Still we can think of <span class="math inline">\(Y_i(1)\)</span> and <span class="math inline">\(Y_i(0)\)</span> as inherent properties of subject <span class="math inline">\(i\)</span>.</p>
-<p>Thus, what we observe is <span class="math inline">\((X_i,Y_i)\)</span>, with <span class="math inline">\(X_i\)</span> (0 or 1) the actual treatment that is received by subject <span class="math inline">\(i\)</span> and <span class="math inline">\(Y_i\)</span> the observed outcome under treatment <span class="math inline">\(X_i\)</span>.</p>
+<p>Thus, what we observe is <span class="math inline">\((X_i,Y_i)\)</span>, with <span class="math inline">\(X_i\)</span> (0 or 1) the actual treatment that is received by subject <span class="math inline">\(i\)</span> and <span class="math inline">\(Y_i\)</span> the observed outcome under treatment <span class="math inline">\(X_i\)</span>. Note that the observed <span class="math inline">\(Y_i\)</span> can be written as <span class="math display">\[
+  Y_i = X_i Y_i(1) + (1-X_i) Y_i(0).
+\]</span></p>
 <p>In the context of the blood pressure example:</p>
 <ul>
 <li><p><span class="math inline">\(Y_i(0)\)</span> is the blood pressure reduction if subject <span class="math inline">\(i\)</span> would have received placebo</p></li>
@@ -2180,9 +2217,9 @@ BloodPressure2<span class="op">$</span>x&lt;-<span class="kw">ifelse</span>(Bloo
 \]</span> This is known as the <strong>sharp causal null hypothesis</strong>. However, we will be interested in the <strong>average causal effect</strong>, defined in terms of population averages: <span class="math display">\[
   \E{Y(1)-Y(0)}=\E{Y(1)}- \E{Y(0)}.
 \]</span> In the remainder of this course, we will simply call this the <strong>causal effect</strong>. In the context of the two-sample problem, it is also known as the <strong>average treatment effect</strong> (ATE).</p>
-<p>The question is now: do we have unbiased estimators of <span class="math inline">\(\E{Y(1)}\)</span> and <span class="math inline">\(\E{Y(0)}\)</span>? If yes, we also have an unbiased estimator of the causal effect. It may be tempting to consider <span class="math inline">\(\bar{Y}_1\)</span> (sample mean of outcomes in the <span class="math inline">\(X=1\)</span> group) as an estimator of <span class="math inline">\(\E{Y(1)}\)</span>, and <span class="math inline">\(\bar{Y}_0\)</span> (sample mean of outcomes in the <span class="math inline">\(X=0\)</span> group) as an estimator of <span class="math inline">\(\E{Y(0)}\)</span>. We will show that this holds true for studies that involve complete randomisation, but it does not hold generally.</p>
-<p>Suppose we would use <span class="math inline">\(\bar{Y}_a\)</span> (<span class="math inline">\(a=0,1\)</span>). What is the estimand of this estimator (i.e. what population parameter is estimated by the estimator). Thus we need to look at <span class="math inline">\(\E{\bar{Y}_a}\)</span>. To be more precise, we write <span class="math inline">\(\Ef{XY}{\bar{Y}_a}\)</span> to stress that both <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> may be random.</p>
-<p>Let <span class="math inline">\(N_a\)</span> denote the number of sample observations in treatment group <span class="math inline">\(a\)</span>, which can be written as</p>
+<p>The question is now: do we have unbiased estimators of <span class="math inline">\(\E{Y(1)}\)</span> and <span class="math inline">\(\E{Y(0)}\)</span>? If yes, we also have an unbiased estimator of the causal effect. It may be tempting to consider <span class="math inline">\(\bar{Y}_1\)</span> (sample mean of observed outcomes in the <span class="math inline">\(X=1\)</span> group) as an estimator of <span class="math inline">\(\E{Y(1)}\)</span>, and <span class="math inline">\(\bar{Y}_0\)</span> (sample mean of observed outcomes in the <span class="math inline">\(X=0\)</span> group) as an estimator of <span class="math inline">\(\E{Y(0)}\)</span>. We will show that this holds true for studies that involve complete randomisation, but it does not hold in general.</p>
+<p>Suppose we would use <span class="math inline">\(\bar{Y}_a\)</span> (<span class="math inline">\(a=0,1\)</span>). What is the <em>estimand</em> of this estimator (i.e. what population parameter is estimated by the estimator). Thus we need to look at <span class="math inline">\(\E{\bar{Y}_a}\)</span>. To be more precise, we write <span class="math inline">\(\Ef{XY}{\bar{Y}_a}\)</span> to stress that both <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> may be random.</p>
+<p>Let <span class="math inline">\(N_a\)</span> denote the number of sample observations in treatment group <span class="math inline">\(a\)</span> (<span class="math inline">\(a=0,1\)</span>), which can be written as</p>
 <span class="math display">\[
   N_1 = \sum_{i=1}^n X_i  \;\;\text{ and }\;\; N_0 = \sum_{i=1}^n (1-X_i).
 \]</span> Then,
@@ -2196,7 +2233,7 @@ BloodPressure2<span class="op">$</span>x&lt;-<span class="kw">ifelse</span>(Bloo
 \end{eqnarray*}\]</span>
 <p>Hence, for <span class="math inline">\(\bar{Y}_a\)</span> to be an unbiased estimator of <span class="math inline">\(\E{Y(a)}\)</span>, we need to demonstrate that <span class="math display">\[
   \E{Y \mid X=a} = \E{Y(a)}.
-\]</span> This is also illustrated in Figure <a href="#fig:Causal1">2.18</a></p>
+\]</span> The conceptual differnce between these two expectation is illustrated in Figure <a href="#fig:Causal1">2.18</a></p>
 <div class="figure" style="text-align: center"><span id="fig:Causal1"></span>
 <img src="figures/Causal1.pdf" alt="Difference between means of counterfactuals and conditional means (Figure 1.1. from Hern\'an and Robins, Causal Inference: What if, 2020)."  />
 <p class="caption">
@@ -2206,9 +2243,9 @@ Figure 2.18: Difference between means of counterfactuals and conditional means (
 <p>We will need the following assumptions:</p>
 <ul>
 <li><p><strong>consistency</strong>: For all subjects <span class="math inline">\(i\)</span>, it must hold that <span class="math inline">\(X_i=a\)</span> implies that <span class="math inline">\(Y_i(a)=Y_i\)</span>. In other words, when a subject receives treatment a, the observed outcome of the subject must be equal to the counterfacual for that treatment.</p></li>
-<li><p><strong>mean exchangeability</strong>: <span class="math inline">\(\E{Y(a) \mid X=0} = \E{Y(a) \mid X=1} = \E{Y(a)}\)</span>, for <span class="math inline">\(a=0/1\)</span>. This condition tells us that the populations of subjects that receive placebo (<span class="math inline">\(X=0\)</span>) and that receive treatment (<span class="math inline">\(X=1\)</span>), have the same mean value for the counterfactual <span class="math inline">\(Y(a)\)</span> for treatment <span class="math inline">\(a\)</span> (<span class="math inline">\(a=0/1\)</span>), and, as a consequence these two conditional means are equal to the marginal mean <span class="math inline">\(\E{Y(a)}\)</span>. This means that the treatment allocation <span class="math inline">\(X\)</span> is not associated with the mean counterfactual outcomes.</p></li>
+<li><p><strong>mean exchangeability</strong>: <span class="math inline">\(\E{Y(a) \mid X=0} = \E{Y(a) \mid X=1} = \E{Y(a)}\)</span>, for <span class="math inline">\(a=0/1\)</span>. This condition tells us that the populations of subjects that receive placebo (<span class="math inline">\(X=0\)</span>) and that receive treatment (<span class="math inline">\(X=1\)</span>), have the same mean value for the counterfactual <span class="math inline">\(Y(a)\)</span> for treatment <span class="math inline">\(a\)</span> (<span class="math inline">\(a=0/1\)</span>), and, as a consequence these two conditional means are equal to the marginal mean <span class="math inline">\(\E{Y(a)}\)</span>. This means that the treatment allocation <span class="math inline">\(X\)</span> is not associated with the mean of the counterfactual outcomes.</p></li>
 </ul>
-<p>A property that is even stronger than mean exchangeability, is <strong>full exchangeability</strong>. This states that the treatment assignment <span class="math inline">\(X\)</span> is stochastically indepedent of the vector of counterfactual outcomes <span class="math inline">\((Y(0),Y(1))\)</span>, i.e. <span class="math display">\[
+<p>A property that is even stronger than mean exchangeability, is <strong>full exchangeability</strong>. This states that the treatment assignment <span class="math inline">\(X\)</span> is stochastically independent of the vector of counterfactual outcomes of a subject, <span class="math inline">\((Y(0),Y(1))\)</span>, i.e. <span class="math display">\[
   (Y(0), Y(1)) \ind X.
 \]</span> This implies that the treatment <span class="math inline">\(X_i\)</span> given to subject <span class="math inline">\(i\)</span>, is jointly independent of the counterfactual outcomes <span class="math inline">\(Y_i(0)\)</span> and <span class="math inline">\(Y_i(1)\)</span>. Full exchangeability implies mean exchangeability.</p>
 <p>Now we are ready to prove the identity <span class="math inline">\(\E{Y \mid X=a} = \E{Y(a)}\)</span>. For <span class="math inline">\(a=0,1\)</span>:</p>
