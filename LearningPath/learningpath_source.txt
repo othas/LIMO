@@ -1,0 +1,224 @@
+# Chapter 1: Introduction
+
+## Getting started
+
+NOTE
+Read the syllabus on Blackboard.
+
+WATCH 4 min | 1.3 | 1_9xj6mpsy
+A short introduction to how the course notes work, the two versions of the course, and the software.
+
+READ 1.2, 1.3, 1.4, 1.5, 1.6
+Read the introduction, how the online course notes can be used, the two versions of this course, communication with the lecturers, and software.
+
+AI Getting ready to work with AI
+In this course you gradually learn to use an AI assistant: first to help you study, later to help you analyse data. You are not expected to master this now; that is the goal at the end of the course. For now: (1) read [the rules of this course on the use of AI](LearningPath_AI_rules.html); (2) choose the AI assistant that you will use; (3) start an AI logbook, a simple file in which you note for every AI step what you asked, what you got, and what you found when you checked it. One rule holds for the whole course: the AI assists, you are responsible. Never hand in or rely on something that you cannot explain yourself.
+
+# Chapter 2: Simple Linear Regression Analysis
+
+BEFORE
+This chapter builds on the following. If something is rusty, refresh it first.
+- Random variables, expectation, variance and covariance, and the normal, $t$ and chi-squared distributions.
+- Conditional distributions and the conditional mean $E(Y \mid x)$.
+- Vectors and matrices: product, transpose, inverse and rank.
+- The basics of estimation and testing from the course Concepts of Probability and Statistics: estimator, bias, standard error, confidence interval, null and alternative hypothesis, p-value. You need these from Section 2.6 onwards.
+- Basic R: reading a dataset, making a plot and running a function. See Section 1.6.
+
+## The regression model
+> Goal: understand what a regression model is, and that it is a model for the conditional mean $E(Y \mid x)$.
+
+WATCH 47 min | example-galtons-height-data | 1_3fhxnwhq
+We start from an example in which we want to investigate how the height of a son depends on the height of his father. We use this example to introduce you to the concept of regression models. We start from a very general formulation of regression models, and by gradually introducing assumptions, we move towards the formulation of a linear regression model. It is extremely important to understand that regression models are about the mean outcome, more specifically the conditional mean of the outcome, given the regressor: $E(Y \mid x)$.
+
+WATCH 13 min | 2.1 | 1_rxo1dpwy
+This movie explains how simulations can be used for exploring theoretical aspects of statistical models (and later such simulations will also be used for empirically demonstrating theoretical properties of statistical methods).
+
+AI AI as explainer
+Ask the AI assistant to explain in simple words what a regression model is and what $E(Y \mid x)$ means, without telling it anything about this course. Compare the answer with the course notes. Note in your logbook: one thing that agrees, and one thing that is different (terminology, notation, an assumption that is added or left out). The point of this first step: an AI answer is a text to be checked, not a source to be trusted.
+
+CHECK
+You can move on when you can answer these questions.
+- What exactly does the regression model describe: individual outcomes, or something else?
+- Explain in words what $\beta_0$ and $\beta_1$ mean in the Galton example.
+- Which assumptions were added, one by one, to go from the general regression model to the linear regression model?
+- What do you learn from simulating data from the model again and again?
+
+## Estimating the parameters
+> Goal: estimate the parameters by least squares, in R (and SAS), and interpret the estimates.
+
+WATCH 19 min | 2.2 | 1_hwabtpot
+Here you learn how the parameters of a linear regression model can be estimated by means of the method of least squares. This method is best introduced by making use of matrix notation and so this section also introduces the matrix notation for the linear model. The advantage is that with matrix notation, the results of this section are also valid for the more complicated linear models that will be seen in later chapters. The LSE of $\beta$ has a simple expression in terms of the design matrix $X$. Also the variance of the LSE of $\beta$ has a simple expression in terms of $X$.
+
+WATCH 7 min | example-galtons-height-data-1 | 1_7q0k4v1u
+The example of Section 2.2.
+
+DO exercise-blood-pressure
+Make the exercise yourself. The solution is also in the course notes. It is important that you know how to do this analysis in R (and SAS) and how to interpret the numerical values of the parameter estimates $\hat\beta_0$ and $\hat\beta_1$. Note that the final conclusion of a data analysis is always formulated using the terminology from the application, i.e. a statistician must be able to explain the conclusions to the scientist/client.
+
+AI AI as reader of R output
+First make the blood pressure exercise yourself. Only then give the R output of your fitted model to the AI assistant and ask it to explain the output line by line. Check each statement against the course notes and your own solution. Did it interpret $\hat\beta_0$ and $\hat\beta_1$ in the terminology of the application, or only in general terms? Ask it to do better and see what changes when you give more context about the study.
+
+CHECK
+You can move on when you can answer these questions.
+- Which criterion is minimised by the least squares estimator?
+- Write down the model in matrix notation. What are the rows and the columns of the design matrix $X$?
+- Give the expression of the LSE of $\beta$ in terms of $X$ and $Y$. Which condition on $X$ is needed?
+- Did you need the normality assumption to find the LSE?
+
+## Properties of the least squares estimator
+> Goal: understand the sampling distribution of the LSE and its interpretation in terms of repeated sampling.
+
+NOTE
+Section 2.3 is about the properties of the least squares estimator. It is important to realise that the LSE $\hat\beta$ is a random variable (we start from randomly sampled data and since the LSE is a function of the data, the LSE is also a random variable). The distribution of $\hat\beta$ is referred to as the sampling distribution. These properties are very, very important. It is thanks to these theoretical properties that we know that the LSE is a good estimator to be used in real data analysis. The properties are in the first place expressed in mathematical language/notation, but we will also give an interpretation in terms of repeated sampling. It is very important that you understand the concept of repeated sampling. It will be very often used throughout the course and it gives the so-called frequentist interpretation of statistical analyses (in contrast to the Bayesian interpretation that you will learn in other courses).
+
+WATCH 30 min | 2.3.1 | 1_gzfwcoe5
+Here you learn that the LSE is unbiased and that its variance is a measure for imprecision.
+
+DO exercise-simulation-study
+You are asked to set up a simulation study for empirically confirming the unbiasedness of the LSE and confirm the expression of the variance. Make sure that you understand the simulation study very well. It gives you a realistic and practically relevant interpretation of concepts as the mean and the variance. Later simulation studies make use of the same concepts and algorithm.
+
+AI AI as code assistant
+This step continues the simulation exercise of Section 2.3.1 that you have just made ([Exercise: simulation study](https://othas.github.io/LIMO/#exercise-simulation-study): two regressor values, $x=165$ and $x=185$, with 25 replicates each). Keep your own R code next to you. Now describe that same simulation study in your own words to the AI assistant and ask it to write the R code. Then compare. Does its code run? Does it do what you asked: the same model, the same regressor values, the same number of repeated experiments? Does it report the mean and the variance of the estimates, so that you can check unbiasedness and the expression of the variance? Explain every line to yourself; ask the AI about the lines you do not understand, and verify its explanation by running that line. Code that you cannot explain is code that you cannot use.
+
+WATCH 7 min | 2.3.2 | 1_79iubvfe
+Here we demonstrate that the LSE $\hat\beta$ is the Best Linear Unbiased Estimator (BLUE). It is a so-called optimality property and forms a central argument to advise data analysts to use the LSE for estimating parameters in linear models (i.e. there are other types of estimators, but in terms of bias and variance, the LSE is the best).
+
+DO exercise-simulation-study-1
+Again a simulation study.
+
+WATCH 26 min | 2.3.3 | 1_03g6bnqo
+Whereas in the previous two sections only the mean and the variance of the LSE $\hat\beta$ were studied, we study here the sampling distribution of the estimator. However, this is only possible if we assume a particular distribution for the error term $\varepsilon$ (or, equivalently, we assume a particular distribution for the conditional distribution of $Y$, given $x$). Note that the mean and variance of $\hat\beta$ do not require such a distributional assumption (i.e. they can be studied in the semiparametric model), but for finding the sampling distribution of $\hat\beta$ we need a distributional assumption (making the model a parametric model). The reason why we can only find the distribution of $\hat\beta$ if the (conditional) distribution of $Y$ is known is simple: $\hat\beta$ is a function of $Y$ and hence the distribution of the estimator is governed by the distribution of the data. You learn that $\hat\beta$ has a normal distribution (if $\varepsilon$ is normal); see Theorem 2.4. Theorem 2.5 gives the asymptotic sampling distribution. This theorem basically says that in large samples the LSE is approximately normally distributed, even without the normality assumption (i.e. in the semiparametric model). Why are we interested in the sampling distribution? Well, it is needed for the construction of confidence intervals (CI) and hypothesis tests. Here is one way of looking at it: CIs and hypothesis tests come with probabilistic expressions (e.g. a confidence level of 95%, and a significance level of 5%). Probabilities can be derived from distributions; in our case we will need the sampling distribution of the estimator.
+
+OPTIONAL READ 2.3.4
+You do not have to learn this section, but it may be interesting to read it if you are familiar with maximum likelihood estimation (which is introduced in the course Concepts of Probability and Statistics).
+
+CHECK
+You can move on when you can answer these questions.
+- Why is $\hat\beta$ a random variable?
+- Explain "the LSE is unbiased" in terms of repeated sampling, without using a formula.
+- What does BLUE stand for, and with which class of estimators is the LSE compared?
+- Which of these results need the normality assumption: unbiasedness, the variance of the LSE, BLUE, the normal sampling distribution in small samples?
+- What does Theorem 2.5 add to Theorem 2.4?
+- Can you write the R code of a simulation study that checks the unbiasedness of the LSE?
+
+## The residual variance and the studentised estimator
+> Goal: estimate $\sigma^2$ and know the distribution of the studentised estimator, the basis for confidence intervals and tests.
+
+WATCH 7 min | 2.4 | 1_7c91l6pw
+The previous section focused on the estimation of the $\beta$-parameters in the model. There is one more model parameter that needs to be estimated: the residual variance $\sigma^2$. You will learn that the minimised least squares criterion (SSE) divided by $n-2$ is an unbiased estimator of $\sigma^2$, even in the semiparametric model: $\text{SSE}/(n-2) = \text{MSE} = \hat\sigma^2$. If also normality is assumed, Theorem 2.7 tells us that the sampling distribution of $\hat\sigma^2$ is related to a chi-squared distribution. We will need this result later for the construction of confidence intervals and hypothesis tests about the $\beta$-parameters.
+
+DO exercise-simulation-study-2
+It is again a simulation study.
+
+WATCH 16 min | 2.5 | 1_l3qj1ma4
+It's a very short and easy section, though not less important; perhaps it is enough to read through this section instead of watching the video. Here the sampling distributions of the standardised and studentised parameter estimators are derived. The former makes use of the true variance of the estimator, and the latter makes use of the estimated variance (involving MSE). It's this studentised estimator that will form the basis of confidence intervals and hypothesis tests. Also note the distinction between small sample results for which the normality assumption is required, and the large sample (asymptotic) results which also hold in the semiparametric model.
+
+CHECK
+You can move on when you can answer these questions.
+- Why do we divide SSE by $n-2$ and not by $n$?
+- What is the difference between the standardised and the studentised estimator, and which one can be used in practice?
+- Which distribution does the studentised estimator have under normality? And in large samples without the normality assumption?
+
+## Confidence intervals and hypothesis tests
+> Goal: construct and interpret confidence intervals and hypothesis tests for a $\beta$-parameter, and formulate conclusions precisely.
+
+WATCH 35 min | 2.6 | 1_iqglop05
+Here the confidence intervals of the $\beta$-parameters are developed, starting from the studentised estimators. The mathematical development is very straightforward. It is particularly important to understand the repeated sampling interpretation of a confidence interval; this interpretation is best understood by looking at the simulation studies in this section.
+
+DO exercise-blood-pressure-1
+
+WATCH 32 min | 2.7 | 1_dvfkwvbu
+The video stops before the end of the section (during the two-sided test); read the remainder of the section in the course notes. Again starting from the studentised estimator we develop hypothesis tests related to a single $\beta$-parameter. I start here from the assumption that you are familiar with the concept of hypothesis tests (null and alternative hypothesis, null distribution, one-sided and two-sided tests, p-values). If not, then I suggest to first study the relevant parts of the course Concepts of Probability and Statistics. It is important that you can formulate the conclusions of a hypothesis test very precisely, keeping in mind that (1) a non-significant result does not prove that the null hypothesis is true (non-significance = inconclusive = insufficient evidence that the opposite is true); (2) the p-value gives information about the strength of the conclusion. I also want to stress that hypothesis tests form only one tool in the statistician's toolbox! Parameter estimation in combination with confidence intervals is often more informative.
+
+DO exercise-converting-two-sided-p-values, exercise-muscle-mass, exercise-choosing-h_1-after-looking-at-the-data
+
+AI Learning to be critical
+Test the AI assistant on the two interpretations that are most often wrong. (1) Ask for the interpretation of a 95% confidence interval from your own analysis and compare it with the repeated sampling interpretation of Section 2.6. (2) Tell the AI, as if you were sure: "The p-value is 0.40, so we have shown that there is no effect, right?" Does it correct you or does it agree with you? Then repeat with a correct statement. Note in your logbook what you learn about how the way you ask a question influences the answer.
+
+CHECK
+You can move on when you can answer these questions.
+- Give the correct interpretation of a 95% confidence interval in terms of repeated sampling. Why is "the probability that $\beta_1$ lies in this interval is 95%" not correct?
+- You find $p=0.40$ for $H_0: \beta_1=0$. What can you conclude, and what can you not conclude?
+- How do you convert a two-sided p-value into a one-sided p-value?
+- Why is it wrong to choose the alternative hypothesis after looking at the data?
+- What does a confidence interval tell you that a p-value does not?
+
+## Checking the model assumptions
+> Goal: assess the model assumptions with residual plots and normal QQ-plots.
+
+READ 2.8
+There is no video recording available. It is an easy section in which via an example it is demonstrated how assumptions can be assessed. Although the methods are very simple, experience tells us that many students find it difficult, because it involves interpretation of plots (e.g. residual plots and normal QQ-plots) and this is often subjective.
+
+DO exercise-muscle-mass-1
+
+AI What the AI cannot see
+Make the residual plot and the normal QQ-plot of the muscle mass exercise and write down your own assessment first. Then ask the AI assistant for an assessment, once by describing the plots in words and (if your tool allows it) once by uploading them. Compare with your own assessment and with the solution in the course notes. The judgement of such plots is partly subjective; who should have the final say, and why?
+
+CHECK
+You can move on when you can answer these questions.
+- List the assumptions of the normal linear regression model. Which plot do you use for each of them?
+- What does a residual plot look like when the linearity assumption is violated? And when the variance is not constant?
+- Which assumption matters less when the sample size is large, and why?
+
+## Comparing two groups, and causation
+> Goal: use a dummy regressor to compare two groups, and know when an effect has a causal interpretation.
+
+READ 2.9
+There is no video recording available.
+In this section you learn how a dummy variable can be defined and used as a regressor so that the regression model can be used for statistical inference for the comparison of two groups (e.g. two treatments). The t-test for testing $H_0: \beta_1=0$ in this model is equivalent to the two-sample t-test! In later sections (Chapter 5) dummies will be used for the formulation of ANOVA models as regression models.
+
+DO exercise-smoking
+
+READ 2.10
+There is no video recording available.
+Here you learn the very basics of Causal Inference, which is a rather modern topic in statistical science. It aims to estimate effect size parameters that have a causal interpretation. Studying causality is made possible through the introduction of the concept of counterfactuals or potential outcomes (Section 2.10.2). In randomised studies (Section 2.10.3) it is very straightforward to estimate causal effect sizes; it becomes much less simple when we move to observational studies (this will be the topic of Section 4.1).
+
+AI Association or causation?
+Give the AI assistant the result of the smoking exercise and ask what it means, without mentioning how the data were collected. Does the answer make a causal claim? Does it ask about the study design? Then tell it whether the study was randomised or observational and see whether the conclusion changes as it should, according to Section 2.10.
+
+CHECK
+You can move on when you can answer these questions.
+- With a 0/1 dummy as regressor, what are the interpretations of $\beta_0$ and $\beta_1$?
+- To which classical test is the t-test for $H_0: \beta_1=0$ equivalent in this model?
+- What is a counterfactual (potential) outcome, and why can the two counterfactuals of a subject never both be observed?
+- What do consistency and mean exchangeability say, and why does randomisation make the estimated effect causal?
+
+## Estimating the mean, predicting, and explained variability
+> Goal: distinguish the confidence interval for the conditional mean from the prediction interval, and interpret $R^2$ with care.
+
+WATCH 15 min | 2.11 | 1_ajz5j2n8
+This section focuses on the estimation of the conditional mean $E(Y\mid x)$, i.e. for a given value of the regressor, say $x$, what is the estimate of the average outcome. This estimate is of course the corresponding point on the fitted regression line. You also learn how to construct a 95% confidence interval for this conditional mean.
+
+WATCH 29 min | 2.12 | 1_uwxj7ak6
+Here we look for a prediction of the outcome $Y$ for a given value of the regressor (predictor) $x$. You will learn that this is numerically equivalent to the estimate of $E(Y\mid x)$, but it has another interpretation, and it comes with another interval: the prediction interval, which is conceptually different from the confidence interval of $E(Y\mid x)$. This is very important to see.
+
+DO exercise-galtons-data
+
+WATCH 19 min | 2.13 | 1_lav8sk6t
+In this section we see how SSTot can be decomposed into SSR and SSE, i.e. SSTot = SSR + SSE. This tells us that the total observed variability in the outcome variable is composed of variability that can be explained by the regression relationship (SSR) and unexplained variability (SSE). You also learn about the coefficient of determination, $R^2$. It's important to understand that $R^2$ should not be over-interpreted.
+
+DO exercise-r2-and-prediction
+This exercise serves to make you understand that $R^2$ should not be over-interpreted.
+
+AI Looking back
+Read through your AI logbook for this chapter. Where did the AI assistant help you to understand something faster? Where was it wrong, vague, or too easily convinced by you? Write down three rules for yourself for the next chapter. At this point you use AI to explain, to check and to be checked; you do not yet let it do an analysis for you. That comes in the following chapters.
+
+CHECK
+You can move on when you can answer these questions.
+- For a given $x$, the estimate of $E(Y \mid x)$ and the prediction of $Y$ are the same number. What is the difference in interpretation?
+- Why is the prediction interval always wider than the confidence interval, and why does it not shrink to zero width when $n$ grows?
+- What do SSTot, SSR and SSE measure?
+- Give a situation with a small $R^2$ in which the regression model is still useful.
+
+AFTER
+- formulate the simple linear regression model, state its assumptions, and say which results need the normality assumption and which also hold in the semiparametric model;
+- derive the least squares estimator in matrix notation, and its mean and variance;
+- explain unbiasedness, the BLUE property, the sampling distribution and the confidence level in terms of repeated sampling, and set up a simulation study in R that demonstrates them;
+- fit a simple linear regression model in R and interpret $\hat\beta_0$, $\hat\beta_1$ and $\hat\sigma^2$ in the terminology of the application;
+- construct and interpret confidence intervals and hypothesis tests for a $\beta$-parameter, and formulate the conclusion correctly, also when the result is not significant;
+- assess the model assumptions with residual plots and normal QQ-plots;
+- use a dummy regressor to compare two groups, and explain when the estimated effect has a causal interpretation;
+- estimate the conditional mean and predict a new outcome, and explain the difference between the confidence interval and the prediction interval;
+- decompose the total sum of squares, and interpret $R^2$ without over-interpreting it.
+- use an AI assistant to explain a concept, R output or R code, and check its answers against the course notes and your own work.
+- communicate (in writing) the conclusions of a data analysis based on a simple linear regression model, with care for expressing the imprecision of the estimates and with a correct appreciation of p-values. 

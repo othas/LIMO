@@ -1,0 +1,1242 @@
+{
+ "Ch_Introduction": {
+  "anchor": "Ch_Introduction",
+  "title": "Linear Models\n          \n        \n\n        \n          \n\n            \n\nLinear Models\nOlivier Thas\n2024-2025\n\n\n\\(\\newcommand{\\prob}[1]{\\text{P}\\left\\{#1\\right\\}}\\)\n\\(\\newcommand{\\mb}[1]{\\boldsymbol{#1}}\\)\n\\(\\newcommand{\\E}[1]{\\mbox{E}\\left\\{#1\\right\\}}\\)\n\\(\\newcommand{\\Ef}[2]{\\mbox{E}_{#1}\\left\\{#2\\right\\}}\\)\n\\(\\newcommand{\\cov}[1]{\\mbox{Cov}\\left\\{#1\\right\\}}\\)\n\\(\\newcommand{\\cor}[1]{\\mbox{Cor}\\left\\{#1\\right\\}}\\)\n\\(\\newcommand{\\covf}[2]{\\mbox{Cov}_{#1}\\left\\{#2\\right\\}}\\)\n\\(\\newcommand{\\var}[1]{\\mbox{Var}\\left\\{#1\\right\\}}\\)\n\\(\\newcommand{\\varf}[2]{\\mbox{Var}_{#1}\\left\\{#2\\right\\}}\\)\n\\(\\newcommand{\\ind}[0]{\\perp \\!\\!\\! \\perp}\\)\n\\(\\newcommand{\\eps}[0]{\\varepsilon}\\)\n\\(\\newcommand{\\SSE}[0]{\\text{SSE}}\\)\n\\(\\newcommand{\\iid}[0]{\\text{ i.i.d. }}\\)\n\\(\\newcommand{\\convDistr}[0]{\\stackrel{d}{\\longrightarrow}}\\)\n\\(\\newcommand{\\convProb}[0]{\\stackrel{p}{\\longrightarrow}}\\)\n\\(\\newcommand{\\QED}[0]{\\null\\nobreak\\hfill\\ensuremath{\\blacksquare}}\\)\n\\(\\newcommand{\\MSE}[0]{\\text{MSE}}\\)\n\\(\\newcommand{\\SSTot}[0]{\\text{SSTot}}\\)\n\\(\\newcommand{\\SSR}[0]{\\text{SSR}}\\)\n\\(\\newcommand{\\MSR}[0]{\\text{MSR}}\\)\n\\(\\newcommand{\\SST}[0]{\\text{SST}}\\)\n\\(\\newcommand{\\MST}[0]{\\text{MST}}\\)\n\\(\\newcommand{\\SSA}[0]{\\text{SSA}}\\)\n\\(\\newcommand{\\MSA}[0]{\\text{MSA}}\\)\n\\(\\newcommand{\\SSTA}[0]{\\text{SSTA}}\\)\n\\(\\newcommand{\\MSTA}[0]{\\text{MSTA}}\\)\n\\(\\newcommand{\\probf}[2]{\\text{P}_{#1}\\left\\{#2\\right\\}}\\)\n\\(\\newcommand{\\HSim}[0]{\\stackrel{H_0}{\\sim}}\\)\n\\(\\newcommand{\\ApproxSim}[0]{\\stackrel{\\cdot}{\\sim}}\\)\n## \n## Attaching package: 'dplyr'\n## The following object is masked from 'package:MASS':\n## \n##     select\n## The following objects are masked from 'package:stats':\n## \n##     filter, lag\n## The following objects are masked from 'package:base':\n## \n##     intersect, setdiff, setequal, union\n## \n## Attaching package: 'plotly'\n## The following object is masked from 'package:ggplot2':\n## \n##     last_plot\n## The following object is masked from 'package:MASS':\n## \n##     select\n## The following object is masked from 'package:stats':\n## \n##     filter\n## The following object is masked from 'package:graphics':\n## \n##     layout\n## Registered S3 method overwritten by 'GGally':\n##   method from   \n##   +.gg   ggplot2\n## Loading required package: carData\n## \n## Attaching package: 'car'\n## The following object is masked from 'package:dplyr':\n## \n##     recode\n## Loading required package: mvtnorm\n## Loading required package: survival\n## Loading required package: TH.data\n## \n## Attaching package: 'TH.data'\n## The following object is masked from 'package:MASS':\n## \n##     geyser\n\n\nChapter 1 Introduction",
+  "number": ""
+ },
+ "versions-and-changes": {
+  "anchor": "versions-and-changes",
+  "title": "Versions and Changes",
+  "number": "1.1"
+ },
+ "1.1": {
+  "anchor": "versions-and-changes",
+  "title": "Versions and Changes",
+  "number": "1.1"
+ },
+ "introduction": {
+  "anchor": "introduction",
+  "title": "Introduction",
+  "number": "1.2"
+ },
+ "1.2": {
+  "anchor": "introduction",
+  "title": "Introduction",
+  "number": "1.2"
+ },
+ "how-to-work-through-the-course-notes": {
+  "anchor": "how-to-work-through-the-course-notes",
+  "title": "How to work through the course notes",
+  "number": "1.3"
+ },
+ "1.3": {
+  "anchor": "how-to-work-through-the-course-notes",
+  "title": "How to work through the course notes",
+  "number": "1.3"
+ },
+ "exercise": {
+  "anchor": "exercise",
+  "title": "Exercise",
+  "number": ""
+ },
+ "two-versions-of-this-course-oc-and-dl": {
+  "anchor": "two-versions-of-this-course-oc-and-dl",
+  "title": "Two versions of this course: OC and DL",
+  "number": "1.4"
+ },
+ "1.4": {
+  "anchor": "two-versions-of-this-course-oc-and-dl",
+  "title": "Two versions of this course: OC and DL",
+  "number": "1.4"
+ },
+ "communication": {
+  "anchor": "communication",
+  "title": "Communication",
+  "number": "1.5"
+ },
+ "1.5": {
+  "anchor": "communication",
+  "title": "Communication",
+  "number": "1.5"
+ },
+ "software": {
+  "anchor": "software",
+  "title": "Software",
+  "number": "1.6"
+ },
+ "1.6": {
+  "anchor": "software",
+  "title": "Software",
+  "number": "1.6"
+ },
+ "Ch:Reg1": {
+  "anchor": "Ch:Reg1",
+  "title": "Simple Linear Regression Analysis",
+  "number": "2"
+ },
+ "2": {
+  "anchor": "Ch:Reg1",
+  "title": "Simple Linear Regression Analysis",
+  "number": "2"
+ },
+ "example-galtons-height-data": {
+  "anchor": "example-galtons-height-data",
+  "title": "Example (Galton’s height data)",
+  "number": ""
+ },
+ "S:RegSimStudy": {
+  "anchor": "S:RegSimStudy",
+  "title": "Interpretation via simulations",
+  "number": "2.1"
+ },
+ "2.1": {
+  "anchor": "S:RegSimStudy",
+  "title": "Interpretation via simulations",
+  "number": "2.1"
+ },
+ "S:LSE1": {
+  "anchor": "S:LSE1",
+  "title": "Least squares estimators",
+  "number": "2.2"
+ },
+ "2.2": {
+  "anchor": "S:LSE1",
+  "title": "Least squares estimators",
+  "number": "2.2"
+ },
+ "example-galtons-height-data-1": {
+  "anchor": "example-galtons-height-data-1",
+  "title": "Example (Galton’s height data)",
+  "number": ""
+ },
+ "exercise-blood-pressure": {
+  "anchor": "exercise-blood-pressure",
+  "title": "Exercise: blood pressure",
+  "number": ""
+ },
+ "S:PropLSE": {
+  "anchor": "S:PropLSE",
+  "title": "Properties of the Least Squares Estimator",
+  "number": "2.3"
+ },
+ "2.3": {
+  "anchor": "S:PropLSE",
+  "title": "Properties of the Least Squares Estimator",
+  "number": "2.3"
+ },
+ "mean-and-variance-of-the-lse": {
+  "anchor": "mean-and-variance-of-the-lse",
+  "title": "Mean and variance of the LSE",
+  "number": "2.3.1"
+ },
+ "2.3.1": {
+  "anchor": "mean-and-variance-of-the-lse",
+  "title": "Mean and variance of the LSE",
+  "number": "2.3.1"
+ },
+ "exercise-simulation-study": {
+  "anchor": "exercise-simulation-study",
+  "title": "Exercise: simulation study",
+  "number": ""
+ },
+ "best-linear-unbiased-estimator-blue": {
+  "anchor": "best-linear-unbiased-estimator-blue",
+  "title": "Best Linear Unbiased Estimator (BLUE)",
+  "number": "2.3.2"
+ },
+ "2.3.2": {
+  "anchor": "best-linear-unbiased-estimator-blue",
+  "title": "Best Linear Unbiased Estimator (BLUE)",
+  "number": "2.3.2"
+ },
+ "exercise-simulation-study-1": {
+  "anchor": "exercise-simulation-study-1",
+  "title": "Exercise: Simulation study",
+  "number": ""
+ },
+ "sampling-distribution-of-the-lse": {
+  "anchor": "sampling-distribution-of-the-lse",
+  "title": "Sampling distribution of the LSE",
+  "number": "2.3.3"
+ },
+ "2.3.3": {
+  "anchor": "sampling-distribution-of-the-lse",
+  "title": "Sampling distribution of the LSE",
+  "number": "2.3.3"
+ },
+ "maximum-likelihood-estimator-of-hatmbbeta": {
+  "anchor": "maximum-likelihood-estimator-of-hatmbbeta",
+  "title": "Maximum likelihood estimator of \\(\\hat{\\mb\\beta}\\)",
+  "number": "2.3.4"
+ },
+ "2.3.4": {
+  "anchor": "maximum-likelihood-estimator-of-hatmbbeta",
+  "title": "Maximum likelihood estimator of \\(\\hat{\\mb\\beta}\\)",
+  "number": "2.3.4"
+ },
+ "an-estimator-of-sigma2": {
+  "anchor": "an-estimator-of-sigma2",
+  "title": "An Estimator of \\(\\sigma^2\\)",
+  "number": "2.4"
+ },
+ "2.4": {
+  "anchor": "an-estimator-of-sigma2",
+  "title": "An Estimator of \\(\\sigma^2\\)",
+  "number": "2.4"
+ },
+ "exercise-simulation-study-2": {
+  "anchor": "exercise-simulation-study-2",
+  "title": "Exercise: Simulation study",
+  "number": ""
+ },
+ "sampling-distributions-of-the-standardised-and-the-studentised-lse": {
+  "anchor": "sampling-distributions-of-the-standardised-and-the-studentised-lse",
+  "title": "Sampling Distributions of the Standardised and the Studentised LSE",
+  "number": "2.5"
+ },
+ "2.5": {
+  "anchor": "sampling-distributions-of-the-standardised-and-the-studentised-lse",
+  "title": "Sampling Distributions of the Standardised and the Studentised LSE",
+  "number": "2.5"
+ },
+ "S:BIReg1": {
+  "anchor": "S:BIReg1",
+  "title": "Confidence Intervals",
+  "number": "2.6"
+ },
+ "2.6": {
+  "anchor": "S:BIReg1",
+  "title": "Confidence Intervals",
+  "number": "2.6"
+ },
+ "example-galtons-height-data-2": {
+  "anchor": "example-galtons-height-data-2",
+  "title": "Example (Galton’s height data)",
+  "number": ""
+ },
+ "exercise-blood-pressure-1": {
+  "anchor": "exercise-blood-pressure-1",
+  "title": "Exercise: Blood Pressure",
+  "number": ""
+ },
+ "S:RegTests": {
+  "anchor": "S:RegTests",
+  "title": "Hypothesis Tests",
+  "number": "2.7"
+ },
+ "2.7": {
+  "anchor": "S:RegTests",
+  "title": "Hypothesis Tests",
+  "number": "2.7"
+ },
+ "example-galtons-height-data-3": {
+  "anchor": "example-galtons-height-data-3",
+  "title": "Example (Galton’s height data)",
+  "number": ""
+ },
+ "exercise-converting-two-sided-p-values": {
+  "anchor": "exercise-converting-two-sided-p-values",
+  "title": "Exercise: Converting two-sided p-values",
+  "number": ""
+ },
+ "exercise-muscle-mass": {
+  "anchor": "exercise-muscle-mass",
+  "title": "Exercise: Muscle mass",
+  "number": ""
+ },
+ "exercise-choosing-h_1-after-looking-at-the-data": {
+  "anchor": "exercise-choosing-h_1-after-looking-at-the-data",
+  "title": "Exercise: choosing \\(H_1\\) after looking at the data",
+  "number": ""
+ },
+ "S:AssessAssumptions": {
+  "anchor": "S:AssessAssumptions",
+  "title": "Assessment of the Model Assumptions",
+  "number": "2.8"
+ },
+ "2.8": {
+  "anchor": "S:AssessAssumptions",
+  "title": "Assessment of the Model Assumptions",
+  "number": "2.8"
+ },
+ "example-galtons-height-data-4": {
+  "anchor": "example-galtons-height-data-4",
+  "title": "Example (Galton’s height data)",
+  "number": ""
+ },
+ "normality-of-the-error-term": {
+  "anchor": "normality-of-the-error-term",
+  "title": "Normality of the error term",
+  "number": ""
+ },
+ "homoskedasticity": {
+  "anchor": "homoskedasticity",
+  "title": "Homoskedasticity",
+  "number": ""
+ },
+ "exercise-muscle-mass-1": {
+  "anchor": "exercise-muscle-mass-1",
+  "title": "Exercise: Muscle mass",
+  "number": ""
+ },
+ "binary-dummy-regressors": {
+  "anchor": "binary-dummy-regressors",
+  "title": "Binary Dummy Regressors",
+  "number": "2.9"
+ },
+ "2.9": {
+  "anchor": "binary-dummy-regressors",
+  "title": "Binary Dummy Regressors",
+  "number": "2.9"
+ },
+ "example": {
+  "anchor": "example",
+  "title": "Example",
+  "number": ""
+ },
+ "exercise-smoking": {
+  "anchor": "exercise-smoking",
+  "title": "Exercise: Smoking",
+  "number": ""
+ },
+ "S:Causality": {
+  "anchor": "S:Causality",
+  "title": "Association versus Causation",
+  "number": "2.10"
+ },
+ "2.10": {
+  "anchor": "S:Causality",
+  "title": "Association versus Causation",
+  "number": "2.10"
+ },
+ "introduction-1": {
+  "anchor": "introduction-1",
+  "title": "Introduction",
+  "number": "2.10.1"
+ },
+ "2.10.1": {
+  "anchor": "introduction-1",
+  "title": "Introduction",
+  "number": "2.10.1"
+ },
+ "causal-inference-and-counterfactuals": {
+  "anchor": "causal-inference-and-counterfactuals",
+  "title": "Causal inference and counterfactuals",
+  "number": "2.10.2"
+ },
+ "2.10.2": {
+  "anchor": "causal-inference-and-counterfactuals",
+  "title": "Causal inference and counterfactuals",
+  "number": "2.10.2"
+ },
+ "randomised-studies": {
+  "anchor": "randomised-studies",
+  "title": "Randomised studies",
+  "number": "2.10.3"
+ },
+ "2.10.3": {
+  "anchor": "randomised-studies",
+  "title": "Randomised studies",
+  "number": "2.10.3"
+ },
+ "S:Reg1BIPI": {
+  "anchor": "S:Reg1BIPI",
+  "title": "Estimation of the Conditional Mean Outcome",
+  "number": "2.11"
+ },
+ "2.11": {
+  "anchor": "S:Reg1BIPI",
+  "title": "Estimation of the Conditional Mean Outcome",
+  "number": "2.11"
+ },
+ "example-blood-pressure": {
+  "anchor": "example-blood-pressure",
+  "title": "Example (Blood Pressure)",
+  "number": ""
+ },
+ "sampling-distribution": {
+  "anchor": "sampling-distribution",
+  "title": "Sampling Distribution",
+  "number": ""
+ },
+ "confidence-interval-ci": {
+  "anchor": "confidence-interval-ci",
+  "title": "Confidence Interval (CI)",
+  "number": ""
+ },
+ "example-blood-pressure-1": {
+  "anchor": "example-blood-pressure-1",
+  "title": "Example (Blood Pressure)",
+  "number": ""
+ },
+ "S:PI": {
+  "anchor": "S:PI",
+  "title": "Predictions and Prediction Intervals (PI)",
+  "number": "2.12"
+ },
+ "2.12": {
+  "anchor": "S:PI",
+  "title": "Predictions and Prediction Intervals (PI)",
+  "number": "2.12"
+ },
+ "example-blood-pressure-2": {
+  "anchor": "example-blood-pressure-2",
+  "title": "Example (Blood Pressure)",
+  "number": ""
+ },
+ "example-blood-pressure-3": {
+  "anchor": "example-blood-pressure-3",
+  "title": "Example (Blood Pressure)",
+  "number": ""
+ },
+ "simulation-study": {
+  "anchor": "simulation-study",
+  "title": "Simulation Study",
+  "number": "2.12.1"
+ },
+ "2.12.1": {
+  "anchor": "simulation-study",
+  "title": "Simulation Study",
+  "number": "2.12.1"
+ },
+ "exercise-galtons-data": {
+  "anchor": "exercise-galtons-data",
+  "title": "Exercise: Galton’s data",
+  "number": ""
+ },
+ "decomposition-of-the-total-sum-of-squares": {
+  "anchor": "decomposition-of-the-total-sum-of-squares",
+  "title": "Decomposition of the Total Sum of Squares",
+  "number": "2.13"
+ },
+ "2.13": {
+  "anchor": "decomposition-of-the-total-sum-of-squares",
+  "title": "Decomposition of the Total Sum of Squares",
+  "number": "2.13"
+ },
+ "example-galtons-height": {
+  "anchor": "example-galtons-height",
+  "title": "Example (Galton’s height)",
+  "number": ""
+ },
+ "exercise-r2-and-prediction": {
+  "anchor": "exercise-r2-and-prediction",
+  "title": "Exercise: \\(R^2\\) and prediction",
+  "number": ""
+ },
+ "Ch:Reg2": {
+  "anchor": "Ch:Reg2",
+  "title": "Multiple Linear Regression Analysis",
+  "number": "3"
+ },
+ "3": {
+  "anchor": "Ch:Reg2",
+  "title": "Multiple Linear Regression Analysis",
+  "number": "3"
+ },
+ "example-lead-concentration": {
+  "anchor": "example-lead-concentration",
+  "title": "Example (Lead concentration)",
+  "number": ""
+ },
+ "S:AddMeervoudigModel": {
+  "anchor": "S:AddMeervoudigModel",
+  "title": "The Additive Multiple Linear Regression Model",
+  "number": "3.1"
+ },
+ "3.1": {
+  "anchor": "S:AddMeervoudigModel",
+  "title": "The Additive Multiple Linear Regression Model",
+  "number": "3.1"
+ },
+ "the-statistical-model": {
+  "anchor": "the-statistical-model",
+  "title": "The Statistical Model",
+  "number": ""
+ },
+ "example-lead-concentration-1": {
+  "anchor": "example-lead-concentration-1",
+  "title": "Example (Lead concentration)",
+  "number": ""
+ },
+ "exercise-lead-concentration": {
+  "anchor": "exercise-lead-concentration",
+  "title": "Exercise: Lead concentration",
+  "number": ""
+ },
+ "the-non-additive-multiple-linear-regression-model": {
+  "anchor": "the-non-additive-multiple-linear-regression-model",
+  "title": "The Non-Additive Multiple Linear Regression Model",
+  "number": "3.2"
+ },
+ "3.2": {
+  "anchor": "the-non-additive-multiple-linear-regression-model",
+  "title": "The Non-Additive Multiple Linear Regression Model",
+  "number": "3.2"
+ },
+ "interaction": {
+  "anchor": "interaction",
+  "title": "Interaction",
+  "number": "3.2.1"
+ },
+ "3.2.1": {
+  "anchor": "interaction",
+  "title": "Interaction",
+  "number": "3.2.1"
+ },
+ "parameter-estimators": {
+  "anchor": "parameter-estimators",
+  "title": "Parameter Estimators",
+  "number": "3.2.2"
+ },
+ "3.2.2": {
+  "anchor": "parameter-estimators",
+  "title": "Parameter Estimators",
+  "number": "3.2.2"
+ },
+ "example-lead-concentration-2": {
+  "anchor": "example-lead-concentration-2",
+  "title": "Example (Lead concentration)",
+  "number": ""
+ },
+ "example-blood-pressure-4": {
+  "anchor": "example-blood-pressure-4",
+  "title": "Example (Blood Pressure)",
+  "number": ""
+ },
+ "exercise-blood-pressure-2": {
+  "anchor": "exercise-blood-pressure-2",
+  "title": "Exercise: Blood Pressure",
+  "number": ""
+ },
+ "example-lead-concentration-3": {
+  "anchor": "example-lead-concentration-3",
+  "title": "Example (Lead concentration)",
+  "number": ""
+ },
+ "exercise-lead-concentration-1": {
+  "anchor": "exercise-lead-concentration-1",
+  "title": "Exercise: Lead concentration",
+  "number": ""
+ },
+ "the-anova-table": {
+  "anchor": "the-anova-table",
+  "title": "The ANOVA Table",
+  "number": "3.3"
+ },
+ "3.3": {
+  "anchor": "the-anova-table",
+  "title": "The ANOVA Table",
+  "number": "3.3"
+ },
+ "sstot-ssr-and-sse": {
+  "anchor": "sstot-ssr-and-sse",
+  "title": "SSTot, SSR and SSE",
+  "number": "3.3.1"
+ },
+ "3.3.1": {
+  "anchor": "sstot-ssr-and-sse",
+  "title": "SSTot, SSR and SSE",
+  "number": "3.3.1"
+ },
+ "multicollinearity": {
+  "anchor": "multicollinearity",
+  "title": "Multicollinearity",
+  "number": "3.4"
+ },
+ "3.4": {
+  "anchor": "multicollinearity",
+  "title": "Multicollinearity",
+  "number": "3.4"
+ },
+ "example-lead-concentration-4": {
+  "anchor": "example-lead-concentration-4",
+  "title": "Example (Lead concentration)",
+  "number": ""
+ },
+ "illustrations-via-simulations": {
+  "anchor": "illustrations-via-simulations",
+  "title": "Illustrations via Simulations",
+  "number": "3.4.1"
+ },
+ "3.4.1": {
+  "anchor": "illustrations-via-simulations",
+  "title": "Illustrations via Simulations",
+  "number": "3.4.1"
+ },
+ "excercise-repeatedly-fitting-model-with-rho0.99": {
+  "anchor": "excercise-repeatedly-fitting-model-with-rho0.99",
+  "title": "Excercise: repeatedly fitting model with \\(\\rho=0.99\\)",
+  "number": ""
+ },
+ "variance-inflation-factor": {
+  "anchor": "variance-inflation-factor",
+  "title": "Variance Inflation Factor",
+  "number": "3.4.2"
+ },
+ "3.4.2": {
+  "anchor": "variance-inflation-factor",
+  "title": "Variance Inflation Factor",
+  "number": "3.4.2"
+ },
+ "example-lead-concentration-5": {
+  "anchor": "example-lead-concentration-5",
+  "title": "Example (Lead concentration)",
+  "number": ""
+ },
+ "leverage": {
+  "anchor": "leverage",
+  "title": "Leverage",
+  "number": "3.5"
+ },
+ "3.5": {
+  "anchor": "leverage",
+  "title": "Leverage",
+  "number": "3.5"
+ },
+ "example-lead-concentration-6": {
+  "anchor": "example-lead-concentration-6",
+  "title": "Example (Lead concentration)",
+  "number": ""
+ },
+ "assessment-of-the-model-assumptions-and-remedial-measures": {
+  "anchor": "assessment-of-the-model-assumptions-and-remedial-measures",
+  "title": "Assessment of the Model Assumptions and Remedial Measures",
+  "number": "3.6"
+ },
+ "3.6": {
+  "anchor": "assessment-of-the-model-assumptions-and-remedial-measures",
+  "title": "Assessment of the Model Assumptions and Remedial Measures",
+  "number": "3.6"
+ },
+ "residual-analysis": {
+  "anchor": "residual-analysis",
+  "title": "Residual analysis",
+  "number": ""
+ },
+ "example-lead-concentration-7": {
+  "anchor": "example-lead-concentration-7",
+  "title": "Example (Lead Concentration)",
+  "number": ""
+ },
+ "exercise-lead-concentration-2": {
+  "anchor": "exercise-lead-concentration-2",
+  "title": "Exercise: Lead concentration",
+  "number": ""
+ },
+ "exercise-blood-pressure-3": {
+  "anchor": "exercise-blood-pressure-3",
+  "title": "Exercise: Blood pressure",
+  "number": ""
+ },
+ "example-bacterial-count": {
+  "anchor": "example-bacterial-count",
+  "title": "Example (Bacterial count)",
+  "number": ""
+ },
+ "remedial-measures": {
+  "anchor": "remedial-measures",
+  "title": "Remedial measures",
+  "number": ""
+ },
+ "example-bacterial-count-1": {
+  "anchor": "example-bacterial-count-1",
+  "title": "Example (Bacterial count)",
+  "number": ""
+ },
+ "model-selection": {
+  "anchor": "model-selection",
+  "title": "Model Selection",
+  "number": "3.7"
+ },
+ "3.7": {
+  "anchor": "model-selection",
+  "title": "Model Selection",
+  "number": "3.7"
+ },
+ "selection-methods-based-on-hypothesis-testing": {
+  "anchor": "selection-methods-based-on-hypothesis-testing",
+  "title": "Selection methods based on hypothesis testing",
+  "number": ""
+ },
+ "example-lead-concentration-8": {
+  "anchor": "example-lead-concentration-8",
+  "title": "Example (Lead concentration)",
+  "number": ""
+ },
+ "model-selection-for-building-a-prediction-model": {
+  "anchor": "model-selection-for-building-a-prediction-model",
+  "title": "Model selection for building a prediction model",
+  "number": ""
+ },
+ "exercise-lead-concentration-3": {
+  "anchor": "exercise-lead-concentration-3",
+  "title": "Exercise: Lead concentration",
+  "number": ""
+ },
+ "Ch:DesignCausal": {
+  "anchor": "Ch:DesignCausal",
+  "title": "Design-related Topics and Causal Inference",
+  "number": "4"
+ },
+ "4": {
+  "anchor": "Ch:DesignCausal",
+  "title": "Design-related Topics and Causal Inference",
+  "number": "4"
+ },
+ "confounding": {
+  "anchor": "confounding",
+  "title": "Confounding",
+  "number": "4.1"
+ },
+ "4.1": {
+  "anchor": "confounding",
+  "title": "Confounding",
+  "number": "4.1"
+ },
+ "causal-diagrams-and-controling-for-confounders": {
+  "anchor": "causal-diagrams-and-controling-for-confounders",
+  "title": "Causal diagrams and controling for confounders",
+  "number": "4.1.1"
+ },
+ "4.1.1": {
+  "anchor": "causal-diagrams-and-controling-for-confounders",
+  "title": "Causal diagrams and controling for confounders",
+  "number": "4.1.1"
+ },
+ "example-lead-concentration-9": {
+  "anchor": "example-lead-concentration-9",
+  "title": "Example (Lead concentration)",
+  "number": ""
+ },
+ "example-diabetes": {
+  "anchor": "example-diabetes",
+  "title": "Example (Diabetes)",
+  "number": ""
+ },
+ "causality-and-confounders": {
+  "anchor": "causality-and-confounders",
+  "title": "Causality and confounders",
+  "number": "4.1.2"
+ },
+ "4.1.2": {
+  "anchor": "causality-and-confounders",
+  "title": "Causality and confounders",
+  "number": "4.1.2"
+ },
+ "colliders": {
+  "anchor": "colliders",
+  "title": "Colliders",
+  "number": "4.1.3"
+ },
+ "4.1.3": {
+  "anchor": "colliders",
+  "title": "Colliders",
+  "number": "4.1.3"
+ },
+ "example-study-time": {
+  "anchor": "example-study-time",
+  "title": "Example (Study time)",
+  "number": ""
+ },
+ "collapsibility": {
+  "anchor": "collapsibility",
+  "title": "Collapsibility",
+  "number": "4.2"
+ },
+ "4.2": {
+  "anchor": "collapsibility",
+  "title": "Collapsibility",
+  "number": "4.2"
+ },
+ "example-blood-pressure-5": {
+  "anchor": "example-blood-pressure-5",
+  "title": "Example (Blood pressure)",
+  "number": ""
+ },
+ "randomisation-restriction": {
+  "anchor": "randomisation-restriction",
+  "title": "Randomisation restriction",
+  "number": "4.3"
+ },
+ "4.3": {
+  "anchor": "randomisation-restriction",
+  "title": "Randomisation restriction",
+  "number": "4.3"
+ },
+ "sample-size-and-power": {
+  "anchor": "sample-size-and-power",
+  "title": "Sample size and power",
+  "number": "4.4"
+ },
+ "4.4": {
+  "anchor": "sample-size-and-power",
+  "title": "Sample size and power",
+  "number": "4.4"
+ },
+ "example-two-01-dummies": {
+  "anchor": "example-two-01-dummies",
+  "title": "Example (two 0/1 dummies)",
+  "number": ""
+ },
+ "Ch:ANOVA": {
+  "anchor": "Ch:ANOVA",
+  "title": "Analysis of Variance",
+  "number": "5"
+ },
+ "5": {
+  "anchor": "Ch:ANOVA",
+  "title": "Analysis of Variance",
+  "number": "5"
+ },
+ "example-pwd-post-weaning-diarrhea": {
+  "anchor": "example-pwd-post-weaning-diarrhea",
+  "title": "Example (PWD: Post-weaning diarrhea)",
+  "number": ""
+ },
+ "S:ANOVA1": {
+  "anchor": "S:ANOVA1",
+  "title": "One-Way ANOVA",
+  "number": "5.1"
+ },
+ "5.1": {
+  "anchor": "S:ANOVA1",
+  "title": "One-Way ANOVA",
+  "number": "5.1"
+ },
+ "S:ANOVA1Mu3": {
+  "anchor": "S:ANOVA1Mu3",
+  "title": "Comparison of Three Means",
+  "number": "5.1.1"
+ },
+ "5.1.1": {
+  "anchor": "S:ANOVA1Mu3",
+  "title": "Comparison of Three Means",
+  "number": "5.1.1"
+ },
+ "example-pwd": {
+  "anchor": "example-pwd",
+  "title": "Example (PWD)",
+  "number": ""
+ },
+ "the-anova-model": {
+  "anchor": "the-anova-model",
+  "title": "The ANOVA model",
+  "number": "5.1.2"
+ },
+ "5.1.2": {
+  "anchor": "the-anova-model",
+  "title": "The ANOVA model",
+  "number": "5.1.2"
+ },
+ "parameter-estimators-1": {
+  "anchor": "parameter-estimators-1",
+  "title": "Parameter Estimators",
+  "number": "5.1.3"
+ },
+ "5.1.3": {
+  "anchor": "parameter-estimators-1",
+  "title": "Parameter Estimators",
+  "number": "5.1.3"
+ },
+ "S:ANOVA1SS": {
+  "anchor": "S:ANOVA1SS",
+  "title": "Sum of Squares",
+  "number": "5.1.4"
+ },
+ "5.1.4": {
+  "anchor": "S:ANOVA1SS",
+  "title": "Sum of Squares",
+  "number": "5.1.4"
+ },
+ "S:FTest": {
+  "anchor": "S:FTest",
+  "title": "The \\(F\\)-test",
+  "number": "5.2"
+ },
+ "5.2": {
+  "anchor": "S:FTest",
+  "title": "The \\(F\\)-test",
+  "number": "5.2"
+ },
+ "introduction-2": {
+  "anchor": "introduction-2",
+  "title": "Introduction",
+  "number": "5.2.1"
+ },
+ "5.2.1": {
+  "anchor": "introduction-2",
+  "title": "Introduction",
+  "number": "5.2.1"
+ },
+ "the-general-linear-hypothesis": {
+  "anchor": "the-general-linear-hypothesis",
+  "title": "The General Linear Hypothesis",
+  "number": "5.2.2"
+ },
+ "5.2.2": {
+  "anchor": "the-general-linear-hypothesis",
+  "title": "The General Linear Hypothesis",
+  "number": "5.2.2"
+ },
+ "example-pwd-1": {
+  "anchor": "example-pwd-1",
+  "title": "Example (PWD)",
+  "number": ""
+ },
+ "exercise-pwd---fcr": {
+  "anchor": "exercise-pwd---fcr",
+  "title": "Exercise: PWD - FCR",
+  "number": ""
+ },
+ "contrasts": {
+  "anchor": "contrasts",
+  "title": "Contrasts",
+  "number": "5.3"
+ },
+ "5.3": {
+  "anchor": "contrasts",
+  "title": "Contrasts",
+  "number": "5.3"
+ },
+ "setting-the-reference-level": {
+  "anchor": "setting-the-reference-level",
+  "title": "Setting the reference level",
+  "number": "5.3.1"
+ },
+ "5.3.1": {
+  "anchor": "setting-the-reference-level",
+  "title": "Setting the reference level",
+  "number": "5.3.1"
+ },
+ "examples-of-other-contrasts": {
+  "anchor": "examples-of-other-contrasts",
+  "title": "Examples of other contrasts",
+  "number": "5.3.2"
+ },
+ "5.3.2": {
+  "anchor": "examples-of-other-contrasts",
+  "title": "Examples of other contrasts",
+  "number": "5.3.2"
+ },
+ "S:ANOVA2": {
+  "anchor": "S:ANOVA2",
+  "title": "The Two-way ANOVA",
+  "number": "5.4"
+ },
+ "5.4": {
+  "anchor": "S:ANOVA2",
+  "title": "The Two-way ANOVA",
+  "number": "5.4"
+ },
+ "the-additive-model": {
+  "anchor": "the-additive-model",
+  "title": "The additive model",
+  "number": "5.4.1"
+ },
+ "5.4.1": {
+  "anchor": "the-additive-model",
+  "title": "The additive model",
+  "number": "5.4.1"
+ },
+ "exercise-interpretation-of-the-parameters": {
+  "anchor": "exercise-interpretation-of-the-parameters",
+  "title": "Exercise: interpretation of the parameters",
+  "number": ""
+ },
+ "sum-of-squares": {
+  "anchor": "sum-of-squares",
+  "title": "Sum of Squares",
+  "number": "5.4.2"
+ },
+ "5.4.2": {
+  "anchor": "sum-of-squares",
+  "title": "Sum of Squares",
+  "number": "5.4.2"
+ },
+ "S:Ftest2": {
+  "anchor": "S:Ftest2",
+  "title": "\\(F\\)-tests",
+  "number": "5.4.3"
+ },
+ "5.4.3": {
+  "anchor": "S:Ftest2",
+  "title": "\\(F\\)-tests",
+  "number": "5.4.3"
+ },
+ "example-pwd-2": {
+  "anchor": "example-pwd-2",
+  "title": "Example (PWD)",
+  "number": ""
+ },
+ "the-non-additive-anova-model": {
+  "anchor": "the-non-additive-anova-model",
+  "title": "The non-additive ANOVA model",
+  "number": "5.4.4"
+ },
+ "5.4.4": {
+  "anchor": "the-non-additive-anova-model",
+  "title": "The non-additive ANOVA model",
+  "number": "5.4.4"
+ },
+ "exercise-interpretation-of-the-parameters-1": {
+  "anchor": "exercise-interpretation-of-the-parameters-1",
+  "title": "Exercise: interpretation of the parameters",
+  "number": ""
+ },
+ "S:FInteraction": {
+  "anchor": "S:FInteraction",
+  "title": "Sum of squares and \\(F\\)-test for interaction",
+  "number": "5.4.5"
+ },
+ "5.4.5": {
+  "anchor": "S:FInteraction",
+  "title": "Sum of squares and \\(F\\)-test for interaction",
+  "number": "5.4.5"
+ },
+ "exercise-degrees-of-freedom": {
+  "anchor": "exercise-degrees-of-freedom",
+  "title": "Exercise: degrees of freedom",
+  "number": ""
+ },
+ "example-pwd-3": {
+  "anchor": "example-pwd-3",
+  "title": "Example (PWD)",
+  "number": ""
+ },
+ "extra-sum-of-squares": {
+  "anchor": "extra-sum-of-squares",
+  "title": "Extra sum of squares",
+  "number": "5.5"
+ },
+ "5.5": {
+  "anchor": "extra-sum-of-squares",
+  "title": "Extra sum of squares",
+  "number": "5.5"
+ },
+ "the-f-test-in-a-one-way-anova": {
+  "anchor": "the-f-test-in-a-one-way-anova",
+  "title": "The \\(F\\)-test in a one-way ANOVA",
+  "number": "5.5.1"
+ },
+ "5.5.1": {
+  "anchor": "the-f-test-in-a-one-way-anova",
+  "title": "The \\(F\\)-test in a one-way ANOVA",
+  "number": "5.5.1"
+ },
+ "an-f-test-for-nested-models": {
+  "anchor": "an-f-test-for-nested-models",
+  "title": "An \\(F\\)-test for nested models",
+  "number": "5.5.2"
+ },
+ "5.5.2": {
+  "anchor": "an-f-test-for-nested-models",
+  "title": "An \\(F\\)-test for nested models",
+  "number": "5.5.2"
+ },
+ "example-pwd-4": {
+  "anchor": "example-pwd-4",
+  "title": "Example (PWD)",
+  "number": ""
+ },
+ "S:TypesSS": {
+  "anchor": "S:TypesSS",
+  "title": "types of SS",
+  "number": "5.5.3"
+ },
+ "5.5.3": {
+  "anchor": "S:TypesSS",
+  "title": "types of SS",
+  "number": "5.5.3"
+ },
+ "example-diabetes-1": {
+  "anchor": "example-diabetes-1",
+  "title": "Example (Diabetes)",
+  "number": ""
+ },
+ "example-diabetes-2": {
+  "anchor": "example-diabetes-2",
+  "title": "Example (Diabetes)",
+  "number": ""
+ },
+ "example-diabetes-3": {
+  "anchor": "example-diabetes-3",
+  "title": "Example (Diabetes)",
+  "number": ""
+ },
+ "S:Multiplicity": {
+  "anchor": "S:Multiplicity",
+  "title": "Multiple comparisons of means",
+  "number": "5.6"
+ },
+ "5.6": {
+  "anchor": "S:Multiplicity",
+  "title": "Multiple comparisons of means",
+  "number": "5.6"
+ },
+ "formulation-of-the-multiplicity-problem": {
+  "anchor": "formulation-of-the-multiplicity-problem",
+  "title": "Formulation of the multiplicity problem",
+  "number": "5.6.1"
+ },
+ "5.6.1": {
+  "anchor": "formulation-of-the-multiplicity-problem",
+  "title": "Formulation of the multiplicity problem",
+  "number": "5.6.1"
+ },
+ "the-familywise-error-rate": {
+  "anchor": "the-familywise-error-rate",
+  "title": "The Familywise Error Rate",
+  "number": "5.6.2"
+ },
+ "5.6.2": {
+  "anchor": "the-familywise-error-rate",
+  "title": "The Familywise Error Rate",
+  "number": "5.6.2"
+ },
+ "the-bonferroni-method": {
+  "anchor": "the-bonferroni-method",
+  "title": "The Bonferroni method",
+  "number": "5.6.3"
+ },
+ "5.6.3": {
+  "anchor": "the-bonferroni-method",
+  "title": "The Bonferroni method",
+  "number": "5.6.3"
+ },
+ "example-pwd-5": {
+  "anchor": "example-pwd-5",
+  "title": "Example (PWD)",
+  "number": ""
+ },
+ "the-sidak-method": {
+  "anchor": "the-sidak-method",
+  "title": "The Sidak method",
+  "number": ""
+ },
+ "the-holm-bonferroni-method": {
+  "anchor": "the-holm-bonferroni-method",
+  "title": "The Holm-Bonferroni method",
+  "number": "5.6.4"
+ },
+ "5.6.4": {
+  "anchor": "the-holm-bonferroni-method",
+  "title": "The Holm-Bonferroni method",
+  "number": "5.6.4"
+ },
+ "example-pwd-6": {
+  "anchor": "example-pwd-6",
+  "title": "Example (PWD)",
+  "number": ""
+ },
+ "the-tukey-kramer-method": {
+  "anchor": "the-tukey-kramer-method",
+  "title": "The Tukey-Kramer method",
+  "number": "5.6.5"
+ },
+ "5.6.5": {
+  "anchor": "the-tukey-kramer-method",
+  "title": "The Tukey-Kramer method",
+  "number": "5.6.5"
+ },
+ "example-pwd-7": {
+  "anchor": "example-pwd-7",
+  "title": "Example (PWD)",
+  "number": ""
+ },
+ "simultaneous-ci": {
+  "anchor": "simultaneous-ci",
+  "title": "Simultaneous CI",
+  "number": "5.6.6"
+ },
+ "5.6.6": {
+  "anchor": "simultaneous-ci",
+  "title": "Simultaneous CI",
+  "number": "5.6.6"
+ },
+ "example-pwd-8": {
+  "anchor": "example-pwd-8",
+  "title": "Example (PWD)",
+  "number": ""
+ },
+ "exercise-equivalence-simultaneous-ci-and-fwer-control": {
+  "anchor": "exercise-equivalence-simultaneous-ci-and-fwer-control",
+  "title": "Exercise: equivalence simultaneous CI and FWER control",
+  "number": ""
+ },
+ "assessment-of-model-assumptions": {
+  "anchor": "assessment-of-model-assumptions",
+  "title": "Assessment of model assumptions",
+  "number": "5.7"
+ },
+ "5.7": {
+  "anchor": "assessment-of-model-assumptions",
+  "title": "Assessment of model assumptions",
+  "number": "5.7"
+ },
+ "example-pwd-9": {
+  "anchor": "example-pwd-9",
+  "title": "Example (PWD)",
+  "number": ""
+ },
+ "reporting": {
+  "anchor": "reporting",
+  "title": "Reporting",
+  "number": "6"
+ },
+ "6": {
+  "anchor": "reporting",
+  "title": "Reporting",
+  "number": "6"
+ },
+ "app:VecDiff": {
+  "anchor": "app:VecDiff",
+  "title": "Vector Differentiation",
+  "number": "A"
+ },
+ "A": {
+  "anchor": "app:VecDiff",
+  "title": "Vector Differentiation",
+  "number": "A"
+ },
+ "app:LinTrans": {
+  "anchor": "app:LinTrans",
+  "title": "Linear Transformations of MVN",
+  "number": "B"
+ },
+ "B": {
+  "anchor": "app:LinTrans",
+  "title": "Linear Transformations of MVN",
+  "number": "B"
+ },
+ "app:Slutsky": {
+  "anchor": "app:Slutsky",
+  "title": "Slutsky’s Theorem",
+  "number": "C"
+ },
+ "C": {
+  "anchor": "app:Slutsky",
+  "title": "Slutsky’s Theorem",
+  "number": "C"
+ },
+ "types-of-statistical-models": {
+  "anchor": "types-of-statistical-models",
+  "title": "Types of Statistical Models",
+  "number": "D"
+ },
+ "D": {
+  "anchor": "types-of-statistical-models",
+  "title": "Types of Statistical Models",
+  "number": "D"
+ },
+ "r-session-info": {
+  "anchor": "r-session-info",
+  "title": "R Session Info",
+  "number": "E"
+ },
+ "E": {
+  "anchor": "r-session-info",
+  "title": "R Session Info",
+  "number": "E"
+ }
+}
